@@ -14,20 +14,28 @@ class CreateBlogPostsTable extends Migration
     public function up()
     {
         Schema::create('blog_posts', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('category_id')->unsigned();
-            $table->bigInteger('user_id')->unsigned();
+            $table->bigIncrements ('id');
+
+            $table->bigInteger ('category_id')->unsigned();
+            $table->bigInteger ('user_id')->unsigned();
+
             $table->string('slug')->unique();
             $table->string('title');
+
             $table->text('excerpt')->nullable();
+
             $table->text('content');
+
             $table->boolean('is_published')->default(false);
             $table->timestamp('published_at')->nullable();
+
             $table->timestamps();
             $table->softDeletes();
+
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('category_id')->references('id')->on('blog_categories');
             $table->index('is_published');
+
         });
     }
 

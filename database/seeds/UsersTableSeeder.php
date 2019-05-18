@@ -1,8 +1,9 @@
 <?php
 
     use Illuminate\Database\Seeder;
+    use Illuminate\Support\Str;
 
-    class UserTableSeeder extends Seeder
+    class UsersTableSeeder extends Seeder
     {
         /**
          * Run the database seeds.
@@ -25,5 +26,6 @@
             ];
             DB::table('users')->insert($data);
 
-    }
+
+        }
     }
