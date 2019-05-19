@@ -53,9 +53,7 @@
 
         public function isAdministrator()
         {
-            $admin = $this->roles()->where('name', 'admin')->exists();
-            if ($admin) return "admin";
-
+           return $this->roles()->where('name', 'admin')->exists();
         }
 
         public function isUser()
