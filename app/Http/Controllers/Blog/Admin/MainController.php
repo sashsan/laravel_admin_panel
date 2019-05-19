@@ -14,6 +14,11 @@
     class MainController extends BaseController
     {
 
+        public function __construct()
+        {
+            $this->middleware('auth');
+            $this->middleware('status');
+        }
 
         /**
          * Display a listing of the resource.
@@ -22,9 +27,7 @@
          */
         public function index()
         {
-            if (Auth::user()->isAdministrator() != 'admin') {
-                return view('home');
-            }
+
             return view('blog.admin.index');
         }
 

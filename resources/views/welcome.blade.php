@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title></title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -12,7 +12,11 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
+                background-image: url("{{asset('images/main.jpg')}}");
+                -moz-background-size: 100% 100%; /* Firefox 3.6+ */
+                -webkit-background-size: 100% 100%; /* Safari 3.1+ и Chrome 4.0+ */
+                -o-background-size: 100% 100%; /* Opera 9.6+ */
+                background-size: 100% 100%; /* Современные браузеры */
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
@@ -68,7 +72,7 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/home') }}" style="color: black">Home</a>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -78,10 +82,10 @@
                             @csrf
                         </form>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
+                        <a href="{{ route('login') }}" style="color: black">Login</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                            <a href="{{ route('register') }}" style="color: black">Register</a>
                         @endif
                     @endauth
 
@@ -91,7 +95,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                        {{--LARAVEL--}}
                 </div>
 
                 <div class="links">
