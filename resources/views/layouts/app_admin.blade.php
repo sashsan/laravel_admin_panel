@@ -227,6 +227,5 @@
 <script src="{{asset('adminlte/my.js')}}"></script>
 <!-- =======  -->
 
-
 </body>
 </html>
