@@ -76,10 +76,10 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="/user/edit?id=" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="/user/edit?id=" class="btn btn-default btn-flat">Профиль</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="/user/logout" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="/user/logout" class="btn btn-default btn-flat">Выход</a>
                                 </div>
                             </li>
                         </ul>
@@ -226,7 +226,6 @@
 <!-- для кнопок мой собственный js -->
 <script src="{{asset('adminlte/my.js')}}"></script>
 <!-- =======  -->
-
 
 </body>
 </html>
