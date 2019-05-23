@@ -1,7 +1,10 @@
-<?php
-    /**
-     * Created by PhpStorm.
-     * User: Sasha San
-     * Date: 21.05.2019
-     * Time: 10:06
-     */
+<table>
+    @foreach($items as $item)
+        <tr>
+            <td>{{$item->id}}</td>
+            <td>{{$item->title}}</td>
+            <td>{{$item->created_at}}</td>
+        </tr>
+    @endforeach
+</table>
+

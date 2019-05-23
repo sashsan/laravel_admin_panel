@@ -14,14 +14,14 @@
         {
             $data = [
                 [
-                    'name' => 'Автор не известен',
-                    'email' => 's@s.ru',
-                    'password' => bcrypt(Str::random(16)),
+                    'name' => 'admin',
+                    'email' => 'a@a.ru',
+                    'password' => bcrypt(12345678),
                 ],
                 [
-                    'name' => 'Автор',
-                    'email' => 's@sw.rus',
-                    'password' => bcrypt(123123),
+                    'name' => 'user',
+                    'email' => 'u@u.ru',
+                    'password' => bcrypt(12345678),
                 ]
             ];
             DB::table('users')->insert($data);

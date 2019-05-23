@@ -1,10 +1,19 @@
 <?php
 
-    use App\Http\Middleware\CheckStatus;
+
+
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
+    Auth::routes();
+
+    Route::get('/home', 'HomeController@index')->name('home');
+
 
 
     //Admin side
-    Route::group(['middleware' => ['status']], function () {
+    Route::group(['middleware' => ['status','auth']], function () {
         $groupeData = [
             'namespace' => 'Blog\Admin',
             'prefix' => 'admin',
@@ -12,6 +21,12 @@
         Route::group($groupeData, function () {
             Route::resource('index', 'MainController')
                 ->names('blog.admin.index');
+            Route::resource('posts', 'PostController')
+                ->names('blog.admin.posts');
+            $methods = ['index','edit','update','create','store'];
+            Route::resource('categories', 'CategoryController')
+                ->only($methods)
+                ->names('blog.admin.categories');
         });
     });
     //---------
@@ -40,14 +55,6 @@
     });
     //---------
 
-
-    Route::get('/', function () {
-        return view('welcome');
-    });
-
-    Auth::routes();
-
-    Route::get('/home', 'HomeController@index')->name('home');
 
 
 

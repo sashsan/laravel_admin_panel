@@ -7,9 +7,41 @@
      */
 
     namespace App\Repositories;
+    use Illuminate\Database\Eloquent\Model;
 
-
-    class CoreRepository
+    abstract class CoreRepository
     {
+        /**
+         * с какой моделью он работает
+         * Illuminate\Database\Eloquent\Model;
+         * @var Model
+         */
+        protected $model;
+
+        /**
+         * $this->model = app('BlogCategoryRepository');
+         * CoreRepository constructor.
+         */
+        public function __construct()
+        {
+            //тоже самое
+            //$this->model = new $this->getModelClass();
+            $this->model = app($this->getModelClass());
+        }
+
+        /**
+         * @return mixed
+         */
+        abstract protected function getModelClass();
+
+        /**
+         * @return Model|\Illuminate\Foundation\Application|mixed
+         */
+        protected function startConditions()
+        {
+            return clone $this->model;
+        }
+
+
 
     }

@@ -14,6 +14,9 @@
     abstract class BaseController extends MainBaseController
     {
 
+        public function __construct()
+        {
 
+        }
 
     }
