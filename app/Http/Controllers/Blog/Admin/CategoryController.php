@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
  * Class CategoryController
  * @package App\Http\Controllers\Blog\Admin
  */
-class CategoryController extends BaseController
+class CategoryController extends AdminBaseController
 {
     /**
      * @var BlogCategoryRepository

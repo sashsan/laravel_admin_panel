@@ -25,7 +25,6 @@
                 ]
             ];
             DB::table('users')->insert($data);
-
-
         }
+
     }

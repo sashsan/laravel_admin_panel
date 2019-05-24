@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBrandTable extends Migration
+class CreateAttributeProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,12 @@ class CreateBrandTable extends Migration
      */
     public function up()
     {
-        Schema::create('brand', function (Blueprint $table) {
+        Schema::create('attribute_products', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
-            $table->bigIncrements('id');
-            $table->string('title',255);
-            $table->string('alias',255)->unique();
-            $table->string('img',255)->default('brand_no_image.jpg');
-            $table->string('description',255);
-
+            $table->bigInteger('attr_id');
+            $table->bigInteger('product_id');
+            $table->primary(['attr_id', 'product_id']);
         });
     }
 
@@ -32,6 +29,6 @@ class CreateBrandTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('brand');
+        Schema::dropIfExists('attribute_products');
     }
 }

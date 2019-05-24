@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrderProductTable extends Migration
+class CreateOrderProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateOrderProductTable extends Migration
      */
     public function up()
     {
-        Schema::create('order_product', function (Blueprint $table) {
+        Schema::create('order_products', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
             $table->bigIncrements('id');
@@ -26,10 +26,9 @@ class CreateOrderProductTable extends Migration
             $table->index('order_id');
 
             $table->foreign('order_id')
-                ->references('id')->on('order')
+                ->references('id')->on('orders')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-
         });
     }
 
@@ -40,6 +39,6 @@ class CreateOrderProductTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order_product');
+        Schema::dropIfExists('order_products');
     }
 }

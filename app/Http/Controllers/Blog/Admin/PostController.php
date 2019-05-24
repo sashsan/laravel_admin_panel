@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Blog\Admin;
 use Illuminate\Http\Request;
 use App\Models\BlogPost;
 
-class PostController extends BaseController
+class PostController extends AdminBaseController
 {
 
     /**

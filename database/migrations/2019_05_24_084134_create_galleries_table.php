@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRelatedProductTable extends Migration
+class CreateGalleriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateRelatedProductTable extends Migration
      */
     public function up()
     {
-        Schema::create('related_product', function (Blueprint $table) {
+        Schema::create('galleries', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
+            $table->bigIncrements('id');
             $table->bigInteger('product_id')->unsigned();
-            $table->bigInteger('related_id')->unsigned();
-
-            $table->primary(['product_id','related_id']);
+            $table->string('img',255);
         });
     }
 
@@ -30,6 +29,6 @@ class CreateRelatedProductTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('related_product');
+        Schema::dropIfExists('galleries');
     }
 }

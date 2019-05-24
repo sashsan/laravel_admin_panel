@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAttributeValueTable extends Migration
+class CreateAttributeValuesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAttributeValueTable extends Migration
      */
     public function up()
     {
-        Schema::create('attribute_value', function (Blueprint $table) {
+        Schema::create('attribute_values', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
             $table->bigIncrements('id');
@@ -21,7 +21,6 @@ class CreateAttributeValueTable extends Migration
             $table->bigInteger('attr_group_id')->unsigned();
 
             $table->index('attr_group_id');
-
         });
     }
 
@@ -32,6 +31,6 @@ class CreateAttributeValueTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attribute_value');
+        Schema::dropIfExists('attribute_values');
     }
 }

@@ -7,6 +7,7 @@
      */
 
     namespace App\Repositories;
+
     use Illuminate\Database\Eloquent\Model;
 
     abstract class CoreRepository
@@ -18,14 +19,9 @@
          */
         protected $model;
 
-        /**
-         * $this->model = app('BlogCategoryRepository');
-         * CoreRepository constructor.
-         */
+
         public function __construct()
         {
-            //тоже самое
-            //$this->model = new $this->getModelClass();
             $this->model = app($this->getModelClass());
         }
 
@@ -42,6 +38,35 @@
             return clone $this->model;
         }
 
+        public function getRequestId($get = true, $id = 'id')
+        {
+            if ($get) {
+                $data = $_GET;
+            } else {
+                $data = $_POST;
+            }
+            $id = !empty($data[$id]) ? (int)$data[$id] : null;
+            if ($id) {
+                throw new \Exception('Проверить Откуда id, если getRequestID(false) == $_POST', 404);
+            }
+            return $id;
+
+        }
+
+        public function getEditId($id)
+        {
+            return $this->startConditions()->find($id);
+        }
+
+
+        public function getAllWithPaginate($perPage = null, $columns = [])
+        {
+            $result = $this
+                ->startConditions()
+                ->select($columns)
+                ->paginate($perPage);
+            return $result;
+        }
 
 
     }

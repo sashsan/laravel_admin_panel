@@ -139,6 +139,8 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+
+
         Barryvdh\Debugbar\ServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
@@ -191,6 +193,7 @@ return [
 
     'aliases' => [
 
+        'MetaTag' => Fomvasss\LaravelMetaTags\Facade::class,
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
@@ -226,6 +229,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
 
     ],
 

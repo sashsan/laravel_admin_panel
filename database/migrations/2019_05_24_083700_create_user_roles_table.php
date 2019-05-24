@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrderTable extends Migration
+class CreateUserRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,14 @@ class CreateOrderTable extends Migration
      */
     public function up()
     {
-        Schema::create('order', function (Blueprint $table) {
+        Schema::create('user_roles', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-
-            $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
-            $table->enum('status',['0','1'])->default(0);
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('update_at')->nullable()->default(null);
-            $table->string('currency',10);
-            $table->text('note');
-
+            $table->bigInteger('role_id')->unsigned()->default(2);
+            $table->foreign('user_id')
+                ->references('id')->on('users');
+            $table->foreign('role_id')
+                ->references('id')->on('roles');
         });
     }
 
@@ -34,6 +31,6 @@ class CreateOrderTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order');
+        Schema::dropIfExists('user_role');
     }
 }

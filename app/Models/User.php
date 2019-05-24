@@ -48,7 +48,7 @@
 
         public function roles()
         {
-            return $this->belongsToMany(Role::class, 'user_role');
+            return $this->belongsToMany(Role::class, 'user_roles');
         }
 
         public function isAdministrator()
@@ -68,27 +68,6 @@
             if ($disabled) return "disabled";
         }
 
-
-
-//        public function isDisabled()
-//        {
-//            return $this->statusCheck();
-//        }
-//
-//        public function isVisitor()
-//        {
-//            return $this->statusCheck(1);
-//        }
-//
-//        public function isAdmin()
-//        {
-//            return $this->statusCheck(2);
-//        }
-//
-//        public function statusCheck($status = 0)
-//        {
-//            return $this->status === $status ? true : false;
-//        }
 
 
     }

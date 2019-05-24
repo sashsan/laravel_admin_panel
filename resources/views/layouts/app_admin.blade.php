@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     {{--<base href="/adminlte/">--}}
     <link rel="shortcut icon" href="" type="image/png" />
-
+    <title>{!! MetaTag::tag('title') !!}</title>
 <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -192,7 +192,10 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
+
         <main class="py-4">
+            @include('blog.admin.components.result_messages')
+
             @yield('content')
         </main>
     </div>

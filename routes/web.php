@@ -21,8 +21,18 @@
         Route::group($groupeData, function () {
             Route::resource('index', 'MainController')
                 ->names('blog.admin.index');
+
+            Route::resource('orders', 'OrderController')
+                ->names('blog.admin.orders');
+
+
+
+
+
+
             Route::resource('posts', 'PostController')
                 ->names('blog.admin.posts');
+
             $methods = ['index','edit','update','create','store'];
             Route::resource('categories', 'CategoryController')
                 ->only($methods)
@@ -32,27 +42,27 @@
     //---------
 
 
-    //User side
-    $groupeData = [
-        'namespace' => 'Blog\User',
-        'prefix' => 'user',
-    ];
-    Route::group($groupeData, function () {
-        Route::resource('index', 'MainController')
-            ->names('blog.user.index');
-    });
-    //---------
-
-
-    //Disabled side - in that moment don`t work yet
-    $groupeData = [
-        'namespace' => 'Blog\Disabled',
-        'prefix' => 'disabled',
-    ];
-    Route::group($groupeData, function () {
-        Route::resource('index', 'MainController')
-            ->names('blog.disabled.index');
-    });
+//    //User side
+//    $groupeData = [
+//        'namespace' => 'Blog\User',
+//        'prefix' => 'user',
+//    ];
+//    Route::group($groupeData, function () {
+//        Route::resource('index', 'MainController')
+//            ->names('blog.user.index');
+//    });
+//    //---------
+//
+//
+//    //Disabled side - in that moment don`t work yet
+//    $groupeData = [
+//        'namespace' => 'Blog\Disabled',
+//        'prefix' => 'disabled',
+//    ];
+//    Route::group($groupeData, function () {
+//        Route::resource('index', 'MainController')
+//            ->names('blog.disabled.index');
+//    });
     //---------
 
 
