@@ -20,7 +20,7 @@
                         @if($menu)
                             <div class="list-group list-group-root well">
 
-                @include('blog.admin.menu.customMenuItems', ['items'=>$menu->roots()])
+                @include('blog.admin.category.menu.customMenuItems', ['items'=>$menu->roots()])
 
                             </div>
                         @endif

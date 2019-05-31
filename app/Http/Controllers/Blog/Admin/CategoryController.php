@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Blog\Admin;
 
 
 use App\Http\Requests\BlogCategoryUpdateRequest;
+use App\Models\Admin\Category;
 use App\Repositories\Admin\CategoryRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -38,32 +39,17 @@ class CategoryController extends AdminBaseController
      */
     public function index()
     {
-
-        $arrMenu = \App\Models\Admin\Category::all();
-        $menu = $this->buildMenu($arrMenu);
+        $arrMenu = Category::all();
+        $menu = $this->categoryRepository->buildMenu($arrMenu);
 
         MetaTag::setTags(['title' => 'Список категорий']);
         return view('blog.admin.category.index',['menu' => $menu]);
+
+
+
     }
 
-    public function buildMenu($arrMenu)
-    {
-        $mBuilder = LavMenu::make('MyNav', function ($m) use ($arrMenu){
-           foreach ($arrMenu as $item){
-               if ($item->parent_id == 0){
-                   $m->add($item->title, $item->id)
-                       ->id($item->id);
-               } else {
-                   if ($m->find($item->parent_id)){
-                       $m->find($item->parent_id)
-                           ->add($item->title, $item->id)
-                           ->id($item->id);
-                   }
-               }
-           }
-        });
-        return $mBuilder;
-    }
+
 
     /**
      * Show the form for creating a new resource.

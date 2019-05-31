@@ -29,11 +29,8 @@
                                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                             </div>
                             <div class="form-group">
-                                <label for="parent_id">Родительская категория</label>
 
-                                @widget('menu_admin')
-
-
+                                 <label for="parent_id">Родительская категория</label>
 
                             </div>
                             <div class="form-group">
