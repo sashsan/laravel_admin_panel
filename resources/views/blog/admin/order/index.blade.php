@@ -40,14 +40,21 @@
                             <tr class="{{$class}}">
                                 <td>{{$order->id}}</td>
                                 <td>{{$order->name}}</td>
-                                <td>{{$order->status ? 'Завершен' : 'Новый'}}</td>
+                                <td>
+                                    @if ($order->status == 0)Новый@endif
+                                    @if ($order->status == 1)Завершен@endif
+                                    @if ($order->status == 2)<b style="color: red">Удален</b>@endif
+                                </td>
                                 <td>{{$order->sum}} {{$order->currency}}</td>
                                 <td>{{$order->created_at}}</td>
-                                <td>{{$order->update_at}}</td>
-                                <td>
-                                    <a href="{{route('blog.admin.orders.edit',$order->id)}}" title="редактировать заказ"><i class="fa fa-fw fa-eye"></i></a>
+                                <td>{{$order->updated_at}}</td>
 
-                                    <a href="{{route('blog.admin.orders.destroy',$order->id)}}" title="удалить заказ"><i class="fa fa-fw fa-close text-danger delete"></i></a>
+                                <td>
+                                    <a href="{{route('blog.admin.orders.edit',$order->id)}}" title="редактировать заказ"><i class="fa fa-fw fa-eye"></i></a>&nbsp;&nbsp;&nbsp;
+
+                                    <a href="{{route('blog.admin.orders.forcedestroy', $order->id)}}" title="удалить из БД"><i class="fa fa-fw fa-close text-danger deletebd"></i></a>&nbsp;&nbsp;&nbsp;
+
+
                                 </td>
                             </tr>
                                 @endforeach

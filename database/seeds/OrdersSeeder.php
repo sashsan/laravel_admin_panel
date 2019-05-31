@@ -17,8 +17,6 @@ class OrdersSeeder extends Seeder
                 'id' => 1,
                 'user_id' => 2,
                 'status' => 1,
-                'created_at' => Carbon::createFromFormat('Y-m-d g:i A', '2016-11-29 02:00 PM'),
-                'update_at' => Carbon::createFromFormat('Y-m-d g:i A', '2016-11-29 02:00 PM'),
                 'currency' => 'RUB',
                 'note' => 'Note',
                 'sum' => 250.0
@@ -27,8 +25,6 @@ class OrdersSeeder extends Seeder
                 'id' => 2,
                 'user_id' => 2,
                 'status' => 1,
-                'created_at' => Carbon::createFromFormat('Y-m-d g:i A', '2016-11-29 02:00 PM'),
-                'update_at' => Carbon::createFromFormat('Y-m-d g:i A', '2016-11-29 02:00 PM'),
                 'currency' => 'RUB',
                 'note' => 'Note',
                 'sum' => 250.0
@@ -37,8 +33,6 @@ class OrdersSeeder extends Seeder
                 'id' => 3,
                 'user_id' => 2,
                 'status' => 1,
-                'created_at' => Carbon::createFromFormat('Y-m-d g:i A', '2016-11-29 02:00 PM'),
-                'update_at' => Carbon::createFromFormat('Y-m-d g:i A', '2016-11-29 02:00 PM'),
                 'currency' => 'RUB',
                 'note' => 'Note',
                 'sum' => 250.0
@@ -47,8 +41,6 @@ class OrdersSeeder extends Seeder
                 'id' => 4,
                 'user_id' => 2,
                 'status' => 1,
-                'created_at' => Carbon::createFromFormat('Y-m-d g:i A', '2016-11-29 02:00 PM'),
-                'update_at' => Carbon::createFromFormat('Y-m-d g:i A', '2016-11-29 02:00 PM'),
                 'currency' => 'RUB',
                 'note' => 'Note',
                 'sum' => 250.0
@@ -57,8 +49,6 @@ class OrdersSeeder extends Seeder
                 'id' => 5,
                 'user_id' => 2,
                 'status' => 1,
-                'created_at' => Carbon::createFromFormat('Y-m-d g:i A', '2016-11-29 02:00 PM'),
-                'update_at' => Carbon::createFromFormat('Y-m-d g:i A', '2016-11-29 02:00 PM'),
                 'currency' => 'RUB',
                 'note' => 'Note',
                 'sum' => 250.0
@@ -67,8 +57,6 @@ class OrdersSeeder extends Seeder
                 'id' => 6,
                 'user_id' => 2,
                 'status' => 1,
-                'created_at' => Carbon::createFromFormat('Y-m-d g:i A', '2016-11-29 02:00 PM'),
-                'update_at' => Carbon::createFromFormat('Y-m-d g:i A', '2016-11-29 02:00 PM'),
                 'currency' => 'RUB',
                 'note' => 'Note',
                 'sum' => 250.0

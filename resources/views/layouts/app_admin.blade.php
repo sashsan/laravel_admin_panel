@@ -47,7 +47,7 @@
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>A</b>LT</span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Admin</b>LTE</span>
+            <span class="logo-lg"><b>Admin</b> Panel</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
@@ -116,7 +116,7 @@
                 <li class="header">Меню</li>
                 <!-- Optionally, you can add icons to the links -->
                 <li><a href="/"><i class="fa fa-home"></i> <span>Home</span></a></li>
-                <li><a href="/order"><i class="fa fa-shopping-cart"></i> <span>Заказы</span></a></li>
+                <li><a href="{{route('blog.admin.orders.index')}}"><i class="fa fa-shopping-cart"></i> <span>Заказы</span></a></li>
                 <li class="treeview">
                     <a href="#"><i class="fa fa-navicon"></i> <span>Категории</span>
                         <span class="pull-right-container">
@@ -124,8 +124,8 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="/category">Список категорий</a></li>
-                        <li><a href="/category/add">Добавить категорию</a></li>
+                        <li><a href="{{route('blog.admin.categories.index')}}">Список категорий</a></li>
+                        <li><a href="{{route('blog.admin.categories.create')}}">Добавить категорию</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -195,8 +195,8 @@
 
         <main class="py-4">
             @include('blog.admin.components.result_messages')
-
             @yield('content')
+            @yield('menu')
         </main>
     </div>
     <!-- /.content-wrapper -->

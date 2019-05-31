@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Blog\Admin;
 
 
 use App\Http\Requests\BlogCategoryUpdateRequest;
-use App\Models\BlogCategory;
-use App\Repositories\BlogCategoryRepository;
+use App\Repositories\Admin\CategoryRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-
+use MetaTag;
+use Menu as LavMenu;
 
 /**
  *  Управление категориями блога
@@ -17,10 +17,9 @@ use Illuminate\Support\Str;
  */
 class CategoryController extends AdminBaseController
 {
-    /**
-     * @var BlogCategoryRepository
-     */
-    private $blogCategoryRepository;
+
+
+    private $categoryRepository;
 
     /**
      * CategoryController constructor.
@@ -28,7 +27,7 @@ class CategoryController extends AdminBaseController
     public function __construct()
     {
         parent::__construct();
-        $this->blogCategoryRepository = app(BlogCategoryRepository::class);
+       $this->categoryRepository = app(CategoryRepository::class);
     }
 
 
@@ -39,10 +38,32 @@ class CategoryController extends AdminBaseController
      */
     public function index()
     {
-        //$paginator = BlogCategory::paginate(5);
-        $paginator = $this->blogCategoryRepository->getAllWithPaginate(20);
-        return view('blog.admin.categories',compact('paginator'));
 
+        $arrMenu = \App\Models\Admin\Category::all();
+        $menu = $this->buildMenu($arrMenu);
+
+
+        MetaTag::setTags(['title' => 'Список категорий']);
+        return view('blog.admin.category.index',['menu' => $menu]);
+    }
+
+    public function buildMenu($arrMenu)
+    {
+        $mBuilder = LavMenu::make('MyNav', function ($m) use ($arrMenu){
+           foreach ($arrMenu as $item){
+               if ($item->parent_id == 0){
+                   $m->add($item->title, $item->id)
+                       ->id($item->id);
+               } else {
+                   if ($m->find($item->parent_id)){
+                       $m->find($item->parent_id)
+                           ->add($item->title, $item->id)
+                           ->id($item->id);
+                   }
+               }
+           }
+        });
+        return $mBuilder;
     }
 
     /**
@@ -52,12 +73,8 @@ class CategoryController extends AdminBaseController
      */
     public function create()
     {
-        $item = new BlogCategory();
 
-        $categoryList = $this->blogCategoryRepository->getForComboBox();
-
-        return view('blog.admin.category.create', compact('item','categoryList'));
-
+        return view('blog.admin.category.create');
     }
 
     /**
@@ -68,24 +85,6 @@ class CategoryController extends AdminBaseController
      */
     public function store(BlogCategoryUpdateRequest $request)
     {
-        $data = $request->input();
-
-        if (empty($data['slug'])){
-            $data['slug'] = Str::slug($data['title']);
-        }
-
-        $item = new BlogCategory($data);
-
-        $item->save();
-
-        if ($item){
-            return redirect()->route('blog.admin.categories.create', [$item->id])
-                ->with(['success'=>'Успешно сохранено']);
-        } else {
-            //->withInput(); -чтобы введенные данные сохранились в форме
-            return back()->withErrors(['msg'=>'Ошибка сохранения'])
-                ->withInput();
-        }
 
     }
 
@@ -107,17 +106,8 @@ class CategoryController extends AdminBaseController
      * @param BlogCategoryRepository $categoryRepository
      * @return \Illuminate\Http\Response
      */
-    public function edit($id,BlogCategoryRepository $categoryRepository)
+    public function edit($id,CategoryRepository $categoryRepository)
     {
-        //получаю инфу по id
-        // $item = $categoryRepository->getEdit($id); было
-        $item = $this->blogCategoryRepository->getEdit($id);
-        if(empty($item)){
-            abort(404);
-        }
-        $categoryList = $this->blogCategoryRepository->getForComboBox();
-
-        return view('blog.admin.category.edit', compact('item','categoryList'));
 
     }
 
@@ -132,36 +122,40 @@ class CategoryController extends AdminBaseController
     public function update(BlogCategoryUpdateRequest $request, $id)
     {
 
-        $item = $this->blogCategoryRepository->getEdit($id);
-        if (empty($item)){
-            return back()
-                ->withErrors(['msg'=> "Запись id = [{$id}] не найдена"])
-                ->withInput();
-        }
-
-        $data = $request->all();
-        //это из store
-        if (empty($data['slug'])){
-            $data['slug'] = Str::slug($data['title']);
-        }
-        //---
-
-        $result = $item
-            ->fill($data)
-            ->save();
-        //вместо  $result = $item->fill($data)->save(); можно  $result = $item->update($data);
-        if ($result){
-            return redirect()
-                ->route('blog.admin.categories.edit', $item->id)
-                ->with(['success' => 'Успешно сохранено']);
-        } else {
-            return back()
-                ->withErrors(['msg'=>'Ошибка сохранения'])
-                ->withInput();
-        }
     }
 
 
+    public function mydel()
+    {
+        $id = $this->categoryRepository->getRequestID();
+        if (!$id){
+            return back()
+                ->withErrors(['msg'=>'Ошибка с ID']);
+        }
+
+        $children = $this->categoryRepository->checkChildren($id);
+        if ($children){
+                return back()
+                    ->withErrors(['msg'=>'Удаление невозможно, в категории есть вложенные категории']);
+        }
+
+        $parents = $this->categoryRepository->checkParentsInProducts($id);
+        if ($parents){
+            return back()
+                ->withErrors(['msg'=>'Удаление невозможно, в категории есть товары']);
+        }
+
+        $delete = $this->categoryRepository->deleteCategory($id);
+
+        if ($delete){
+            return redirect()
+                ->route('blog.admin.categories.index')
+                ->with(['success' => "Запись id [$id] удалена"]);
+        }   else {
+            return back()->withErrors(['msg' => 'Ошибка удаления']);
+        }
+
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -171,6 +165,6 @@ class CategoryController extends AdminBaseController
      */
     public function destroy($id)
     {
-        //
+        return view('blog.admin.category.index');
     }
 }

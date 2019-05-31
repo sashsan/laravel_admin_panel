@@ -9,6 +9,10 @@
 
 define('LARAVEL_START', microtime(true));
 
+require_once dirname(__DIR__) . '/config/init.php';
+
+require_once __DIR__ . '/../resources/libs/functions.php';
+
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader

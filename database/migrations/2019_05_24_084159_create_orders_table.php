@@ -19,8 +19,10 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
             $table->enum('status',['0','1'])->default(0);
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('update_at')->nullable()->default(null);
+
+            $table->timestamps();
+            $table->softDeletes();
+
             $table->string('currency',10);
             $table->text('note')->nullable();
             $table->float('sum')->nullable();

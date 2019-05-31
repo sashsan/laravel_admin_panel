@@ -13,6 +13,7 @@
         "fomvasss/laravel-meta-tags": "^2.0",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
+        "lavary/laravel-menu": "^1.7",
         "torann/laravel-meta-tags": "^3.0"
     },
     "require-dev": {

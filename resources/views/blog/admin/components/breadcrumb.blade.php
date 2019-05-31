@@ -6,6 +6,9 @@
     @if (isset($order))
         <li><a href="{{route('blog.admin.orders.index')}}"><i></i>{{$order}}</a></li>
     @endif
+    @if (isset($category))
+        <li><a href="{{route('blog.admin.categories.index')}}"><i></i>{{$category}}</a></li>
+    @endif
     @if (isset($user))
         <li><a href=""><i></i>{{$user}}</a></li>
     @endif
