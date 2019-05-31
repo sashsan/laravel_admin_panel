@@ -42,7 +42,6 @@ class CategoryController extends AdminBaseController
         $arrMenu = \App\Models\Admin\Category::all();
         $menu = $this->buildMenu($arrMenu);
 
-
         MetaTag::setTags(['title' => 'Список категорий']);
         return view('blog.admin.category.index',['menu' => $menu]);
     }
