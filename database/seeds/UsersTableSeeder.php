@@ -22,7 +22,22 @@
                     'name' => 'user',
                     'email' => 'u@u.ru',
                     'password' => bcrypt(12345678),
-                ]
+                ],
+                [
+                    'name' => 'sasha',
+                    'email' => 'admin@admin.ru9',
+                    'password' => bcrypt(12345678),
+                ],
+                [
+                    'name' => 'admin',
+                    'email' => '1984aab@gmail.com',
+                    'password' => bcrypt(12345678),
+                ],
+                [
+                    'name' => 'user',
+                    'email' => '1984aab@gmail.comq',
+                    'password' => bcrypt(12345678),
+                ],
             ];
             DB::table('users')->insert($data);
         }

@@ -18,14 +18,18 @@ INSERT INTO `order_products` (`id`, `order_id`, `product_id`, `qty`, `title`, `p
 (40, 12, 7, 2, 'Q&Q Q956J302Y', 20),
 (41, 12, 8, 2, 'Royal London 41040-01', 90),
 (42, 12, 4, 2, 'Citizen JP1010-00E', 400),
+
 (43, 13, 1, 1, 'Casio MRP-700-1AVEFF', 300),
 (44, 13, 2, 1, 'Casio MQ-24-7BUL', 70),
 (45, 13, 3, 1, 'Casio GA-1000-1AER', 400),
 (46, 13, 4, 1, 'Citizen JP1010-00E', 400),
 (47, 13, 7, 1, 'Q&Q Q956J302Y', 20),
+
 (48, 14, 2, 1, 'Casio MQ-24-7BUL', 70),
 (49, 14, 3, 1, 'Casio GA-1000-1AER', 400),
 (50, 14, 4, 1, 'Citizen JP1010-00E', 400),
+
+
 (51, 15, 2, 1, 'Casio MQ-24-7BUL', 70),
 (52, 15, 3, 1, 'Casio GA-1000-1AER', 400),
 (53, 16, 6, 1, 'Citizen AT0696-59E', 350),

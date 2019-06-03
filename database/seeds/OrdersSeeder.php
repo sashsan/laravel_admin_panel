@@ -14,52 +14,68 @@ class OrdersSeeder extends Seeder
     {
         $data = [
             [
-                'id' => 1,
-                'user_id' => 2,
-                'status' => 1,
-                'currency' => 'RUB',
+                'id' => 12,
+                'user_id' => 7,
+                'status' => '0',
+                'currency' => 'USD',
                 'note' => 'Note',
-                'sum' => 250.0
+                'sum' => 1560.0
             ],
             [
-                'id' => 2,
-                'user_id' => 2,
-                'status' => 1,
-                'currency' => 'RUB',
+                'id' => 13,
+                'user_id' => 8,
+                'status' => '0',
+                'currency' => 'USD',
                 'note' => 'Note',
-                'sum' => 250.0
+                'sum' => 1190.0
             ],
             [
-                'id' => 3,
-                'user_id' => 2,
-                'status' => 1,
-                'currency' => 'RUB',
+                'id' => 14,
+                'user_id' => 10,
+                'status' => '0',
+                'currency' => 'USD',
                 'note' => 'Note',
-                'sum' => 250.0
+                'sum' => 870.0
             ],
             [
-                'id' => 4,
+                'id' => 15,
                 'user_id' => 2,
-                'status' => 1,
-                'currency' => 'RUB',
+                'status' => '0',
+                'currency' => 'USD',
                 'note' => 'Note',
-                'sum' => 250.0
+                'sum' => 470.0
             ],
             [
-                'id' => 5,
+                'id' => 16,
                 'user_id' => 2,
-                'status' => 1,
-                'currency' => 'RUB',
+                'status' => '0',
+                'currency' => 'USD',
                 'note' => 'Note',
-                'sum' => 250.0
+                'sum' => 460.0
             ],
             [
-                'id' => 6,
-                'user_id' => 2,
-                'status' => 1,
-                'currency' => 'RUB',
+                'id' => 17,
+                'user_id' => 13,
+                'status' => '0',
+                'currency' => 'USD',
                 'note' => 'Note',
-                'sum' => 250.0
+                'sum' => 1270.0
+            ],
+            [
+                'id' => 18,
+                'user_id' => 14,
+                'status' => '0',
+                'currency' => 'USD',
+                'note' => 'Note',
+                'sum' => 370.0
+            ],
+            [
+                'id' => 19,
+                'user_id' => 15,
+                'status' => '0',
+                'currency' => 'USD',
+                'note' => 'Note',
+                'sum' => 460.0
             ],
         ];
         DB::table('orders')->insert($data);

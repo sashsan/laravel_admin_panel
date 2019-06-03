@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Category extends Model
 {
 
+    use SoftDeletes;
+
     protected $fillable = [
         'id',
         'title',
@@ -15,9 +17,10 @@ class Category extends Model
         'parent_id',
         'keywords',
         'description',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
-
-
 
 
 

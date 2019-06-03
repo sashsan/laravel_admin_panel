@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Admin\Category;
 use App\Models\Admin\Order;
+use App\Observers\AdminCategoryObserver;
 use App\Observers\AdminOrderObserver;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -29,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         date_default_timezone_set('Europe/Minsk');
         Order::observe(AdminOrderObserver::class);
+        Category::observe(AdminCategoryObserver::class);
 
     }
 }

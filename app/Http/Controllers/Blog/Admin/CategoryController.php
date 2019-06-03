@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use MetaTag;
 use Menu as LavMenu;
+use SebastianBergmann\CodeCoverage\Driver\Xdebug;
 
 /**
  *  Управление категориями блога
@@ -28,7 +29,7 @@ class CategoryController extends AdminBaseController
     public function __construct()
     {
         parent::__construct();
-       $this->categoryRepository = app(CategoryRepository::class);
+        $this->categoryRepository = app(CategoryRepository::class);
     }
 
 
@@ -50,16 +51,19 @@ class CategoryController extends AdminBaseController
     }
 
 
-
     /**
      * Show the form for creating a new resource.
      *
+     * @param BlogCategoryUpdateRequest $request
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
+        $item = new Category();
+        $categoryList = $this->categoryRepository->getComboBoxCategories();
 
-        return view('blog.admin.category.create');
+        MetaTag::setTags(['title' => 'Добавление категории']);
+        return view('blog.admin.category.create',compact('item','categoryList'));
     }
 
     /**
@@ -70,7 +74,19 @@ class CategoryController extends AdminBaseController
      */
     public function store(BlogCategoryUpdateRequest $request)
     {
+        $data = $request->input();
 
+        $item = (new Category())->create($data);
+
+        if ($item) {
+            return redirect()
+                ->route('blog.admin.categories.create', [$item->id])
+                ->with(['success' => 'Успешно сохранено']);
+        } else {
+            return back()
+                ->withErrors(['msg'=>'Ошибка сохранения'])
+                ->withInput();
+        }
     }
 
     /**
@@ -93,7 +109,16 @@ class CategoryController extends AdminBaseController
      */
     public function edit($id,CategoryRepository $categoryRepository)
     {
+        $item = $this->categoryRepository->getEditId($id);
 
+        if (empty($item)){
+            abort(404);
+        }
+
+        $categoryList = $this->categoryRepository->getComboBoxCategories();
+
+        MetaTag::setTags(['title' => 'Редактирование категории']);
+        return view('blog.admin.category.edit',compact('item'),compact('categoryList'));
     }
 
     /**
@@ -106,10 +131,32 @@ class CategoryController extends AdminBaseController
      */
     public function update(BlogCategoryUpdateRequest $request, $id)
     {
+        $item = $this->categoryRepository->getEditId($id);
+
+        if (empty($item)){
+            return back()
+                ->withErrors(['msg' => "Запись = [{$id}] не найдена"])
+                ->withInput();
+        }
+
+        $data = $request->all();
+
+
+        $result = $item->update($data);
+
+        if ($result){
+            return redirect()
+                ->route('blog.admin.categories.edit', $item->id)
+                ->with(['success' => "Успешно сохранено"]);
+        } else {
+            return back()
+                ->withErrors(['msg' => 'Ошибка сохранения!'])
+                ->withInput();
+        }
 
     }
 
-
+    /** @throws \Exception */
     public function mydel()
     {
         $id = $this->categoryRepository->getRequestID();

@@ -78,4 +78,21 @@
         }
 
 
+        public function getComboBoxCategories()
+        {
+            $columns = implode(',', [
+                'id',
+                'parent_id',
+                'title',
+                'CONCAT (id, ". ", title) AS combo_title',
+                ]);
+
+            $result = $this->startConditions()
+                ->selectRaw($columns)
+                ->toBase()
+                ->get();
+
+            return $result;
+        }
+
     }

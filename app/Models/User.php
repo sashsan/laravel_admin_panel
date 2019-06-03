@@ -21,6 +21,7 @@
          * @var array
          */
         protected $fillable = [
+            'id',
             'name',
             'email',
             'password',
