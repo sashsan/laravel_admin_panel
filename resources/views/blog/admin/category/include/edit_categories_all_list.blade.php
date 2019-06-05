@@ -1,27 +1,26 @@
-<div class="form-group">
 
-<label for="parent_id">Родительская категория</label>
-
-<select name="parent_id"
-        id="parent_id"
-        class="form-control"
-        required>
-
-
-    <option value='0'> Самостоятельная категория </option>
-
-    @foreach($categoryList as $categoryOption)
-
-            <option value="{{$categoryOption->id}}"
-                @if($categoryOption->id == $item->parent_id) selected @endif
-                @if ($item->id == $categoryOption->id) disabled @endif
+    @foreach($categories as $category_list)
+            <option value="{{$category_list->id ?? ""}}"
+                @isset($item->id)
+                    @if($category_list->id == $item->parent_id) selected
+                    @endif
+                    @if ($item->id == $category_list->id) disabled
+                    @endif
+                @endisset
             >
-                {{$categoryOption->combo_title}}
+                {!! $delimiter ?? ""!!} {{$category_list->title ?? ""}}
 
             </option>
 
+        @if (count($category_list->children) > 0)
+            @include('blog.admin.category.include.edit_categories_all_list',
+            [
+                'categories' => $category_list->children,
+                'delimiter' => ' - ' . $delimiter,
+            ])
+        @endif
+
     @endforeach
 
-</select>
-</div>
+
 

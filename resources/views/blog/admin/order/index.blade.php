@@ -35,7 +35,7 @@
                             <tbody>
 
 
-                            @foreach($paginator as $order)
+                            @forelse($paginator as $order)
                                 @php $class = $order->status ? 'success' : '' @endphp
                             <tr class="{{$class}}">
                                 <td>{{$order->id}}</td>
@@ -57,7 +57,12 @@
 
                                 </td>
                             </tr>
-                                @endforeach
+                                @empty
+                                <tr>
+                                    <td colspan="3" class="text-center"><h2>Заказов нет</h2></td>
+                                </tr>
+
+                            @endforelse
 
                             </tbody>
                         </table>

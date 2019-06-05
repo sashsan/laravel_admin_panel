@@ -40,6 +40,7 @@ class BlogCategoryUpdateRequest extends FormRequest
             'description.min' => 'Минимальная длинна описания 5 символов',
             'description.string' => 'Описание должно быть текстом',
             'comment.max' => 'Максимальная длинна комментария 200 символов',
+            'parent_id.exists' => 'Текущая категория не может быть этой категорией. Выбирите другую.'
         ];
     }
 }

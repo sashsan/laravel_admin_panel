@@ -43,7 +43,7 @@
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="" class="logo" target="_blank">
+        <a href="{{route('blog.admin.index.index')}}" class="logo" target="_blank">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>A</b>LT</span>
             <!-- logo for regular state and mobile devices -->
@@ -238,7 +238,7 @@
 <!-- для кнопок мой собственный js -->
 <script src="{{asset('adminlte/my.js')}}"></script>
 <!-- =======  -->
-
+<script src="{{ asset('js/app.js') }}"></script>
 
 </body>
 </html>

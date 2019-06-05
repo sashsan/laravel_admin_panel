@@ -104,7 +104,7 @@ class CategoryController extends AdminBaseController
      * Show the form for editing the specified resource.
      *
      * @param  int $id
-     * @param BlogCategoryRepository $categoryRepository
+     * @param CategoryRepository $categoryRepository
      * @return \Illuminate\Http\Response
      */
     public function edit($id,CategoryRepository $categoryRepository)
@@ -117,8 +117,14 @@ class CategoryController extends AdminBaseController
 
         $categoryList = $this->categoryRepository->getComboBoxCategories();
 
+
+
         MetaTag::setTags(['title' => 'Редактирование категории']);
-        return view('blog.admin.category.edit',compact('item'),compact('categoryList'));
+        return view('blog.admin.category.edit',[
+            'categories' => Category::with('children')->where('parent_id','0')->get(),
+            'delimiter' => '-',
+            'item' => $item,
+        ]);
     }
 
     /**
