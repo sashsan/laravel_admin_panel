@@ -8,7 +8,7 @@
             @slot('title') Создание категории @endslot
             @slot('parent') Главная @endslot
             @slot('category') Список категорий @endslot
-            @slot('active') Создание категории @endslot
+            @slot('active') Редактирование категории {{$item->title}} @endslot
         @endcomponent
     </section>
 
