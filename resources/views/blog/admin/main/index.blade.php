@@ -5,12 +5,11 @@
 
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>
-            Панель управления
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href=""><i class="fa fa-dashboard"></i> Главная</a></li>
-        </ol>
+        @component('blog.admin.components.breadcrumb')
+            @slot('title') Панель упраления @endslot
+            @slot('parent') Главная @endslot
+            @slot('active')  @endslot
+        @endcomponent
     </section>
 
     <!-- Main content -->
@@ -21,13 +20,13 @@
                 <!-- small box -->
                 <div class="small-box bg-aqua">
                     <div class="inner">
-                        <h4>Кол-во Заказов</h4>
+                        <h4>Кол-во Заказов {{$countOrders}}</h4>
                         <p>New Orders</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
-                    <a href="/order" class="small-box-footer">Все заказы <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="{{route('blog.admin.orders.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -35,8 +34,8 @@
                 <!-- small box -->
                 <div class="small-box bg-green">
                     <div class="inner">
-                        <h4>Кол-во продуктов</h4>
-                        <p>Product</p>
+                        <h4>Кол-во продуктов {{$countProducts}}</h4>
+                        <p>Products</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
@@ -49,7 +48,7 @@
                 <!-- small box -->
                 <div class="small-box bg-yellow">
                     <div class="inner">
-                        <h4>Кол-во пользователей</h4>
+                        <h4>Кол-во пользователей {{$countUsers}}</h4>
                         <p>User Registrations</p>
                     </div>
                     <div class="icon">
@@ -63,13 +62,13 @@
                 <!-- small box -->
                 <div class="small-box bg-red">
                     <div class="inner">
-                        <h4>Кол-во категорий</h4>
+                        <h4>Кол-во категорий {{$countCategories}}</h4>
                         <p>Categories</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>
                     </div>
-                    <a href="/category" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="{{route('blog.admin.categories.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->

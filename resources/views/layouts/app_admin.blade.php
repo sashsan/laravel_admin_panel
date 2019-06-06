@@ -2,10 +2,11 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     {{--<base href="/adminlte/">--}}
     <link rel="shortcut icon" href="" type="image/png" />
-
+    <title>{!! MetaTag::tag('title') !!}</title>
 <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -22,7 +23,7 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{asset('adminlte/dist/css/skins/_all-skins.min.css')}}">
 
-    <link rel="stylesheet" href="{{asset('adminlte/my.css')}}">
+    <link rel="stylesheet" href="{{asset('css/my.css')}}">
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -43,11 +44,11 @@
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="" class="logo" target="_blank">
+        <a href="{{route('blog.admin.index.index')}}" class="logo" target="_blank">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>A</b>LT</span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Admin</b>LTE</span>
+            <span class="logo-lg"><b>Admin</b> Panel</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
@@ -62,14 +63,14 @@
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="{{asset('adminlte/dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image">
-                            <span class="hidden-xs">Имя Админа</span>
+                            <span class="hidden-xs">{{ucfirst (Auth::user()->name) }} </span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
                                 <img src="{{asset('adminlte/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
                                 <p>
-                                    Имя Админа
+                                    {{ ucfirst(Auth::user()->name) }}
                                 </p>
 
                             </li>
@@ -79,7 +80,13 @@
                                     <a href="/user/edit?id=" class="btn btn-default btn-flat">Профиль</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="/user/logout" class="btn btn-default btn-flat">Выход</a>
+                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"
+                                       class="btn btn-default btn-flat">Выход</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+
                                 </div>
                             </li>
                         </ul>
@@ -100,7 +107,7 @@
                     <img src="{{asset('adminlte/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>Имя Админа</p>
+                    <p>{{ ucfirst (Auth::user()->name) }} </p>
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
@@ -110,7 +117,10 @@
                 <li class="header">Меню</li>
                 <!-- Optionally, you can add icons to the links -->
                 <li><a href="/"><i class="fa fa-home"></i> <span>Home</span></a></li>
-                <li><a href="/order"><i class="fa fa-shopping-cart"></i> <span>Заказы</span></a></li>
+                <li><a href="{{route('blog.admin.orders.index')}}"><i class="fa fa-shopping-cart"></i> <span>Заказы</span></a></li>
+
+
+
                 <li class="treeview">
                     <a href="#"><i class="fa fa-navicon"></i> <span>Категории</span>
                         <span class="pull-right-container">
@@ -118,8 +128,8 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="/category">Список категорий</a></li>
-                        <li><a href="/category/add">Добавить категорию</a></li>
+                        <li><a href="{{route('blog.admin.categories.index')}}">Список категорий</a></li>
+                        <li><a href="{{route('blog.admin.categories.create')}}">Добавить категорию</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -186,8 +196,11 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        <main class="py-4">
+
+        <main id="app">
+            @include('blog.admin.components.result_messages')
             @yield('content')
+            @yield('menu')
         </main>
     </div>
     <!-- /.content-wrapper -->
@@ -224,8 +237,7 @@
 <script src="{{asset('adminlte/bower_components/ckeditor/adapters/jquery.js')}}"></script>
 <!-- =======  -->
 <!-- для кнопок мой собственный js -->
-<script src="{{asset('adminlte/my.js')}}"></script>
-<!-- =======  -->
+<script src="{{asset('js/app.js')}}"></script>
 
 </body>
 </html>

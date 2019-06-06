@@ -6,7 +6,7 @@
     use App\Http\Controllers\Blog\BaseController as MainBaseController;
 
     /**
-     * Class BaseController
+     * Class AdminBaseController
      * @package App\Http\Controllers\Blog\User
      */
     abstract class BaseController extends MainBaseController

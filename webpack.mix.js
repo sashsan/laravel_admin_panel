@@ -12,4 +12,10 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+    .js('resources/js/validator.js', 'public/js')
+    .js('resources/js/ajaxupload.js', 'public/js')
+    .js('resources/js/typeahead.bundle.js', 'public/js')
+    .sass('resources/sass/app.scss', 'public/css')
+    .sass('resources/sass/my.scss', 'public/css');
+
+

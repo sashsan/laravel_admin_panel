@@ -72,7 +72,19 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}" style="color: black">Home</a>
+
+                        @if(Auth::user()->isDisabled())
+                            <a href="{{ url('/') }}" style="color: black">Главная</a>
+                        @elseif(Auth::user()->isUser())
+                            <a href="{{ url('/user/index') }}" style="color: black">Кабинет</a>
+                            <a href="{{ url('/') }}" style="color: black">Главная</a>
+                        @elseif(Auth::user()->isVisitor())
+                            <a href="{{ url('/') }}" style="color: black">Главная</a>
+                        @elseif(Auth::user()->isAdministrator())
+                            <a href="{{ url('/admin/index') }}" style="color: black">Панель Администратора</a>
+                            <a href="{{ url('/') }}" style="color: black">Главная</a>
+                        @endif
+
                         <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -82,10 +94,10 @@
                             @csrf
                         </form>
                     @else
-                        <a href="{{ route('login') }}" style="color: black">Login</a>
+                        <a href="{{ route('login') }}" style="color: black">Войти</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" style="color: black">Register</a>
+                            <a href="{{ route('register') }}" style="color: black">Регистрация</a>
                         @endif
                     @endauth
 
