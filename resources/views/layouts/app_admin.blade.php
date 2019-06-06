@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     {{--<base href="/adminlte/">--}}
     <link rel="shortcut icon" href="" type="image/png" />
@@ -22,7 +23,7 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{asset('adminlte/dist/css/skins/_all-skins.min.css')}}">
 
-    <link rel="stylesheet" href="{{asset('adminlte/my.css')}}">
+    <link rel="stylesheet" href="{{asset('css/my.css')}}">
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -196,7 +197,7 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
 
-        <main class="py-4">
+        <main id="app">
             @include('blog.admin.components.result_messages')
             @yield('content')
             @yield('menu')
@@ -236,9 +237,8 @@
 <script src="{{asset('adminlte/bower_components/ckeditor/adapters/jquery.js')}}"></script>
 <!-- =======  -->
 <!-- для кнопок мой собственный js -->
-<script src="{{asset('adminlte/my.js')}}"></script>
-<!-- =======  -->
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{asset('js/app.js')}}"></script>
+
 
 </body>
 </html>

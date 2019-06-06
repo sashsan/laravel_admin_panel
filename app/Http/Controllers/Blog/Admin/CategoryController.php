@@ -60,11 +60,19 @@ class CategoryController extends AdminBaseController
     public function create()
     {
         $item = new Category();
+
         $categoryList = $this->categoryRepository->getComboBoxCategories();
 
         MetaTag::setTags(['title' => 'Добавление категории']);
-        return view('blog.admin.category.create',compact('item','categoryList'));
+
+        return view('blog.admin.category.create', [
+            'categories' => Category::with('children')->where('parent_id', '0')->get(),
+            'delimiter' => '-',
+            'item' => $item,
+        ]);
+
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -107,7 +115,7 @@ class CategoryController extends AdminBaseController
      * @param CategoryRepository $categoryRepository
      * @return \Illuminate\Http\Response
      */
-    public function edit($id,CategoryRepository $categoryRepository)
+    public function edit($id, CategoryRepository $categoryRepository)
     {
         $item = $this->categoryRepository->getEditId($id);
 
@@ -116,7 +124,6 @@ class CategoryController extends AdminBaseController
         }
 
         $categoryList = $this->categoryRepository->getComboBoxCategories();
-
 
 
         MetaTag::setTags(['title' => 'Редактирование категории']);

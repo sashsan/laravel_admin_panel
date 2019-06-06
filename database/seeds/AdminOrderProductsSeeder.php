@@ -52,9 +52,6 @@ class AdminOrderProductsSeeder extends Seeder
                 'title' => 'Citizen JP1010-00E',
                 'price' => 400.0
             ],
-
-
-
             [
                 'id' => 43,
                 'order_id' => 13,
@@ -120,6 +117,114 @@ class AdminOrderProductsSeeder extends Seeder
                 'title' => 'Q&Q Q956J302Y',
                 'price' => 400.0
             ],
+
+
+
+            [
+                'id' => 51,
+                'order_id' => 15,
+                'product_id' => 2,
+                'qty' => 1,
+                'title' => 'Casio MQ-24-7BUL',
+                'price' => 70.0
+            ],
+            [
+                'id' => 52,
+                'order_id' => 15,
+                'product_id' => 3,
+                'qty' => 1,
+                'title' => 'Casio GA-1000-1AER',
+                'price' => 400.0
+            ],
+            [
+                'id' => 53,
+                'order_id' => 16,
+                'product_id' => 6,
+                'qty' => 1,
+                'title' => 'Citizen AT0696-59E',
+                'price' => 350.0
+            ],
+            [
+                'id' => 54,
+                'order_id' => 16,
+                'product_id' => 7,
+                'qty' => 1,
+                'title' => 'Q&Q Q956J302Y',
+                'price' => 20.0
+            ],
+            [
+                'id' => 55,
+                'order_id' => 16,
+                'product_id' => 8,
+                'qty' => 1,
+                'title' => 'Royal London 41040-01',
+                'price' => 90.0
+            ],
+            [
+                'id' => 56,
+                'order_id' => 17,
+                'product_id' => 2,
+                'qty' => 1,
+                'title' => 'Casio MQ-24-7BUL',
+                'price' => 70.0
+            ],
+            [
+                'id' => 57,
+                'order_id' => 17,
+                'product_id' => 3,
+                'qty' => 1,
+                'title' => 'Casio GA-1000-1AER',
+                'price' => 400.0
+            ],
+            [
+                'id' => 58,
+                'order_id' => 17,
+                'product_id' => 4,
+                'qty' => 1,
+                'title' => 'Citizen JP1010-00E',
+                'price' => 400.0
+            ],
+            [
+                'id' => 59,
+                'order_id' => 18,
+                'product_id' => 6,
+                'qty' => 1,
+                'title' => 'Citizen AT0696-59E',
+                'price' => 350.0
+            ],
+            [
+                'id' => 60,
+                'order_id' => 18,
+                'product_id' => 7,
+                'qty' => 1,
+                'title' => 'Q&Q Q956J302Y',
+                'price' => 20.0
+            ],
+            [
+                'id' => 61,
+                'order_id' => 19,
+                'product_id' => 6,
+                'qty' => 1,
+                'title' => 'Citizen AT0696-59E',
+                'price' => 350.0
+            ],
+            [
+                'id' => 62,
+                'order_id' => 19,
+                'product_id' => 7,
+                'qty' => 1,
+                'title' => 'Q&Q Q956J302Y',
+                'price' => 20.0
+            ],
+            [
+                'id' => 63,
+                'order_id' => 19,
+                'product_id' => 8,
+                'qty' => 1,
+                'title' => 'Royal London 41040-01',
+                'price' => 90.0
+            ],
+
 
 
         ];

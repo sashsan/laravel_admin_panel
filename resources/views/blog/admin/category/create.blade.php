@@ -30,8 +30,12 @@
                                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                             </div>
                             <div class="form-group">
+                                <select name="parent_id" id="parent_id" class="form-control" required>
+                                    <option value="0">-- самостоятельная категория -- </option>
 
-                                @include('blog.admin.category.include.add_categories')
+                                    @include('blog.admin.category.include.edit_categories_all_list',['categories' => $categories])
+
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="keywords">Ключевые слова</label>

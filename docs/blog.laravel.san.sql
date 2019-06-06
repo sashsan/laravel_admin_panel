@@ -50,6 +50,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`,`password`, `rem
 (4, 'sasha','admin@admin.ru9', NULL, 12345678,  NULL, NULL, NULL),
 (7, 'admin', '1984aab@gmail.com',NULL, 12345678,  NULL, NULL, NULL),
 (8, 'user', '1984aab@gmail.comq', NULL, 12345678, NULL, NULL, NULL),
+
 (9, 'sasha2', '1984aab@gmail.comdd',NULL,12345678,  NULL, NULL, NULL),
 (10, 'user1', '1984aab@gmail.com22',NULL, 12345678,  NULL, NULL, NULL),
 (11, 'user2', '1984aab@gmail.com222',NULL, 12345678,  NULL, NULL, NULL),

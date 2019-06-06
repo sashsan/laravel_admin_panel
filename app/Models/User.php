@@ -69,6 +69,11 @@
             if ($disabled) return "disabled";
         }
 
+        public function isVisitor()
+        {
+            $user = $this->roles()->where('name', '')->exists();
+            if ($user) return "user";
+        }
 
 
     }
