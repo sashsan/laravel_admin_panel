@@ -77,7 +77,7 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="/user/edit?id=" class="btn btn-default btn-flat">Профиль</a>
+                                    <a href="{{route('blog.admin.users.edit',Auth::user()->id)}}" class="btn btn-default btn-flat">Профиль</a>
                                 </div>
                                 <div class="pull-right">
                                     <a href="{{ route('logout') }}" onclick="event.preventDefault();

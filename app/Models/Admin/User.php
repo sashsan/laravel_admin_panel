@@ -4,16 +4,20 @@
 
     use Illuminate\Database\Eloquent\Model;
     use Illuminate\Database\Eloquent\SoftDeletes;
+    use Illuminate\Notifications\Notifiable;
+
 
     class User extends Model
     {
 
         use SoftDeletes;
+        use Notifiable;
 
 
         protected $fillable = [
             'id',
             'name',
+            'login',
             'email',
             'password',
         ];
@@ -37,6 +41,7 @@
         {
             return $this->belongsToMany('App\Models\Role','user_roles');
         }
+
 
 
 
