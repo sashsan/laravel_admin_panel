@@ -20,7 +20,7 @@
                 <!-- small box -->
                 <div class="small-box bg-aqua">
                     <div class="inner">
-                        <h4>Кол-во Заказов {{$countOrders}}</h4>
+                        <h4>Кол-во заказов: {{$countOrders}}</h4>
                         <p>New Orders</p>
                     </div>
                     <div class="icon">
@@ -34,7 +34,7 @@
                 <!-- small box -->
                 <div class="small-box bg-green">
                     <div class="inner">
-                        <h4>Кол-во продуктов {{$countProducts}}</h4>
+                        <h4>Кол-во продуктов: {{$countProducts}}</h4>
                         <p>Products</p>
                     </div>
                     <div class="icon">
@@ -48,7 +48,7 @@
                 <!-- small box -->
                 <div class="small-box bg-yellow">
                     <div class="inner">
-                        <h4>Кол-во пользователей {{$countUsers}}</h4>
+                        <h4>Кол-во юзеров: {{$countUsers}}</h4>
                         <p>User Registrations</p>
                     </div>
                     <div class="icon">
@@ -62,7 +62,7 @@
                 <!-- small box -->
                 <div class="small-box bg-red">
                     <div class="inner">
-                        <h4>Кол-во категорий {{$countCategories}}</h4>
+                        <h4>Кол-во категорий: {{$countCategories}}</h4>
                         <p>Categories</p>
                     </div>
                     <div class="icon">
@@ -73,6 +73,13 @@
             </div>
             <!-- ./col -->
         </div>
+        <div class="col-md-6">
+            @include('blog.admin.main.include.orders')
+            @include('blog.admin.main.include.recently')
+        </div>
+
+
+
 
     </section>
     <!-- /.content -->

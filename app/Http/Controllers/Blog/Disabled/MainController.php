@@ -2,13 +2,14 @@
 
     namespace App\Http\Controllers\Blog\Disabled;
 
+    use App\Http\Controllers\Controller;
     use Illuminate\Http\Request;
 
     /**
      * Class MainController
      * @package App\Http\Controllers\Blog\Disabled
      */
-    class MainController extends BaseController
+    class MainController extends Controller
     {
         /**
          * Display a listing of the resource.
