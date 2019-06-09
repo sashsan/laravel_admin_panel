@@ -17,12 +17,14 @@
                 <a href="{{route('blog.admin.orders.change',$item->id)}}/?status=0" class="btn btn-default btn-xs">Вернуть на доработку</a>
             @endif
 
-            <form id="delform" method="post" action="{{route('blog.admin.orders.destroy',$item->id)}}" style="display: none">
-                <input type="hidden" name="varf" id="varf">
-                @method('DELETE') @csrf
+        <a class="btn btn-xs" href="">
+            <form id="delform" method="post" action="{{route('blog.admin.orders.destroy', $item->id)}}"
+                  style="float: none">
+                @method('DELETE')
+                @csrf
+                <button type="submit" class="btn btn-danger btn-xs delete">Удалить</button>
             </form>
-
-        <button type="submit" onclick="document.getElementById('varf').value=this.value; document.getElementById('varf').parentNode.submit();" class="btn btn-danger btn-xs delete">Удалить</button>
+        </a>
 
     </h1>
 

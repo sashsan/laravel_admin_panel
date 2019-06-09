@@ -74,18 +74,18 @@
                     @auth
 
                         @if(Auth::user()->isDisabled())
-                            <a href="{{ url('/') }}" style="color: black">Главная</a>
+                            <a href="{{ url('/') }}" style="color: #0b3e6f">Главная</a>
                         @elseif(Auth::user()->isUser())
-                            <a href="{{ url('/user/index') }}" style="color: black">Кабинет</a>
-                            <a href="{{ url('/') }}" style="color: black">Главная</a>
+                            <a href="{{ url('/user/index') }}" style="color: #0b3e6f">Кабинет</a>
+                            <a href="{{ url('/') }}" style="color: #0b3e6f">Главная</a>
                         @elseif(Auth::user()->isVisitor())
-                            <a href="{{ url('/') }}" style="color: black">Главная</a>
+                            <a href="{{ url('/') }}" style="color: #0b3e6f">Главная</a>
                         @elseif(Auth::user()->isAdministrator())
-                            <a href="{{ url('/admin/index') }}" style="color: black">Панель Администратора</a>
-                            <a href="{{ url('/') }}" style="color: black">Главная</a>
+                            <a href="{{ url('/admin/index') }}" style="color: #0b3e6f">Панель Администратора</a>
+                            <a href="{{ url('/') }}" style="color: #0b3e6f">Главная</a>
                         @endif
 
-                        <a class="dropdown-item" href="{{ route('logout') }}"
+                        <a class="dropdown-item" href="{{ route('logout') }}" style="color: #0b3e6f"
                            onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}

@@ -40,9 +40,11 @@
             Route::resource('categories', 'CategoryController')
                 ->names('blog.admin.categories');
 
+            Route::resource('users','UserController')
+                ->names('blog.admin.users');
 
-
-
+            Route::resource('products','ProductController')
+                ->names('blog.admin.products');
 
 
 

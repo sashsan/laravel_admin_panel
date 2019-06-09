@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
 
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
-            $table->enum('status',['0','1'])->default(0);
+            $table->enum('status',['0','1','2'])->default(0);
 
             $table->timestamps();
             $table->softDeletes();

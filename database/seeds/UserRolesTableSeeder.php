@@ -20,6 +20,46 @@
                     'user_id' => '2',
                     'role_id' => '2',
                 ],
+                [
+                    'user_id' => '4',
+                    'role_id' => '2',
+                ],
+                [
+                    'user_id' => '7',
+                    'role_id' => '2',
+                ],
+                [
+                    'user_id' => '8',
+                    'role_id' => '2',
+                ],
+                [
+                    'user_id' => '9',
+                    'role_id' => '2',
+                ],
+                [
+                    'user_id' => '10',
+                    'role_id' => '2',
+                ],
+                [
+                    'user_id' => '11',
+                    'role_id' => '2',
+                ],
+                [
+                    'user_id' => '12',
+                    'role_id' => '2',
+                ],
+                [
+                    'user_id' => '13',
+                    'role_id' => '2',
+                ],
+                [
+                    'user_id' => '14',
+                    'role_id' => '2',
+                ],
+                [
+                    'user_id' => '15',
+                    'role_id' => '2',
+                ],
 
             ];
             DB::table('user_roles')->insert($data);
