@@ -73,3 +73,7 @@ $('.sidebar-menu a').each(function () {
     }
 });
 /* --------- */
+
+CKEDITOR.replace( 'editor1' );
+
+
