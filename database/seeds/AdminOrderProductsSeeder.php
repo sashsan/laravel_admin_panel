@@ -58,7 +58,7 @@ class AdminOrderProductsSeeder extends Seeder
                 'product_id' => 1,
                 'qty' => 1,
                 'title' => 'Casio MRP-700-1AVEFF',
-                'price' => 400.0
+                'price' => 300.0
             ],
             [
                 'id' => 44,
@@ -66,7 +66,7 @@ class AdminOrderProductsSeeder extends Seeder
                 'product_id' => 2,
                 'qty' => 1,
                 'title' => 'Casio MQ-24-7BUL',
-                'price' => 400.0
+                'price' => 70.0
             ],
             [
                 'id' => 45,
@@ -90,16 +90,15 @@ class AdminOrderProductsSeeder extends Seeder
                 'product_id' => 7,
                 'qty' => 1,
                 'title' => 'Q&Q Q956J302Y',
-                'price' => 400.0
+                'price' => 20.0
             ],
-
             [
                 'id' => 48,
                 'order_id' => 14,
                 'product_id' => 2,
                 'qty' => 1,
                 'title' => 'Casio GA-1000-1AER',
-                'price' => 400.0
+                'price' => 70.0
             ],
             [
                 'id' => 49,
@@ -117,9 +116,6 @@ class AdminOrderProductsSeeder extends Seeder
                 'title' => 'Q&Q Q956J302Y',
                 'price' => 400.0
             ],
-
-
-
             [
                 'id' => 51,
                 'order_id' => 15,
@@ -172,7 +168,7 @@ class AdminOrderProductsSeeder extends Seeder
                 'id' => 57,
                 'order_id' => 17,
                 'product_id' => 3,
-                'qty' => 1,
+                'qty' => 2,
                 'title' => 'Casio GA-1000-1AER',
                 'price' => 400.0
             ],

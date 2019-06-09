@@ -151,8 +151,8 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="/user">Список пользователей</a></li>
-                        <li><a href="/user/add">Добавить пользователя</a></li>
+                        <li><a href="{{route('blog.admin.users.index')}}">Список пользователей</a></li>
+                        <li><a href="{{route('blog.admin.users.create')}}">Добавить пользователя</a></li>
                     </ul>
                 </li>
                 <li class="treeview">

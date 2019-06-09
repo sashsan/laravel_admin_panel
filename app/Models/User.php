@@ -4,6 +4,7 @@
 
     namespace App\Models;
 
+    use Illuminate\Database\Eloquent\SoftDeletes;
     use Illuminate\Notifications\Notifiable;
     use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -14,6 +15,7 @@
     class User extends Authenticatable
     {
         use Notifiable;
+
 
         /**
          * The attributes that are mass assignable.
@@ -74,6 +76,7 @@
             $user = $this->roles()->where('name', '')->exists();
             if ($user) return "user";
         }
+
 
 
     }

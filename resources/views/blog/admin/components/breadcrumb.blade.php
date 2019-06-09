@@ -10,7 +10,7 @@
         <li><a href="{{route('blog.admin.categories.index')}}"><i></i>{{$category}}</a></li>
     @endif
     @if (isset($user))
-        <li><a href=""><i></i>{{$user}}</a></li>
+        <li><a href="{{route('blog.admin.users.index')}}"><i></i>{{$user}}</a></li>
     @endif
     @if (isset($product))
         <li><a href=""><i></i>{{$product}}</a></li>
