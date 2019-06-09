@@ -23,6 +23,7 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{asset('adminlte/dist/css/skins/_all-skins.min.css')}}">
 
+
     <link rel="stylesheet" href="{{asset('css/my.css')}}">
 
 
@@ -36,7 +37,12 @@
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
+<style>
+    .wrapper{
+        overflow:hidden;
+    }
 
+</style>
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -139,8 +145,8 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="/product">Список товаров</a></li>
-                        <li><a href="/product/add">Добавить товар</a></li>
+                        <li><a href="{{route('blog.admin.products.index')}}">Список товаров</a></li>
+                        <li><a href="{{route('blog.admin.products.create')}}">Добавить товар</a></li>
                     </ul>
                 </li>
                 <li><a href="/cache"><i class="fa fa-database"></i> <span>Кэширование</span></a></li>
@@ -200,7 +206,8 @@
         <main id="app">
             @include('blog.admin.components.result_messages')
             @yield('content')
-            @yield('menu')
+            @yield('order')
+            @yield('recently')
         </main>
     </div>
     <!-- /.content-wrapper -->
@@ -236,6 +243,7 @@
 <script src="{{asset('adminlte/bower_components/ckeditor/ckeditor.js')}}"></script>
 <script src="{{asset('adminlte/bower_components/ckeditor/adapters/jquery.js')}}"></script>
 <!-- =======  -->
+
 <!-- для кнопок мой собственный js -->
 <script src="{{asset('js/app.js')}}"></script>
 
