@@ -49402,6 +49402,8 @@ $('.sidebar-menu a').each(function () {
 });
 /* --------- */
 
+CKEDITOR.replace('editor1');
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
