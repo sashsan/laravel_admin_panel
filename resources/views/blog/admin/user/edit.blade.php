@@ -21,35 +21,39 @@
             <div class="box">
                 <!--для валидации data-toggle="validator"-->
                 <form action="{{route('blog.admin.users.update', $item->id)}}" method="post" data-toggle="validator">
-
+                    @method('PUT')
                     @csrf
                     <div class="box-body">
                         <div class="form-group has-feedback">
                             <label for="login">Логин</label>
-                            <input type="text" class="form-control" name="login" id="login" value="{{$item->name}}" required>
+                            <input type="text" class="form-control"  placeholder="{{ucfirst($item->name)}}" disabled >
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                         </div>
                         <div class="form-group">
-                            <label for="password">Пароль</label>
-                            <input type="text" class="form-control" name="password" id="password" placeholder="Введите пароль, если хотите его изменить">
+                            <label for="">Пароль</label>
+                            <input type="text" class="form-control" name="password" placeholder="Введите пароль, если хотите его изменить">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Подтверждение пароля</label>
+                            <input type="text" class="form-control" name="password_confirmation" placeholder="Подтверждение пароля">
                         </div>
                         <div class="form-group has-feedback">
                             <label for="name">Имя</label>
-                            <input type="text" class="form-control" name="name" id="name" value="{{$item->name}}" required>
+                            <input type="text" class="form-control" name="name" id="name" value="@if(old('name')){{old('name')}}@else{{$item->name ?? ""}}@endif" required>
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                         </div>
                         <div class="form-group has-feedback">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" name="email" id="email" value="{{$item->email}}" required>
+                            <input type="email" class="form-control" name="email" id="email" value="@if(old('email')){{old('email')}}@else{{$item->email ?? ""}}@endif" required>
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                         </div>
 
                         <div class="form-group has-feedback">
                             <label for="address">Роль</label>
                             <select name="role" id="role" class="form-control">
-                        <option value="user" @php if ($role == 'user') echo ' selected' @endphp>Пользователь</option>
-                        <option value="admin" @php if ($role == 'admin') echo ' selected' @endphp>Администратор</option>
-                        <option value="disabled" @php if ($role == 'disabled') echo ' selected' @endphp>Disabled</option>
+                        <option value="2" @php if ($role == 'user') echo ' selected' @endphp>Пользователь</option>
+                        <option value="3" @php if ($role == 'admin') echo ' selected' @endphp>Администратор</option>
+                        <option value="1" @php if ($role == 'disabled') echo ' selected' @endphp>Disabled</option>
                             </select>
                         </div>
                     </div>
