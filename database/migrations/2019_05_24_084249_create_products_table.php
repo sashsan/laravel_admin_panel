@@ -30,6 +30,9 @@ class CreateProductsTable extends Migration
             $table->string('img',255)->default('no_image.jpg');
             $table->enum('hit',['0','1'])->default(0)->index();
 
+            $table->timestamps();
+            $table->softDeletes();
+
             $table->index(['category_id','brand_id']);
         });
     }
