@@ -9,7 +9,6 @@ class AdminCategoryObserver
 
 
 
-
     public function creating(Category $category)
     {
         $this->setAlias($category);

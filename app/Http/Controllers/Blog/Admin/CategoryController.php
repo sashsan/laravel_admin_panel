@@ -86,6 +86,7 @@ class CategoryController extends AdminBaseController
 
         $item = (new Category())->create($data);
 
+
         if ($item) {
             return redirect()
                 ->route('blog.admin.categories.create', [$item->id])

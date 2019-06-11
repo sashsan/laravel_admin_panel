@@ -40,12 +40,16 @@
             return $get_all;
         }
 
+
         public function getCountProducts()
         {
             $count = $this->startConditions()
                 ->count();
             return $count;
         }
+
+
+
 
 
 

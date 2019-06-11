@@ -3,6 +3,8 @@
     namespace App\Http\Controllers\Blog\Admin;
 
     use App\Http\Requests\AdminProductsCreateRequest;
+    use App\Models\Admin\Category;
+    use App\Models\Admin\Product;
     use App\Repositories\Admin\ProductRepository;
     use Illuminate\Http\Request;
     use App\Http\Controllers\Controller;
@@ -45,20 +47,52 @@
         public function create()
         {
 
+            $_SESSION['ckfinder_auth'] = true;
 
+            $item = new Category();
 
             MetaTag::setTags(['title' => 'Создание нового товара']);
-            return view('blog.admin.product.create', compact(''));
+
+            return view('blog.admin.product.create',[
+                'categories' => Category::with('children')->where('parent_id', '0')
+                    ->get(),
+                'delimiter' => '-',
+                'item' => $item,
+            ]);
         }
 
         /**
          * Store a newly created resource in storage.
          *
          * @param AdminProductsCreateRequest $request
-         * @return void
+         * @return \Illuminate\Http\RedirectResponse
          */
         public function store(AdminProductsCreateRequest $request)
         {
+
+            $data = $request->input();
+
+            $product = (new Product())->create($data);
+
+            $product->status =  $request->status ? '1' : '0';
+            $product->hit =  $request->hit ? '1' : '0';
+            $product->category_id = $request->parent_id ?? '0';
+
+            $save = $product->save();
+
+
+
+            if ($save){
+                return redirect()
+                    ->route('blog.admin.products.create',[$product->id])
+                    ->with(['success' => 'Успешно сохранено']);
+            } else {
+                return back()
+                    ->withErrors(['msg'=>'Ошибка сохранения'])
+                    ->withInput();
+            }
+
+
 
         }
 

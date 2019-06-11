@@ -74,6 +74,9 @@ $('.sidebar-menu a').each(function () {
 });
 /* --------- */
 
-CKEDITOR.replace( 'editor1' );
-
+$(document).ready(function () {
+    if (window.location.pathname == '/admin/products/create') {
+        CKEDITOR.replace('editor1');
+    }
+});
 
