@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.1.3",
+        "arrilot/laravel-widgets": "^3.13",
         "fideloper/proxy": "^4.0",
         "fomvasss/laravel-meta-tags": "^2.0",
         "laravel/framework": "5.8.*",
@@ -42,7 +43,8 @@
         },
         "classmap": [
             "database/seeds",
-            "database/factories"
+            "database/factories",
+            "app/Widgets"
         ]
     },
     "autoload-dev": {

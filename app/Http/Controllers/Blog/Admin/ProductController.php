@@ -79,6 +79,10 @@
             $product->category_id = $request->parent_id ?? '0';
 
             $save = $product->save();
+            $id = $product->id;
+
+
+            $this->productRepository->editFilter($id, $data);
 
 
 

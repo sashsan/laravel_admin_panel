@@ -75,11 +75,21 @@
                                 </label>
                             </div>
 
+                            {{ Widget::run('filter',
+                                    [
+                                        'tpl' => 'widgets.filter',
+                                        'filter' => null,
+
+                                    ]) }}
+
+
                         </div>
                         <div class="box-footer">
                             <button type="submit" class="btn btn-success">Добавить</button>
                         </div>
                     </form>
+
+
 
                 </div>
             </div>

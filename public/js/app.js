@@ -49407,6 +49407,13 @@ $(document).ready(function () {
     CKEDITOR.replace('editor1');
   }
 });
+/* для кнопки сбросить в админке добавление товара, в admin_filter_tpl.php добавил */
+
+$('#reset-filter').click(function () {
+  $('#filter input[type=radio]').prop('checked', false);
+  return false;
+});
+/* ----------- */
 
 /***/ }),
 
