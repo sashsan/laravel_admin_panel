@@ -40,6 +40,7 @@
             return $get_all;
         }
 
+
         public function getCountProducts()
         {
             $count = $this->startConditions()
@@ -47,7 +48,62 @@
             return $count;
         }
 
+        public function getLastProducts($perpage)
+        {
+            $get = $this->startConditions()
+                ->orderBy('id','desc')
+                ->limit($perpage)
+                ->paginate($perpage);
+            return $get;
+        }
 
+
+
+        public function editFilter($id, $data)
+        {
+            $filter = \DB::table('attribute_products')
+                ->pluck('attr_id')
+                ->where('product_id',$id)
+                ->toArray();
+
+            //если убрал фильтры
+            if (empty($data['attrs']) && !empty($filter)){
+                \DB::table('attribute_products')
+                    ->where('product_id',$id)
+                    ->delete();
+                return;
+            }
+
+            //если фильтры добавляются
+            if (empty($filter) && !empty($data['attrs'])){
+                $sql_part = '';
+                foreach ($data['attrs'] as $v){
+                    $sql_part .= "($v, $id),";
+                }
+
+                $sql_part = rtrim($sql_part, ',');
+
+                \DB::insert("insert into attribute_products (attr_id, product_id) VALUES $sql_part");
+
+                return;
+            }
+            //если изменились фильтры
+            if(!empty($data['attrs'])){
+                $result = array_diff($filter, $data['attrs']);
+                if (!$result){
+                    \DB::table('attribute_products')
+                        ->where('product_id',$id)
+                        ->delete();
+                    $sql_part = '';
+                    foreach ($data['attrs'] as $v){
+                        $sql_part .= "($v, $id),";
+                    }
+                    $sql_part = rtrim($sql_part, ',');
+
+                    \DB::insert("insert into attribute_products (attr_id, product_id) VALUES $sql_part");
+                }
+            }
+        }
 
 
     }

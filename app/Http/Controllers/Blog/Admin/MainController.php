@@ -5,6 +5,7 @@
     use App\Repositories\Admin\MainRepository;
 
     use App\Repositories\Admin\OrderRepository;
+    use App\Repositories\Admin\ProductRepository;
     use MetaTag;
 
     /**
@@ -16,12 +17,14 @@
 
 
         private $orderRepository;
+        private $productRepository;
 
 
         public function __construct()
         {
             parent::__construct();
             $this->orderRepository = app(OrderRepository::class);
+            $this->productRepository = app(ProductRepository::class);
         }
 
 
@@ -34,8 +37,8 @@
 
 
             $perpage = 4;
-            $last_orders = $this->orderRepository->getAllOrders($perpage);
-
+            $last_orders = $this->orderRepository->getAllOrders(5);
+            $last_products = $this->productRepository->getLastProducts($perpage);
 
 
             MetaTag::setTags([
@@ -43,7 +46,7 @@
             ]);
 
             return view('blog.admin.main.index',
-                compact('countOrders', 'countUsers', 'countProducts', 'countCategories','last_orders'));
+                compact('countOrders', 'countUsers', 'countProducts', 'countCategories','last_orders','last_products'));
         }
 
 

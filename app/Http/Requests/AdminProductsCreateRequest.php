@@ -21,7 +21,7 @@ class AdminProductsCreateRequest extends FormRequest
 
         return [
             'title' => 'required|min:3|max:20|string',
-            'category_id' => 'required|integer',
+            'category_id' => 'integer',
             'price' => 'required',
         ];
     }

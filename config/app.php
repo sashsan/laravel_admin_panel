@@ -165,7 +165,6 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Illuminate\Foundation\Providers\ArtisanServiceProvider::class,
-        App\Providers\WidgetServiceProvider::class,
         Lavary\Menu\ServiceProvider::class,
 
         /*

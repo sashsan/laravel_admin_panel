@@ -206,8 +206,7 @@
         <main id="app">
             @include('blog.admin.components.result_messages')
             @yield('content')
-            @yield('order')
-            @yield('recently')
+            
         </main>
     </div>
     <!-- /.content-wrapper -->
