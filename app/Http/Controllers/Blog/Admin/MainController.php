@@ -37,7 +37,7 @@
 
 
             $perpage = 4;
-            $last_orders = $this->orderRepository->getAllOrders(5);
+            $last_orders = $this->orderRepository->getAllOrders($perpage);
             $last_products = $this->productRepository->getLastProducts($perpage);
 
 

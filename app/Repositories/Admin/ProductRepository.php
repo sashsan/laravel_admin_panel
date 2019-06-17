@@ -106,4 +106,50 @@
         }
 
 
+
+        public function editRelatedProduct($id,$data)
+        {
+            $related_product = \DB::table('related_products')
+                ->select('related_id')
+                ->where('product_id',$id)
+                ->get()
+                ->toArray();
+
+            if (empty($data['related']) && !empty($related_product)){
+                \DB::table('related_products')
+                ->where('product_id', $id)
+                ->delete();
+                return;
+            }
+            if (empty($related_product) && !empty($data['related'])){
+                $sql_part = '';
+
+                foreach ($data['related'] as $v){
+                    $v = (int)$v;
+                    $sql_part .= "($id, $v),";
+                }
+                $sql_part = rtrim($sql_part, ',');
+
+
+                \DB::insert("insert into related_products (product_id, related_id) VALUES $sql_part");
+                return;
+            }
+            if (!empty($data['related'])){
+                $result = array_diff($related_product, $data['related']);
+                if (!(empty($result)) || count($related_product) != count($data['related'])){
+                    \DB::table('related_products')
+                        ->where('product_id', $id)
+                        ->delete();
+                    $sql_part = '';
+                    foreach ($data['related'] as $v){
+                        $sql_part .= "($id, $v),";
+                    }
+                    $sql_part = rtrim($sql_part, ',');
+                    \DB::insert("insert into related_products (product_id, related_id) VALUES $sql_part");
+                }
+            }
+
+        }
+
+
     }

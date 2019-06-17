@@ -81,9 +81,9 @@
             $save = $product->save();
             $id = $product->id;
 
-
             $this->productRepository->editFilter($id, $data);
 
+            $this->productRepository->editRelatedProduct($id,$data);
 
 
             if ($save){
@@ -96,9 +96,36 @@
                     ->withInput();
             }
 
-
-
         }
+
+
+
+
+        public function related(Request $request)
+        {
+            $q = isset($request->q) ? htmlspecialchars(trim($request->q)) : '';
+            $data['items'] = [];
+
+            $products = \DB::table('products')
+                ->select('id', 'title')
+                ->where('title', 'LIKE', ["%{$q}%"])
+                ->limit(8)
+                ->get();
+
+            if ($products) {
+                $i = 0;
+                foreach ($products as $id => $title) {
+                    $data['items'][$i]['id'] = $title->id;
+                    $data['items'][$i]['text'] = $title->title;
+                    $i++;
+                }
+            }
+
+            echo json_encode($data);
+            die;
+        }
+
+
 
         /**
          * Display the specified resource.

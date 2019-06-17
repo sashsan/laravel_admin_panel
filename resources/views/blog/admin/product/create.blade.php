@@ -75,6 +75,11 @@
                                 </label>
                             </div>
 
+                            <div class="form-group has-feedback">
+                                <label for="related">Связанные товары</label>
+                                <select name="related[]" class="form-control select2" id="related" multiple></select>
+                            </div>
+
                             {{ Widget::run('filter',
                                     [
                                         'tpl' => 'widgets.filter',
