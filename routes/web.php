@@ -44,8 +44,12 @@
                 ->names('blog.admin.users');
 
 
+            Route::get('/products/related','ProductController@related')
+                ->name('blog.admin.products.related');
+
             Route::resource('products','ProductController')
                 ->names('blog.admin.products');
+
 
 
 

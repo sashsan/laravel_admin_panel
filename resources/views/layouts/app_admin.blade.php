@@ -12,7 +12,7 @@
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="{{asset('adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
     <!-- Для select связанные товары в админке добавить товар -->
-    <link rel="stylesheet" href="{{asset('adminlte/bower_components/select2/dist/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('adminlte/bower_components/select2/dist/css/select2.css')}}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('adminlte/bower_components/font-awesome/css/font-awesome.min.css')}}">
     <!-- Ionicons -->
@@ -22,7 +22,6 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{asset('adminlte/dist/css/skins/_all-skins.min.css')}}">
-
 
     <link rel="stylesheet" href="{{asset('css/my.css')}}">
 
@@ -206,7 +205,7 @@
         <main id="app">
             @include('blog.admin.components.result_messages')
             @yield('content')
-            
+
         </main>
     </div>
     <!-- /.content-wrapper -->
@@ -231,7 +230,7 @@
 <!-- Bootstrap 3.3.7 -->
 <script src="{{asset('adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
 <!-- Для select связанные товары в админке добавить товар -->
-{{--<script src="{{asset('bower_components/select2/dist/js/select2.full.js')}}"></script>--}}
+<script src="{{asset('adminlte/bower_components/select2/dist/js/select2.full.js')}}"></script>
 <!-- Validator -->
 <script src="{{asset('js/validator.js')}}"></script>
 <!-- Search -->
@@ -243,7 +242,7 @@
 <script src="{{asset('adminlte/bower_components/ckeditor/adapters/jquery.js')}}"></script>
 <!-- =======  -->
 
-<!-- для кнопок мой собственный js -->
+
 <script src="{{asset('js/app.js')}}"></script>
 
 </body>
