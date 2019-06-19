@@ -244,6 +244,7 @@
 
 <script src="{{asset('js/app.js')}}"></script>
 
+
 <script>
 
     var buttonSingle = $("#single");
