@@ -4,6 +4,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+
 require('./bootstrap');
 
 window.Vue = require('vue');
@@ -31,7 +32,6 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
 });
-
 
 
 
@@ -88,6 +88,8 @@ $('#reset-filter').click(function () {
 });
 /* ----------- */
 
+
+
 /* Для select связанные товары в админке добавить товар */
 $(".select2").select2({
     placeholder: "Начните вводить наименование товара",
@@ -111,4 +113,7 @@ $(".select2").select2({
     }
 });
 /* ===== */
+
+
+
 

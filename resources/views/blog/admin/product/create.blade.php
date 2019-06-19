@@ -18,8 +18,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="box">
-                    <form action="{{route('blog.admin.products.store',$item->id)}}" method="post" data-toggle="validator">
+                    <form method="POST"  action="{{route('blog.admin.products.store',$item->id)}}"data-toggle="validator">
                         @csrf
+
                         <div class="box-body">
                             <div class="form-group has-feedback">
                                 <label for="title">Наименование товара</label>
@@ -77,15 +78,40 @@
 
                             <div class="form-group has-feedback">
                                 <label for="related">Связанные товары</label>
-                                <select name="related[]" class="form-control select2" id="related" multiple></select>
+                                <select name="related[]" class="select2 form-control" id="related" multiple></select>
                             </div>
 
-                            {{ Widget::run('filter',
-                                    [
-                                        'tpl' => 'widgets.filter',
-                                        'filter' => null,
+                {{ Widget::run('filter',['tpl' => 'widgets.filter','filter' => null, ])}}
 
-                                    ]) }}
+
+                            <div class="form-group">
+
+                                <div class="col-md-4">
+                                    @include('blog.admin.product.single_image')
+                                </div>
+
+
+                                <div class="col-md-8">
+                                    <div class="box box-primary box-solid file-upload">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Картинки галереи</h3>
+                                        </div>
+                                        <div class="box-body">
+                                            <div id="multi" class="btn btn-success" data-url="products/image" data-name="multi">Выбрать файл</div>
+                                            <p><small>Рекомендуемые размеры: 700ш.х1000в.</small></p>
+                                            <div class="multi"></div>
+                                        </div>
+                                        <!--my.css .overlay{}-->
+                                        <div class="overlay">
+                                            <i class="fa fa-refresh fa-spin"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
 
 
                         </div>
@@ -93,16 +119,12 @@
                             <button type="submit" class="btn btn-success">Добавить</button>
                         </div>
                     </form>
-
-
-
                 </div>
             </div>
         </div>
 
     </section>
     <!-- /.content -->
-
 
 
 

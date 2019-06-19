@@ -2,13 +2,22 @@
 
     namespace App\Http\Controllers\Blog\Admin;
 
+
     use App\Http\Requests\AdminProductsCreateRequest;
     use App\Models\Admin\Category;
     use App\Models\Admin\Product;
     use App\Repositories\Admin\ProductRepository;
+
+
+    use Config;
     use Illuminate\Http\Request;
-    use App\Http\Controllers\Controller;
+
+
     use MetaTag;
+    use Illuminate\Support\Facades\File;
+    use Illuminate\Support\Facades\Validator;
+    use App\SBlog\Core\BlogApp;
+
 
     class ProductController extends AdminBaseController
     {
@@ -36,7 +45,7 @@
 
 
             MetaTag::setTags(['title' => 'Список товаров']);
-            return view('blog.admin.product.index', compact('getAllProducts','count'));
+            return view('blog.admin.product.index', compact('getAllProducts', 'count'));
         }
 
         /**
@@ -46,14 +55,13 @@
          */
         public function create()
         {
-
             $_SESSION['ckfinder_auth'] = true;
 
             $item = new Category();
 
             MetaTag::setTags(['title' => 'Создание нового товара']);
 
-            return view('blog.admin.product.create',[
+            return view('blog.admin.product.create', [
                 'categories' => Category::with('children')->where('parent_id', '0')
                     ->get(),
                 'delimiter' => '-',
@@ -74,8 +82,8 @@
 
             $product = (new Product())->create($data);
 
-            $product->status =  $request->status ? '1' : '0';
-            $product->hit =  $request->hit ? '1' : '0';
+            $product->status = $request->status ? '1' : '0';
+            $product->hit = $request->hit ? '1' : '0';
             $product->category_id = $request->parent_id ?? '0';
 
             $save = $product->save();
@@ -83,20 +91,68 @@
 
             $this->productRepository->editFilter($id, $data);
 
-            $this->productRepository->editRelatedProduct($id,$data);
+            $this->productRepository->editRelatedProduct($id, $data);
 
 
-            if ($save){
+            if ($save) {
                 return redirect()
-                    ->route('blog.admin.products.create',[$product->id])
+                    ->route('blog.admin.products.create', [$product->id])
                     ->with(['success' => 'Успешно сохранено']);
             } else {
                 return back()
-                    ->withErrors(['msg'=>'Ошибка сохранения'])
+                    ->withErrors(['msg' => 'Ошибка сохранения'])
                     ->withInput();
             }
 
         }
+
+        public function addImage()
+        {
+
+            $single_img = BlogApp::get_instance()->getProperty('single_img');
+
+            $wmax = BlogApp::get_instance()->getProperty('img_width');
+            $hmax = BlogApp::get_instance()->getProperty('img_height');
+
+            $this->productRepository->uploadImg($single_img,$wmax,$hmax);
+        }
+
+
+        public function ajaxImage(Request $request)
+        {
+            if ($request->isMethod('get')) {
+                return view('blog.admin.product.single_image');
+            } else {
+                $validator = Validator::make($request->all(),
+                    [
+                        'file' => 'image',
+                    ],
+                    [
+                        'file.image' => 'Файл должен быть картинкой (jpeg, png, bmp, gif, or svg)'
+                    ]);
+                if ($validator->fails()) {
+                    return array(
+                        'fail' => true,
+                        'errors' => $validator->errors()
+                    );
+                }
+                $extension = $request->file('file')->getClientOriginalExtension();
+                $dir = 'uploads/single/';
+                $filename = uniqid() . '_' . time() . '.' . $extension;
+                $request->file('file')->move($dir, $filename);
+
+                BlogApp::get_instance()->setProperty('single_img',$filename);
+
+                return $filename;
+            }
+        }
+
+
+        public function deleteImage($filename)
+        {
+            File::delete('uploads/single/' . $filename);
+        }
+
 
 
 
@@ -124,7 +180,6 @@
             echo json_encode($data);
             die;
         }
-
 
 
         /**

@@ -10,7 +10,7 @@
 
 
     use Illuminate\Support\ServiceProvider;
-    use App;
+    use BlogApp;
     use Blade;
 
     class WidgetServiceProvider extends ServiceProvider
@@ -28,7 +28,7 @@
 
         public function register()
         {
-            App::singleton('widget', function(){
+            BlogApp::singleton('widget', function(){
                 return new \App\Widgets\Widget();
             });
         }
