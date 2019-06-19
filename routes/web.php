@@ -44,9 +44,9 @@
                 ->names('blog.admin.users');
 
 
-            Route::get('/products/related','ProductController@related')
-                ->name('blog.admin.products.related');
-
+            Route::get('/products/related','ProductController@related');
+            Route::match(['get', 'post'], '/products/ajax-image-upload', 'ProductController@ajaxImage');
+            Route::delete('/products/ajax-remove-image/{filename}', 'ProductController@deleteImage');
             Route::resource('products','ProductController')
                 ->names('blog.admin.products');
 

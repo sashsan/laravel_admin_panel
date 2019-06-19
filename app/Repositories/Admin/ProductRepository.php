@@ -10,6 +10,7 @@
 
     use App\Models\Admin\Product as Model;
     use App\Repositories\CoreRepository;
+    use App\SBlog\BlogApp;
 
     class ProductRepository extends CoreRepository
     {
@@ -150,6 +151,87 @@
             }
 
         }
+
+
+
+
+        public function uploadImg($name, $wmax, $hmax){
+
+            $uploaddir = WWW . '/uploads/single/';
+            $ext = strtolower(preg_replace("#.+\.([a-z]+)$#i", "$1", $_FILES[$name]['name'])); // расширение картинки
+            $types = array("image/gif", "image/png", "image/jpeg", "image/pjpeg", "image/x-png"); // массив допустимых расширений
+            if($_FILES[$name]['size'] > 1){
+                return back()
+                    ->withErrors(['msg' => "Ошибка! Максимальный вес файла - 1 Мб!"]);
+            }
+            if($_FILES[$name]['error']){
+                return back()
+                    ->withErrors(['msg' => "Ошибка! Возможно, файл слишком большой."]);
+            }
+            if(!in_array($_FILES[$name]['type'], $types)){
+                return back()
+                    ->withErrors(['msg' => "Допустимые расширения - .gif, .jpg, .png"]);
+            }
+            $new_name = md5(time()).".$ext";
+            $uploadfile = $uploaddir.$new_name;
+            if(@move_uploaded_file($_FILES[$name]['tmp_name'], $uploadfile)){
+
+                $_SESSION['single'] = $new_name;
+
+                self::resize($uploadfile, $uploadfile, $wmax, $hmax, $ext);
+                $res = array("file" => $new_name);
+                dd($res);
+                exit(json_encode($res));
+            }
+        }
+
+
+        public static function resize($target, $dest, $wmax, $hmax, $ext){
+            list($w_orig, $h_orig) = getimagesize($target);
+            $ratio = $w_orig / $h_orig;
+
+            if(($wmax / $hmax) > $ratio){
+                $wmax = $hmax * $ratio;
+            }else{
+                $hmax = $wmax / $ratio;
+            }
+
+            $img = "";
+            // imagecreatefromjpeg | imagecreatefromgif | imagecreatefrompng
+            switch($ext){
+                case("gif"):
+                    $img = imagecreatefromgif($target);
+                    break;
+                case("png"):
+                    $img = imagecreatefrompng($target);
+                    break;
+                default:
+                    $img = imagecreatefromjpeg($target);
+            }
+            $newImg = imagecreatetruecolor($wmax, $hmax);
+            if($ext == "png"){
+                imagesavealpha($newImg, true);
+                $transPng = imagecolorallocatealpha($newImg,0,0,0,127);
+                imagefill($newImg, 0, 0, $transPng);
+            }
+            imagecopyresampled($newImg, $img, 0, 0, 0, 0, $wmax, $hmax, $w_orig, $h_orig); // копируем и ресайзим изображение
+            switch($ext){
+                case("gif"):
+                    imagegif($newImg, $dest);
+                    break;
+                case("png"):
+                    imagepng($newImg, $dest);
+                    break;
+                default:
+                    imagejpeg($newImg, $dest);
+            }
+            imagedestroy($newImg);
+        }
+
+
+
+
+
 
 
     }

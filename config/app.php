@@ -119,6 +119,8 @@ return [
     |
     */
 
+
+
     'key' => env('APP_KEY'),
 
     'cipher' => 'AES-256-CBC',
@@ -196,7 +198,7 @@ return [
     'aliases' => [
 
         'MetaTag' => Fomvasss\LaravelMetaTags\Facade::class,
-        'App' => Illuminate\Support\Facades\App::class,
+        'BlogApp' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
