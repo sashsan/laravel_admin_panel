@@ -9,7 +9,7 @@
     </div>
     <p style="text-align: center">
         <a href="javascript:changeProfile()" style="text-decoration: none;" data-name="single">
-            <i class="glyphicon glyphicon-edit"></i> Поменять
+            <i class="glyphicon glyphicon-edit"></i> Загрузить
         </a>&nbsp;&nbsp;
         <a href="javascript:removeFile()" style="color: red;text-decoration: none;">
             <i class="glyphicon glyphicon-trash"></i>

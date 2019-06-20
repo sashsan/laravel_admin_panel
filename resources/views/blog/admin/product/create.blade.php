@@ -85,33 +85,14 @@
 
 
                             <div class="form-group">
-
                                 <div class="col-md-4">
-                                    @include('blog.admin.product.single_image')
+                                    @include('blog.admin.product.include.single_image')
                                 </div>
 
-
-                                <div class="col-md-8">
-                                    <div class="box box-primary box-solid file-upload">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Картинки галереи</h3>
-                                        </div>
-                                        <div class="box-body">
-                                            <div id="multi" class="btn btn-success" data-url="products/image" data-name="multi">Выбрать файл</div>
-                                            <p><small>Рекомендуемые размеры: 700ш.х1000в.</small></p>
-                                            <div class="multi"></div>
-                                        </div>
-                                        <!--my.css .overlay{}-->
-                                        <div class="overlay">
-                                            <i class="fa fa-refresh fa-spin"></i>
-                                        </div>
-                                    </div>
+                                <div class="col-md-8" style="text-align: center;">
+                                    @include('blog.admin.product.include.gallery_image')
                                 </div>
-
-
                             </div>
-
-
 
 
                         </div>

@@ -45,8 +45,14 @@
 
 
             Route::get('/products/related','ProductController@related');
+
             Route::match(['get', 'post'], '/products/ajax-image-upload', 'ProductController@ajaxImage');
+            Route::match(['get', 'post'], '/products/ajax-images-upload', 'ProductController@ajaxImages');
+
             Route::delete('/products/ajax-remove-image/{filename}', 'ProductController@deleteImage');
+            Route::delete('/products/ajax-remove-images/{filename}', 'ProductController@deleteGalleryImage');
+
+
             Route::resource('products','ProductController')
                 ->names('blog.admin.products');
 
