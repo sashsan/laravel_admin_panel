@@ -52,7 +52,7 @@
          */
         public function create()
         {
-            $_SESSION['ckfinder_auth'] = true;
+            \Session::put('ckfinder_auth', true);
 
             $item = new Category();
 
@@ -79,11 +79,11 @@
 
             $product = (new Product())->create($data);
 
+
             $product->status = $request->status ? '1' : '0';
             $product->hit = $request->hit ? '1' : '0';
             $product->category_id = $request->parent_id ?? '0';
             $product->img = $this->productRepository->getImg();
-
 
             $save = $product->save();
             $id = $product->id;
@@ -107,19 +107,22 @@
         }
 
 
-        /** Upload Single Image */
+        /** Upload Single Image
+         * @param Request $request
+         * @return array|\Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
+         */
         public function ajaxImage(Request $request)
         {
             if ($request->isMethod('get')) {
                 return view('blog.admin.product.single_image');
             } else {
-                $validator = Validator::make($request->all(),
+                $validator = \Validator::make($request->all(),
                     [
-                        'file' => 'image|max:1000',
+                        'file' => 'image|max:5000',
                     ],
                     [
                         'file.image' => 'Файл должен быть картинкой (jpeg, png, bmp, gif, or svg)',
-                        'file.max' => 'Ошибка! Максимальный вес файла - 1 Мб!',
+                        'file.max' => 'Ошибка! Максимальный вес файла - 5 Мб!',
                     ]);
                 if ($validator->fails()) {
                     return array(
@@ -135,7 +138,7 @@
                 $wmax = BlogApp::get_instance()->getProperty('img_width');
                 $hmax = BlogApp::get_instance()->getProperty('img_height');
 
-                $this->productRepository->uploadImg($filename,$wmax,$hmax);
+                $this->productRepository->uploadImg($filename, $wmax, $hmax);
 
                 return $filename;
             }
@@ -173,7 +176,7 @@
                 $wmax = BlogApp::get_instance()->getProperty('gallery_width');
                 $hmax = BlogApp::get_instance()->getProperty('gallery_height');
 
-                $this->productRepository->uploadImgs($filename,$wmax,$hmax);
+                $this->productRepository->uploadImgs($filename, $wmax, $hmax);
 
                 return $filename;
             }
@@ -190,7 +193,6 @@
         {
             File::delete('uploads/gallery/' . $filename);
         }
-
 
 
         /** Related Products */
@@ -220,37 +222,79 @@
 
 
         /**
-         * Display the specified resource.
-         *
-         * @param  int $id
-         * @return \Illuminate\Http\Response
-         */
-        public function show($id)
-        {
-            //
-        }
-
-        /**
-         * Show the form for editing the specified resource.
+         * EDIT One Product
          *
          * @param  int $id
          * @return \Illuminate\Http\Response
          */
         public function edit($id)
         {
-            //
+            \Session::put('ckfinder_auth', true);
+            $product = $this->productRepository->getInfoProduct($id);
+
+            $idjs = $product->id;
+            BlogApp::get_instance()->setProperty('parent_id', $product->category_id);
+            $filter = $this->productRepository->getFiltersProduct($id);
+            $related_products = $this->productRepository->getRelatedProducts($id);
+            $gallery = $this->productRepository->getGallery($id);
+
+            MetaTag::setTags(['title' => "Редактирование товара № {$id}"]);
+            return view('blog.admin.product.edit', compact('product', 'gallery', 'filter', 'related_products','idjs'), [
+                'categories' => Category::with('children')->where('parent_id', '0')
+                    ->get(),
+                'delimiter' => '-',
+                'product' => $product,
+            ]);
+
         }
 
+
         /**
-         * Update the specified resource in storage.
-         *
-         * @param  \Illuminate\Http\Request $request
-         * @param  int $id
-         * @return \Illuminate\Http\Response
+         * Update Product
+         * @param AdminProductsCreateRequest $request
+         * @param $id
+         * @return $this
          */
-        public function update(Request $request, $id)
+        public function update(AdminProductsCreateRequest $request, $id)
         {
-            //
+            $product = $this->productRepository->getEditId($id);
+
+            if (empty($product)) {
+                return back()
+                    ->withErrors(['msg' => "Запись = [{$id}] не найдена"])
+                    ->withInput();
+            }
+
+            $data = $request->all();
+
+            //dd($data);
+
+            $result = $product->update($data);
+
+            $product->status = $request->status ? '1' : '0';
+            $product->hit = $request->hit ? '1' : '0';
+            $product->category_id = $request->parent_id ?? $product->category_id;
+
+            $product->img = $this->productRepository->getImg();
+
+            $save = $product->save();
+
+            $this->productRepository->editFilter($id, $data);
+
+            $this->productRepository->editRelatedProduct($id, $data);
+
+
+            //$this->productRepository->saveGallery($id);
+
+            if ($result && $save) {
+                return redirect()
+                    ->route('blog.admin.products.edit', [$product->id])
+                    ->with(['success' => 'Успешно сохранено']);
+            } else {
+                return back()
+                    ->withErrors(['msg' => 'Ошибка сохранения'])
+                    ->withInput();
+            }
         }
 
         /**
@@ -263,4 +307,17 @@
         {
             //
         }
+
+
+        /**
+         * Display the specified resource.
+         *
+         * @param  int $id
+         * @return \Illuminate\Http\Response
+         */
+        public function show($id)
+        {
+            //
+        }
+
     }

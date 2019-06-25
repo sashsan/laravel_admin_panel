@@ -5,9 +5,15 @@
         <h3 class="box-title">Картинки галереи</h3>
     </div>
 
+
     <div style="width: 33.3%; float: left;">
     <div class="box-body" id="image_1" style=" border: 1px solid whitesmoke ; text-align: center; position: relative" >
-        <img width="50%" height="50%" id="preview_image_1" />
+        @if (empty($gallery[0]))
+            <img width="50%" height="50%" src="/images/no_image.jpg" id="preview_image_1"/>
+        @else
+            <img width="50%" height="50%" src="/uploads/gallery/{{$gallery[0]}}" id="preview_image_1"/>
+        @endif
+
         <i id="loading_1" class="fa fa-spinner fa-spin fa-3x fa-fw" style="position: absolute;left: 40%;top: 40%;display: none"></i>
     </div>
     <p style="text-align: center">
@@ -27,7 +33,13 @@
 
     <div style="width: 33.3%; float: left;">
         <div class="box-body" id="image_2" style=" border: 1px solid whitesmoke ; text-align: center; position: relative" >
-            <img width="50%" height="50%" id="preview_image_2" />
+
+            @if (empty($gallery[1]))
+                <img width="50%" height="50%" src="/images/no_image.jpg" id="preview_image_2"/>
+            @else
+                <img width="50%" height="50%" src="/uploads/gallery/{{$gallery[1]}}" id="preview_image_2"/>
+            @endif
+
             <i id="loading_2" class="fa fa-spinner fa-spin fa-3x fa-fw" style="position: absolute;left: 40%;top: 40%;display: none"></i>
         </div>
         <p style="text-align: center">
@@ -47,7 +59,11 @@
 
     <div style="width: 33.3%; float: left;">
         <div class="box-body" id="image_3" style=" border: 1px solid whitesmoke ; text-align: center; position: relative" >
-            <img width="50%" height="50%" id="preview_image_3" />
+            @if (empty($gallery[2]))
+                <img width="50%" height="50%" src="/images/no_image.jpg" id="preview_image_3"/>
+            @else
+                <img width="50%" height="50%" src="/uploads/gallery/{{$gallery[2]}}" id="preview_image_3"/>
+            @endif
             <i id="loading_3" class="fa fa-spinner fa-spin fa-3x fa-fw" style="position: absolute;left: 40%;top: 40%;display: none"></i>
         </div>
         <p style="text-align: center">

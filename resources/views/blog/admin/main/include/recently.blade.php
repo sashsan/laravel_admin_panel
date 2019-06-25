@@ -22,7 +22,7 @@
 
                 <li class="item">
                     <div class="product-img">
-                        <img src="#" alt="Product Image">
+                        <img src="{{asset('images/no_image.jpg')}}" alt="image">
                     </div>
                     <div class="product-info">
                         <a href="{{route('blog.admin.posts.edit', $product->id)}}" class="product-title">{{$product->title}}

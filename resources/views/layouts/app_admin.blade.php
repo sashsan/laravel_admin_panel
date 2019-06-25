@@ -238,10 +238,10 @@
 <!--для поля ввода с редактором текста в добавить новый тоар-->
 <script src="{{asset('adminlte/bower_components/ckeditor/ckeditor.js')}}"></script>
 <script src="{{asset('adminlte/bower_components/ckeditor/adapters/jquery.js')}}"></script>
-<!-- =======  -->
+<!-- === = ===  -->
 
 
-<script src="{{asset('js/app.js')}}"></script>
+<script src="{{asset('js/my.js')}}"></script>
 
 @include('blog.admin.product.include.img_script')
 @include('blog.admin.product.include.imgs_script')

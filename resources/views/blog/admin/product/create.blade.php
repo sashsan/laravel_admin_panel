@@ -86,11 +86,11 @@
 
                             <div class="form-group">
                                 <div class="col-md-4">
-                                    @include('blog.admin.product.include.single_image')
+                                    @include('blog.admin.product.include.image_single_create')
                                 </div>
 
                                 <div class="col-md-8" style="text-align: center;">
-                                    @include('blog.admin.product.include.gallery_image')
+                                    @include('blog.admin.product.include.image_gallery_create')
                                 </div>
                             </div>
 

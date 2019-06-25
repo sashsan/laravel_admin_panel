@@ -8,7 +8,7 @@
         @component('blog.admin.components.breadcrumb')
             @slot('title') Список товаров @endslot
             @slot('parent') Главная @endslot
-            @slot('active') Список заказов @endslot
+            @slot('active') Список товаров @endslot
         @endcomponent
     </section>
 
@@ -42,7 +42,7 @@
                                 <td><strong>{{$product->status ? 'On' : 'Off'}}</strong></td>
 
                                 <td>
-                                    <a href="" title="просмотреть заказ"><i class="fa fa-fw fa-eye"></i></a>
+                                    <a href="{{route('blog.admin.products.edit',$product->id)}}" title="просмотреть заказ"><i class="fa fa-fw fa-eye"></i></a>
                                     &nbsp;&nbsp;&nbsp;&nbsp;
                                     <a href="" title="удалить заказ"><i class="fa fa-fw fa-close text-danger delete"></i></a>
                                     &nbsp;&nbsp;&nbsp;
@@ -60,7 +60,7 @@
                                 <td>{{$product->status ? 'On' : 'Off'}}</td>
 
                                 <td>
-                                    <a href="" title="просмотреть заказ"><i class="fa fa-fw fa-eye"></i></a>
+                                    <a href="{{route('blog.admin.products.edit',$product->id)}}" title="просмотреть заказ"><i class="fa fa-fw fa-eye"></i></a>
                                     &nbsp;	&nbsp;  &nbsp;  &nbsp;
                                     <a href="" title="удалить заказ"><i class="fa fa-fw fa-close text-danger delete"></i></a>
                                 </td>
@@ -71,7 +71,7 @@
                         </table>
                     </div>
                     <div class="text-center">
-                    <p>{{count($getAllProducts)}} заказа(ов) из {{$count}} </p>
+                    <p>{{count($getAllProducts)}} продуктов из {{$count}} </p>
 
                     @if ($getAllProducts->total() > $getAllProducts->count())
                         <br>

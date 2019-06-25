@@ -10,7 +10,7 @@
 
     use App\Models\Admin\Product as Model;
     use App\Repositories\CoreRepository;
-    use App\SBlog\BlogApp;
+    use App\SBlog\Core\BlogApp;
 
     class ProductRepository extends CoreRepository
     {
@@ -28,6 +28,47 @@
             return Model::class;
         }
 
+        /** Get Info for One Product by Id */
+        public function getInfoProduct($id)
+        {
+            $product = $this->startConditions()
+                ->find($id);
+            return $product;
+        }
+
+        /** Get Filters One Product*/
+        public function getFiltersProduct($id)
+        {
+            $filter = \DB::table('attribute_products')
+                ->select('attr_id')
+                ->where('product_id', $id)
+                ->pluck('attr_id')
+                ->all();
+            return $filter;
+        }
+
+        /** Get Related Products One Product*/
+        public function getRelatedProducts($id)
+        {
+            $related_products = $this->startConditions()
+                ->join('related_products','products.id','=','related_products.related_id')
+                ->select('products.title','related_products.related_id')
+                ->where('related_products.product_id',$id)
+                ->get();
+            return $related_products;
+        }
+
+        /** Get Gallery for One Product*/
+        public function getGallery($id)
+        {
+            $gallery = \DB::table('galleries')
+                ->select('img')
+                ->where('product_id',$id)
+                ->pluck('img')
+                ->all();
+            return $gallery;
+
+        }
 
         /** INDEX PAGE */
         public function getAllProducts($perpage)
@@ -64,11 +105,12 @@
         public function editFilter($id, $data)
         {
             $filter = \DB::table('attribute_products')
-                ->pluck('attr_id')
                 ->where('product_id', $id)
+                ->pluck('attr_id')
                 ->toArray();
 
-            //если убрал фильтры
+
+            /** если убрал фильтры */
             if (empty($data['attrs']) && !empty($filter)) {
                 \DB::table('attribute_products')
                     ->where('product_id', $id)
@@ -76,7 +118,7 @@
                 return;
             }
 
-            //если фильтры добавляются
+            /** если добавил фильтры */
             if (empty($filter) && !empty($data['attrs'])) {
                 $sql_part = '';
                 foreach ($data['attrs'] as $v) {
@@ -89,10 +131,11 @@
 
                 return;
             }
-            //если изменились фильтры
+
+            /** если поменял фильтры */
             if (!empty($data['attrs'])) {
                 $result = array_diff($filter, $data['attrs']);
-                if (!$result) {
+                if ($result) {
                     \DB::table('attribute_products')
                         ->where('product_id', $id)
                         ->delete();
@@ -105,6 +148,7 @@
                     \DB::insert("insert into attribute_products (attr_id, product_id) VALUES $sql_part");
                 }
             }
+
         }
 
 
@@ -114,15 +158,18 @@
             $related_product = \DB::table('related_products')
                 ->select('related_id')
                 ->where('product_id', $id)
-                ->get()
+                ->pluck('related_id')
                 ->toArray();
 
+            /** Если убрал связанные товары */
             if (empty($data['related']) && !empty($related_product)) {
                 \DB::table('related_products')
                     ->where('product_id', $id)
                     ->delete();
                 return;
             }
+
+            /** Если добавил связанные товары */
             if (empty($related_product) && !empty($data['related'])) {
                 $sql_part = '';
 
@@ -136,7 +183,10 @@
                 \DB::insert("insert into related_products (product_id, related_id) VALUES $sql_part");
                 return;
             }
+
+            /** Если поменял связанные товары */
             if (!empty($data['related'])) {
+
                 $result = array_diff($related_product, $data['related']);
                 if (!(empty($result)) || count($related_product) != count($data['related'])) {
                     \DB::table('related_products')
@@ -154,7 +204,7 @@
         }
 
 
-        /**  Upload Single Image */
+        /**  Upload Single Image*/
         public function uploadImg($name, $wmax, $hmax)
         {
             $uploaddir = WWW . '/uploads/single/';
@@ -172,7 +222,6 @@
             $uploadfile = $uploaddir . $name;
 
             \Session::push('gallery', $name);
-
             self::resize($uploadfile, $uploadfile, $wmax, $hmax, $ext);
         }
 
@@ -235,7 +284,6 @@
         /** Save Gallery Images */
         public function saveGallery($id)
         {
-            //если не пуст массив
             if (!empty(\Session::get('gallery'))) {
                 $sql_part = '';
                 foreach (\Session::get('gallery') as $v) {

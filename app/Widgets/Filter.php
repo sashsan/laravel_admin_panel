@@ -41,6 +41,7 @@
                 'config' => $this->config,
                 'groups' => $this->groups,
                 'attrs' => $this->attrs,
+                'filter' => $this->filter,
 
             ]);
         }
