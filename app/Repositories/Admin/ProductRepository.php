@@ -11,6 +11,8 @@
     use App\Models\Admin\Product as Model;
     use App\Repositories\CoreRepository;
     use App\SBlog\Core\BlogApp;
+    use Illuminate\Support\Facades\Session;
+
 
     class ProductRepository extends CoreRepository
     {
@@ -62,7 +64,6 @@
         public function getGallery($id)
         {
             $gallery = \DB::table('galleries')
-                ->select('img')
                 ->where('product_id',$id)
                 ->pluck('img')
                 ->all();
@@ -204,26 +205,63 @@
         }
 
 
+
+
+        /**  Upload Gallery Images */
+        public function uploadGallery($name, $wmax, $hmax)
+        {
+            $uploaddir = 'uploads/gallery/';
+            $ext = strtolower(preg_replace("#.+\.([a-z]+)$#i", "$1", $_FILES[$name]['name']));
+            $new_name = md5(time()) . ".$ext";
+            $uploadfile = $uploaddir . $new_name;
+            \Session::push('gallery', $new_name);
+            if (@move_uploaded_file($_FILES[$name]['tmp_name'], $uploadfile)) {
+                self::resize($uploadfile, $uploadfile, $wmax, $hmax, $ext);
+                $res = array("file" => $new_name);
+                echo json_encode($res);
+            }
+        }
+
+
         /**  Upload Single Image*/
         public function uploadImg($name, $wmax, $hmax)
         {
-            $uploaddir = WWW . '/uploads/single/';
+            $uploaddir = 'uploads/single/';
             $ext = strtolower(preg_replace("#.+\.([a-z]+)$#i", "$1", $name));
             $uploadfile = $uploaddir . $name;
             \Session::put('single', $name);
             self::resize($uploadfile, $uploadfile, $wmax, $hmax, $ext);
+
         }
 
-        /**  Upload Gallery Images */
-        public function uploadImgs($name, $wmax, $hmax)
+
+        /** Get Image for Create New Product */
+        public function getImg()
         {
-            $uploaddir = WWW . '/uploads/gallery/';
-            $ext = strtolower(preg_replace("#.+\.([a-z]+)$#i", "$1", $name));
-            $uploadfile = $uploaddir . $name;
-
-            \Session::push('gallery', $name);
-            self::resize($uploadfile, $uploadfile, $wmax, $hmax, $ext);
+            if (!empty(\Session::get('single'))) {
+                $name = \Session::get('single');
+                \Session::forget('single');
+                return $name;
+            }
         }
+
+        /** Save Gallery Images
+         * @param $id
+         */
+        public function saveGallery($id)
+        {
+            if (!empty(\Session::get('gallery'))) {
+                $sql_part = '';
+                foreach (\Session::get('gallery') as $v) {
+                    $sql_part .= "('$v', $id),";
+                }
+                $sql_part = rtrim($sql_part, ',');
+                \DB::insert("insert into galleries (img, product_id) VALUES $sql_part");
+                \Session::forget('gallery');
+            }
+        }
+
+
 
         /**  Resize Images for My needs */
         public static function resize($target, $dest, $wmax, $hmax, $ext)
@@ -271,28 +309,6 @@
         }
 
 
-        /** Get Image for Create New Product */
-        public function getImg()
-        {
-            if (!empty(\Session::get('single'))) {
-                $name = \Session::get('single');
-                \Session::forget('single');
-                return $name;
-            }
-        }
 
-        /** Save Gallery Images */
-        public function saveGallery($id)
-        {
-            if (!empty(\Session::get('gallery'))) {
-                $sql_part = '';
-                foreach (\Session::get('gallery') as $v) {
-                    $sql_part .= "('$v', $id),";
-                }
-                $sql_part = rtrim($sql_part, ',');
-                \DB::insert("insert into galleries (img, product_id) VALUES $sql_part");
-                \Session::forget('gallery');
-            }
-        }
 
     }

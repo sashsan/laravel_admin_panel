@@ -18,7 +18,8 @@ class CreateGalleriesTable extends Migration
 
             $table->bigIncrements('id');
             $table->bigInteger('product_id')->unsigned();
-            $table->string('img',255);
+            $table->string('img',255)->nullable();
+
         });
     }
 

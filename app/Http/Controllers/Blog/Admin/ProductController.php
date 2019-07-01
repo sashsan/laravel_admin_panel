@@ -18,8 +18,6 @@
 
     class ProductController extends AdminBaseController
     {
-
-
         private $productRepository;
 
 
@@ -39,11 +37,10 @@
             $perpage = 10;
             $getAllProducts = $this->productRepository->getAllProducts($perpage);
             $count = $this->productRepository->getCountProducts();
-
-
             MetaTag::setTags(['title' => 'Список товаров']);
             return view('blog.admin.product.index', compact('getAllProducts', 'count'));
         }
+
 
         /**
          * Show the form for creating a new resource.
@@ -53,11 +50,8 @@
         public function create()
         {
             \Session::put('ckfinder_auth', true);
-
             $item = new Category();
-
             MetaTag::setTags(['title' => 'Создание нового товара']);
-
             return view('blog.admin.product.create', [
                 'categories' => Category::with('children')->where('parent_id', '0')
                     ->get(),
@@ -74,27 +68,19 @@
          */
         public function store(AdminProductsCreateRequest $request)
         {
-
             $data = $request->input();
-
             $product = (new Product())->create($data);
-
-
+            $id = $product->id;
             $product->status = $request->status ? '1' : '0';
             $product->hit = $request->hit ? '1' : '0';
             $product->category_id = $request->parent_id ?? '0';
             $product->img = $this->productRepository->getImg();
-
             $save = $product->save();
-            $id = $product->id;
-
-            $this->productRepository->editFilter($id, $data);
-
-            $this->productRepository->editRelatedProduct($id, $data);
-
-            $this->productRepository->saveGallery($id);
-
             if ($save) {
+                $this->productRepository->editFilter($id, $data);
+                $this->productRepository->editRelatedProduct($id, $data);
+                $this->productRepository->saveGallery($id);
+
                 return redirect()
                     ->route('blog.admin.products.create', [$product->id])
                     ->with(['success' => 'Успешно сохранено']);
@@ -114,7 +100,7 @@
         public function ajaxImage(Request $request)
         {
             if ($request->isMethod('get')) {
-                return view('blog.admin.product.single_image');
+                return view('blog.admin.product.include.image_single_edit');
             } else {
                 $validator = \Validator::make($request->all(),
                     [
@@ -134,64 +120,47 @@
                 $dir = 'uploads/single/';
                 $filename = uniqid() . '_' . time() . '.' . $extension;
                 $request->file('file')->move($dir, $filename);
-
                 $wmax = BlogApp::get_instance()->getProperty('img_width');
                 $hmax = BlogApp::get_instance()->getProperty('img_height');
-
                 $this->productRepository->uploadImg($filename, $wmax, $hmax);
-
                 return $filename;
             }
         }
 
-        /** Upload Gallery Images
-         *
+        /**
+         * Add Photo for Gallery
          * @param Request $request
-         * @return array|\Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
+         * @return array
          */
-        public function ajaxImages(Request $request)
+        public function gallery(Request $request)
         {
-            if ($request->isMethod('get')) {
-                return view('blog.admin.product.include.gallery_image');
-            } else {
-                $validator = Validator::make($request->all(),
-                    [
-                        'file' => 'image|max:3000',
-                    ],
-                    [
-                        'file.image' => 'Файл должен быть картинкой (jpeg, png, bmp, gif, or svg)',
-                        'file.max' => 'Ошибка! Максимальный вес файла - 3 Мб!',
-                    ]);
-                if ($validator->fails()) {
-                    return array(
-                        'fail' => true,
-                        'errors' => $validator->errors()
-                    );
-                }
-                $extension = $request->file('file')->getClientOriginalExtension();
-                $dir = 'uploads/gallery/';
-                $filename = uniqid() . '_' . time() . '.' . $extension;
-                $request->file('file')->move($dir, $filename);
-
+            $validator = \Validator::make($request->all(),
+                [
+                    'file' => 'image|max:5000',
+                ],
+                [
+                    'file.image' => 'Файл должен быть картинкой (jpeg, png, bmp, gif, or svg)',
+                    'file.max' => 'Ошибка! Максимальный вес файла - 5 Мб!',
+                ]);
+            if ($validator->fails()) {
+                return array(
+                    'fail' => true,
+                    'errors' => $validator->errors()
+                );
+            }
+            if (isset($_GET['upload'])) {
                 $wmax = BlogApp::get_instance()->getProperty('gallery_width');
                 $hmax = BlogApp::get_instance()->getProperty('gallery_height');
-
-                $this->productRepository->uploadImgs($filename, $wmax, $hmax);
-
-                return $filename;
+                $name = $_POST['name'];
+                $this->productRepository->uploadGallery($name, $wmax, $hmax);
             }
         }
+
 
         /** Delete Image */
         public function deleteImage($filename)
         {
             File::delete('uploads/single/' . $filename);
-        }
-
-        /** Delete Image from Gallery */
-        public function deleteGalleryImage($filename)
-        {
-            File::delete('uploads/gallery/' . $filename);
         }
 
 
@@ -200,13 +169,11 @@
         {
             $q = isset($request->q) ? htmlspecialchars(trim($request->q)) : '';
             $data['items'] = [];
-
             $products = \DB::table('products')
                 ->select('id', 'title')
                 ->where('title', 'LIKE', ["%{$q}%"])
                 ->limit(8)
                 ->get();
-
             if ($products) {
                 $i = 0;
                 foreach ($products as $id => $title) {
@@ -215,7 +182,6 @@
                     $i++;
                 }
             }
-
             echo json_encode($data);
             die;
         }
@@ -236,16 +202,14 @@
             BlogApp::get_instance()->setProperty('parent_id', $product->category_id);
             $filter = $this->productRepository->getFiltersProduct($id);
             $related_products = $this->productRepository->getRelatedProducts($id);
-            $gallery = $this->productRepository->getGallery($id);
-
+            $images = $this->productRepository->getGallery($id);
             MetaTag::setTags(['title' => "Редактирование товара № {$id}"]);
-            return view('blog.admin.product.edit', compact('product', 'gallery', 'filter', 'related_products','idjs'), [
+            return view('blog.admin.product.edit', compact('product', 'images', 'filter', 'related_products', 'idjs'), [
                 'categories' => Category::with('children')->where('parent_id', '0')
                     ->get(),
                 'delimiter' => '-',
                 'product' => $product,
             ]);
-
         }
 
 
@@ -258,34 +222,23 @@
         public function update(AdminProductsCreateRequest $request, $id)
         {
             $product = $this->productRepository->getEditId($id);
-
             if (empty($product)) {
                 return back()
                     ->withErrors(['msg' => "Запись = [{$id}] не найдена"])
                     ->withInput();
             }
-
             $data = $request->all();
-
-            //dd($data);
-
             $result = $product->update($data);
-
             $product->status = $request->status ? '1' : '0';
             $product->hit = $request->hit ? '1' : '0';
             $product->category_id = $request->parent_id ?? $product->category_id;
-
-            $product->img = $this->productRepository->getImg();
-
+//            if(empty($product->img)){
+//                $product->img = $this->productRepository->getImg($id);
+//            }
             $save = $product->save();
-
             $this->productRepository->editFilter($id, $data);
-
             $this->productRepository->editRelatedProduct($id, $data);
-
-
-            //$this->productRepository->saveGallery($id);
-
+            $this->productRepository->saveGallery($id);
             if ($result && $save) {
                 return redirect()
                     ->route('blog.admin.products.edit', [$product->id])

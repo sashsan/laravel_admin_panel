@@ -12,9 +12,9 @@
         public function run()
         {
             $data = [
-                ['id' => '1', 'product_id' => '2', 'img' => 's-1.jpg'],
-                ['id' => '2', 'product_id' => '2', 'img' => 's-2.jpg'],
-                ['id' => '3', 'product_id' => '2', 'img' => 's-3.jpg'],
+                ['id' => '1', 'product_id' => '2',],
+                ['id' => '2', 'product_id' => '2',],
+                ['id' => '3', 'product_id' => '2',],
             ];
 
             DB::table('galleries')->insert($data);

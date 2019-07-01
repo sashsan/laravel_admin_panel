@@ -3,10 +3,10 @@
         <h3 class="box-title">Базовое изображение</h3>
     </div>
     <div class="box-body" id="image" style=" border: 1px solid whitesmoke ; text-align: center; position: relative" >
-        @if ($img != '')
-            <img width="50%" height="50%" src="/uploads/single/{{$img}}" id="preview_image"/>
-        @else
+        @if ($product->img == null)
             <img width="50%" height="50%" src="/images/no_image.jpg" id="preview_image"/>
+        @else
+            <img width="50%" height="50%" src="/uploads/single/{{$product->img}}" id="preview_image"/>
         @endif
 
         <i id="loading" class="fa fa-spinner fa-spin fa-3x fa-fw" style="position: absolute;left: 40%;top: 40%;display: none"></i>
@@ -15,12 +15,12 @@
         <a href="javascript:changeProfile()" style="text-decoration: none;" data-name="single">
             <i class="glyphicon glyphicon-edit"></i> Загрузить
         </a>&nbsp;&nbsp;
-        @if ($img != '')
-            <a href="javascript:removeFileImg()" style="color: red;text-decoration: none;" class="myimg" data-name="{{$img}}">
+        @if ($product->img == null)
+            <a href="javascript:removeFile()" style="color: red;text-decoration: none;" class="nothing">
                 <i class="glyphicon glyphicon-trash"></i>Удалить
             </a>
         @else
-            <a href="javascript:removeFile()" style="color: red;text-decoration: none;" class="nothing">
+            <a href="javascript:removeFileImg()" style="color: red;text-decoration: none;" class="myimg" data-name="{{$product->img}}">
                 <i class="glyphicon glyphicon-trash"></i>Удалить
             </a>
         @endif

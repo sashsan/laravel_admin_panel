@@ -4,11 +4,12 @@
                 @isset($product->id)
                     @if($category_list->id == $product->category_id) selected @endif
 
-                    @if ($product->category_id == $category_list->id) disabled  @endif
+                    @if ($product->category_id == $category_list->id) @endif
 
                 @endisset
             >
-                {!! $delimiter ?? ""!!} {{$category_list->title ?? ""}}
+
+               {!! $delimiter ?? ""!!} {{$category_list->title ?? ""}}
 
             </option>
 

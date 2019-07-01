@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="box">
-                    <form method="POST"  action="{{route('blog.admin.products.update', $product->id)}}" data-toggle="validator">
+                    <form method="POST"  action="{{route('blog.admin.products.update', $product->id)}}" data-toggle="validator" id="add">
                         @method('PATCH')
                         @csrf
                         <div class="box-body">
@@ -29,8 +29,8 @@
                             </div>
 
                             <div class="form-group">
-                                <select name="parent_id" id="parent_id" class="form-control">
-                                    <option value="0">-- самостоятельная категория --</option>
+                                <select name="parent_id" id="parent_id" class="form-control" required>
+                                    <option disabled>-- выберите категорию --</option>
 
                                     @include('blog.admin.product.include.categories_for_prod',['categories' => $categories])
 
@@ -103,12 +103,12 @@
 
                             <div class="form-group">
                                 <div class="col-md-4">
-                                    @include('blog.admin.product.include.image_single_edit',['img' => $product->img])
+                                    @include('blog.admin.product.include.image_single_edit',['product' => $product])
                                 </div>
 
 
-                                <div class="col-md-8" style="text-align: center;">
-                                    {{--@include('blog.admin.product.include.gallery_image',['gallery' => $gallery])--}}
+                                <div class="col-md-8" style="text-align: center;" >
+                                    @include('blog.admin.product.include.image_gallery_edit',['images' => $images])
                                 </div>
                             </div>
 

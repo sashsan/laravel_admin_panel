@@ -92,3 +92,18 @@ $(".select2").select2({
 /** ===== */
 
 
+/** You must choose category */
+$('#add').on('submit', function () {
+    if (!isNumeric($('#parent_id').val())) {
+        alert('Выберите категорию');
+        return false;
+    }
+});
+
+/** Является ли поле числом true / false  вместе с предыдущим */
+function isNumeric(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+}
+/** ===== */
+
+
