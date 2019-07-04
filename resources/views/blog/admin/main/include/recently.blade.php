@@ -22,11 +22,15 @@
 
                 <li class="item">
                     <div class="product-img">
-                        <img src="#" alt="Product Image">
+                        @if (!empty($product->img))
+                            <img src="{{asset('uploads/single/' . $product->img)}}" alt="image">
+                        @else
+                            <img src="{{asset('images/no_img.jpg')}}" alt="image">
+                        @endif
                     </div>
                     <div class="product-info">
                         <a href="{{route('blog.admin.posts.edit', $product->id)}}" class="product-title">{{$product->title}}
-                            <span class="label label-warning pull-right">{{$product->price}}$</span></a>
+                            <span class="label label-warning pull-right">{{$product->price}} $</span></a>
                         <span class="product-description">{{$product->description}}</span>
                     </div>
                 </li>
@@ -37,24 +41,9 @@
             </ul>
         </div>
         <!-- /.box-body -->
-        <div class="text-center">
 
-            @if ($last_products->total() > $last_products->count())
-                <div class="row justify-content-center">
-                    <div class="">
-                        <div class="card">
-                            <div class="card-body">
-                                {{$last_products->links()}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endif
-
-        </div>
-
-        <div class="box-footer text-center">
-            <a href="{{route('blog.admin.products.index')}}" class="uppercase">Все продукты</a>
+        <div class="box-footer clearfix">
+            <a href="{{route('blog.admin.products.index')}}" class="btn btn-sm btn-info btn-flat pull-left">Все продукты</a>
         </div>
         <!-- /.box-footer -->
     </div>

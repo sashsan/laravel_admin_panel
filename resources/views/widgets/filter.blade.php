@@ -1,4 +1,5 @@
 <div class="nav-tabs-custom" id="filter">
+
     <ul class="nav nav-tabs">
         @php $i = 1; @endphp
 
@@ -44,4 +45,5 @@
         @endif
 
     </div>
+
 </div>

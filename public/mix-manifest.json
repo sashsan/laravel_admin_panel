@@ -1,6 +1,5 @@
 {
-    "/js/ajaxupload.js": "/js/ajaxupload.js",
-    "/js/app.js": "/js/app.js",
+    "/js/my.js": "/js/my.js",
     "/css/app.css": "/css/app.css",
     "/css/my.css": "/css/my.css",
     "/js/typeahead.bundle.js": "/js/typeahead.bundle.js",

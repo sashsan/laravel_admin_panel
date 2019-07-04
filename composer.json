@@ -38,13 +38,20 @@
         }
     },
     "autoload": {
+        "files": [
+            "resources/libs/functions.php",
+            "config/constants.php",
+            "config/params.php",
+            "config/init.php"
+        ],
         "psr-4": {
             "App\\": "app/"
         },
         "classmap": [
             "database/seeds",
             "database/factories",
-            "app/Widgets"
+            "app/Widgets",
+            "app/SBlog/Core"
         ]
     },
     "autoload-dev": {

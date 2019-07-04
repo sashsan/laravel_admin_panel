@@ -12,8 +12,9 @@
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="{{asset('adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
     <!-- Для select связанные товары в админке добавить товар -->
-    <link rel="stylesheet" href="{{asset('adminlte/bower_components/select2/dist/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('adminlte/bower_components/select2/dist/css/select2.css')}}">
     <!-- Font Awesome -->
+
     <link rel="stylesheet" href="{{asset('adminlte/bower_components/font-awesome/css/font-awesome.min.css')}}">
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{asset('adminlte/bower_components/Ionicons/css/ionicons.min.css')}}">
@@ -23,8 +24,10 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{asset('adminlte/dist/css/skins/_all-skins.min.css')}}">
 
-
     <link rel="stylesheet" href="{{asset('css/my.css')}}">
+
+
+
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -41,7 +44,6 @@
     .wrapper{
         overflow:hidden;
     }
-
 </style>
 
 </head>
@@ -50,7 +52,7 @@
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="{{route('blog.admin.index.index')}}" class="logo" target="_blank">
+        <a href="{{route('blog.admin.index.index')}}" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>A</b>LT</span>
             <!-- logo for regular state and mobile devices -->
@@ -122,7 +124,8 @@
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">Меню</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li><a href="/"><i class="fa fa-home"></i> <span>Home</span></a></li>
+                <li><a href="/"><i class="fa fa-home"></i> <span>В магазин</span></a></li>
+                <li><a href="{{route('blog.admin.index.index')}}"><i class="fa fa-user"></i> <span>Главная админки</span></a></li>
                 <li><a href="{{route('blog.admin.orders.index')}}"><i class="fa fa-shopping-cart"></i> <span>Заказы</span></a></li>
 
 
@@ -206,7 +209,7 @@
         <main id="app">
             @include('blog.admin.components.result_messages')
             @yield('content')
-            
+
         </main>
     </div>
     <!-- /.content-wrapper -->
@@ -223,28 +226,32 @@
 <!-- ./wrapper -->
 
 
-
 <!-- jQuery 3 -->
 <script src="{{asset('adminlte/bower_components/jquery/dist/jquery.min.js')}}"></script>
-<!-- плагин загрузки картинок админка -->
+
 <script src="{{asset('js/ajaxupload.js')}}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="{{asset('adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
-<!-- Для select связанные товары в админке добавить товар -->
-{{--<script src="{{asset('bower_components/select2/dist/js/select2.full.js')}}"></script>--}}
 <!-- Validator -->
 <script src="{{asset('js/validator.js')}}"></script>
-<!-- Search -->
-<script src="{{asset('js/typeahead.bundle.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('adminlte/dist/js/adminlte.min.js')}}"></script>
+
 <!--для поля ввода с редактором текста в добавить новый тоар-->
 <script src="{{asset('adminlte/bower_components/ckeditor/ckeditor.js')}}"></script>
 <script src="{{asset('adminlte/bower_components/ckeditor/adapters/jquery.js')}}"></script>
-<!-- =======  -->
+<!-- Для select связанные товары в админке добавить товар -->
+<script src="{{asset('adminlte/bower_components/select2/dist/js/select2.full.js')}}"></script>
+<!-- Search -->
+<script src="{{asset('js/typeahead.bundle.js')}}"></script>
 
-<!-- для кнопок мой собственный js -->
-<script src="{{asset('js/app.js')}}"></script>
+<!-- === = ===  -->
+
+<script src="{{asset('js/my.js')}}"></script>
+
+@include('blog.admin.product.include.script_img')
+
+
 
 </body>
 </html>

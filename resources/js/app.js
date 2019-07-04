@@ -4,6 +4,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+
 require('./bootstrap');
 
 window.Vue = require('vue');
@@ -34,13 +35,15 @@ const app = new Vue({
 
 
 
-/* Подтверждение удаление Категории */
+/** Подтверждение удаление Категории */
 $('.delete').click(function () {
     var res = confirm('Подтвердите действие');
     if (!res) return false;
 });
 /* - - - - - - */
-/* Подтверждение удаление из БД Заказа */
+
+
+/** Подтверждение удаление из БД Заказа */
 $('.deletebd').click(function () {
     var res = confirm('Подтвердите действие');
     if (res){
@@ -51,14 +54,15 @@ $('.deletebd').click(function () {
 });
 /* - - - - - - */
 
-/* Подтверждение удаление Категории */
+/** Подтверждение удаление Категории */
 $('.redact').click(function () {
     var res = confirm('Вы можете только изменить Комментарий');
     return false;
 });
-/* - - - - - - */
+/** - - - - - - */
 
-/* чтобы в админке слева меню горело активное */
+
+/** чтобы в админке слева меню горело активное */
 $('.sidebar-menu a').each(function () {
 // window.location.protocol = http или https далее конкатенация . ‘//’ .  //далее хост window.location.host + и window.location.pathname
     var location = window.location.protocol + '//' + window.location.host + window.location.pathname;
@@ -72,17 +76,56 @@ $('.sidebar-menu a').each(function () {
         $(this).closest('.treeview').addClass('active');
     }
 });
-/* --------- */
+/** --------- */
 
-$(document).ready(function () {
-    if (window.location.pathname == '/admin/products/create') {
+
+/** KCFinder  */
+    var create = '/admin/products/create';
+    if (window.location.pathname === create) {
+        CKEDITOR.replace('editor1');
+
+    }
+
+    var id = $('div.hidden').data('name');
+    var edit = '/admin/products/' + id + '/edit';
+    if (window.location.pathname === edit){
         CKEDITOR.replace('editor1');
     }
-});
 
-/* для кнопки сбросить в админке добавление товара, в admin_filter_tpl.php добавил */
+/** ----------- */
+
+
+/** для кнопки сбросить в админке добавление товара, в admin_filter_tpl.php добавил */
 $('#reset-filter').click(function () {
     $('#filter input[type=radio]').prop('checked', false);
     return false;
 });
-/* ----------- */
+/** ----------- */
+
+
+
+/** Для select связанные товары в админке добавить товар */
+$(".select2").select2({
+    placeholder: "Начните вводить наименование товара",
+    //minimumInputLength: 2, с какого симв. посылать запрос
+    cache: true,
+    ajax: {
+        url: '/admin/products/related',
+        delay: 250,
+        dataType: 'json',
+        data: function (params) {
+            return {
+                q: params.term,
+                page: params.page
+            };
+        },
+        processResults: function (data, params) {
+            return {
+                results: data.items
+            };
+        }
+    }
+});
+/** ===== */
+
+

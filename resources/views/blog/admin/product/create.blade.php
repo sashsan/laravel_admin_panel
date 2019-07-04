@@ -5,7 +5,7 @@
 
     <section class="content-header">
         @component('blog.admin.components.breadcrumb')
-            @slot('title') Список товаров @endslot
+            @slot('title') Добавление нового товара @endslot
             @slot('parent') Главная @endslot
             @slot('product') Список заказов @endslot
             @slot('active') Новый товар @endslot
@@ -18,8 +18,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="box">
-                    <form action="{{route('blog.admin.products.store',$item->id)}}" method="post" data-toggle="validator">
+                    <form method="POST"  action="{{route('blog.admin.products.store',$item->id)}}" data-toggle="validator" id="add">
                         @csrf
+
                         <div class="box-body">
                             <div class="form-group has-feedback">
                                 <label for="title">Наименование товара</label>
@@ -29,7 +30,7 @@
 
                             <div class="form-group">
                                 <select name="parent_id" id="parent_id" class="form-control" required>
-                                    <option value="0">-- самостоятельная категория --</option>
+                                    <option>-- выберите категорию --</option>
 
                                     @include('blog.admin.category.include.edit_categories_all_list',['categories' => $categories])
 
@@ -75,29 +76,39 @@
                                 </label>
                             </div>
 
-                            {{ Widget::run('filter',
-                                    [
-                                        'tpl' => 'widgets.filter',
-                                        'filter' => null,
+                            <div class="form-group has-feedback">
+                                <label for="related">Связанные товары</label>
+                                <select name="related[]" class="select2 form-control" id="related" multiple></select>
+                            </div>
 
-                                    ]) }}
+                {{ Widget::run('filter',['tpl' => 'widgets.filter','filter' => null, ])}}
+
+
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    @include('blog.admin.product.include.image_single_create')
+                                </div>
+
+                                <div class="col-md-8">
+                                    @include('blog.admin.product.include.image_gallery_create')
+                                </div>
+                            </div>
 
 
                         </div>
+
+                        <input type="hidden" id="_token" value="{{ csrf_token() }}">
+
                         <div class="box-footer">
                             <button type="submit" class="btn btn-success">Добавить</button>
                         </div>
                     </form>
-
-
-
                 </div>
             </div>
         </div>
 
     </section>
     <!-- /.content -->
-
 
 
 

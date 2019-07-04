@@ -9,15 +9,13 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
 </head>
 <body>
     <div id="app">
@@ -76,5 +74,30 @@
             @yield('content')
         </main>
     </div>
+
+
+    <!-- jQuery 3 -->
+    <script src="{{asset('adminlte/bower_components/jquery/dist/jquery.min.js')}}"></script>
+
+    <script src="https://use.fontawesome.com/2c7a93b259.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="{{asset('adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+    <!-- Для select связанные товары в админке добавить товар -->
+    <script src="{{asset('adminlte/bower_components/select2/dist/js/select2.full.js')}}"></script>
+    <!-- Validator -->
+    <script src="{{asset('js/validator.js')}}"></script>
+    <!-- Search -->
+    <script src="{{asset('js/typeahead.bundle.js')}}"></script>
+    <!-- AdminLTE App -->
+    <script src="{{asset('adminlte/dist/js/adminlte.min.js')}}"></script>
+    <!--для поля ввода с редактором текста в добавить новый тоар-->
+    <script src="{{asset('adminlte/bower_components/ckeditor/ckeditor.js')}}"></script>
+    <script src="{{asset('adminlte/bower_components/ckeditor/adapters/jquery.js')}}"></script>
+    <!-- =======  -->
+
+
+    <script src="{{asset('js/my.js')}}"></script>
+
 </body>
+
 </html>
