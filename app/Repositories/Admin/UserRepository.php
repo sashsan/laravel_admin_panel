@@ -33,7 +33,7 @@
         }
 
 
-
+        /** All Users */
         public function getAllUsers($perpage)
         {
             $users = $this->startConditions()
@@ -46,7 +46,7 @@
             return $users;
         }
 
-
+        /** One Order by User */
         public function getUserOrders($user_id, $perpage)
         {
             $orders = $this->startConditions()::withTrashed()
@@ -62,7 +62,7 @@
             return $orders;
         }
 
-
+        /** User Role */
         public function getUserRole($id)
         {
             $role = $this->startConditions()
@@ -77,7 +77,7 @@
             return $role;
         }
 
-
+        /** Count Orders*/
         public function getCountOrders($id,$perpage)
         {
             $count = \DB::table('orders')
@@ -87,6 +87,7 @@
             return $count;
         }
 
+        /** CountOrders for Pagination part */
         public function getCountOrdersPag($id)
         {
             $count = \DB::table('orders')

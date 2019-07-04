@@ -31,7 +31,7 @@
             return Model::class;
         }
 
-
+        /** Get All Orders */
         public function getAllOrders($perpage)
         {
 
@@ -50,7 +50,7 @@
             return $orders;
         }
 
-
+        /** Get One Order */
         public function getOneOrder($order_id)
         {
             $order = $this->startConditions()::withTrashed()
@@ -67,7 +67,7 @@
             return $order;
         }
 
-
+        /** Get All Order Products Id */
         public function getAllOrderProductsId($order_id)
         {
             $orderProducts = \DB::table('order_products')
@@ -76,7 +76,7 @@
             return $orderProducts;
         }
 
-
+        /** Change Status for Order */
         public function changeStatusOrder($id)
         {
             $item = $this->getEditId($id);
@@ -88,7 +88,7 @@
             return $result;
         }
 
-
+        /** Save Comment in Edit Order */
         public function saveOrderComment($id)
         {
             $item = $this->getEditId($id);
@@ -100,7 +100,7 @@
             return $result;
         }
 
-
+        /** Soft Delete one Order */
         public function changeStatusOnDelete($id)
         {
             $item = $this->getEditId($id);

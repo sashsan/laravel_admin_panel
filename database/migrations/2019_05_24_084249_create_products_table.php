@@ -27,7 +27,7 @@ class CreateProductsTable extends Migration
             $table->enum('status',['0','1'])->default(1);
             $table->string('keywords',255)->default(NULL)->nullable();
             $table->string('description',255)->default(NULL)->nullable();
-            $table->string('img',255)->default('no_image.jpg');
+            $table->string('img',255)->nullable();
             $table->enum('hit',['0','1'])->default(0)->index();
 
             $table->timestamps();

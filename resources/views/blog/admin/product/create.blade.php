@@ -5,7 +5,7 @@
 
     <section class="content-header">
         @component('blog.admin.components.breadcrumb')
-            @slot('title') Список товаров @endslot
+            @slot('title') Добавление нового товара @endslot
             @slot('parent') Главная @endslot
             @slot('product') Список заказов @endslot
             @slot('active') Новый товар @endslot
@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="box">
-                    <form method="POST"  action="{{route('blog.admin.products.store',$item->id)}}"data-toggle="validator">
+                    <form method="POST"  action="{{route('blog.admin.products.store',$item->id)}}" data-toggle="validator" id="add">
                         @csrf
 
                         <div class="box-body">
@@ -30,7 +30,7 @@
 
                             <div class="form-group">
                                 <select name="parent_id" id="parent_id" class="form-control" required>
-                                    <option value="0">-- самостоятельная категория --</option>
+                                    <option>-- выберите категорию --</option>
 
                                     @include('blog.admin.category.include.edit_categories_all_list',['categories' => $categories])
 
@@ -85,36 +85,20 @@
 
 
                             <div class="form-group">
-
                                 <div class="col-md-4">
-                                    @include('blog.admin.product.single_image')
+                                    @include('blog.admin.product.include.image_single_create')
                                 </div>
-
 
                                 <div class="col-md-8">
-                                    <div class="box box-primary box-solid file-upload">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Картинки галереи</h3>
-                                        </div>
-                                        <div class="box-body">
-                                            <div id="multi" class="btn btn-success" data-url="products/image" data-name="multi">Выбрать файл</div>
-                                            <p><small>Рекомендуемые размеры: 700ш.х1000в.</small></p>
-                                            <div class="multi"></div>
-                                        </div>
-                                        <!--my.css .overlay{}-->
-                                        <div class="overlay">
-                                            <i class="fa fa-refresh fa-spin"></i>
-                                        </div>
-                                    </div>
+                                    @include('blog.admin.product.include.image_gallery_create')
                                 </div>
-
-
                             </div>
 
 
-
-
                         </div>
+
+                        <input type="hidden" id="_token" value="{{ csrf_token() }}">
+
                         <div class="box-footer">
                             <button type="submit" class="btn btn-success">Добавить</button>
                         </div>

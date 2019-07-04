@@ -169,6 +169,8 @@ return [
         Illuminate\Foundation\Providers\ArtisanServiceProvider::class,
         Lavary\Menu\ServiceProvider::class,
 
+
+
         /*
          * Package Service Providers...
          */
@@ -234,6 +236,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Menu'      => Lavary\Menu\Facade::class,
+
 
     ],
 

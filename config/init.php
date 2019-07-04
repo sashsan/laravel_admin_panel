@@ -9,6 +9,8 @@
     if (!defined('CACHE')) define('CACHE', ROOT . '/tmp/cache');
     if (!defined('CONF')) define('CONF', ROOT . '/config');
     if (!defined('LAYOUT')) define('LAYOUT', 'app.blade.php');
+    if (!defined('GALLERY')) define('GALLERY', '/public/uploads/gallery');
+    if (!defined('IMG')) define('IMG', '/public/uploads/single');
 
 
     $host = FALSE;
@@ -33,6 +35,6 @@
 
 
 
-require_once ROOT . '/vendor/autoload.php';
+
 
 
