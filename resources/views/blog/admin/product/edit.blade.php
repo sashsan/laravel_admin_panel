@@ -91,8 +91,6 @@
                                 </select>
                             </div>
 
-
-
                         {{ Widget::run('filter',
                             [
                             'tpl' => 'widgets.filter',
@@ -100,18 +98,17 @@
                             ])
                         }}
 
-
                             <div class="form-group">
                                 <div class="col-md-4">
                                     @include('blog.admin.product.include.image_single_edit',['product' => $product])
                                 </div>
 
-
-                                <div class="col-md-8" style="text-align: center;" >
+                                <div class="col-md-8" >
                                     @include('blog.admin.product.include.image_gallery_edit',['images' => $images])
                                 </div>
                             </div>
 
+                            <input type="hidden" id="_token" value="{{ csrf_token() }}">
 
                         </div>
                         <div class="box-footer">
@@ -121,16 +118,9 @@
                 </div>
             </div>
         </div>
-
-
     </section>
     <!-- /.content -->
-
-    <div class = 'hidden' data-name='{{$idjs}}'>
-
-    </div>
-
-
+    <div class = 'hidden' data-name='{{$id}}'></div>
 
 @endsection
 

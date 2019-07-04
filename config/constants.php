@@ -23,7 +23,7 @@
         'CONF' => $root . '/config',
         'PATH' => $app_path,
         'ADMIN' => $app_path . 'admin/index',
-
+        'GALLERY' => $root . '/public/uploads/gallery',
     ];
 
 

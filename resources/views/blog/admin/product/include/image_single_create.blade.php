@@ -3,9 +3,8 @@
         <h3 class="box-title">Базовое изображение</h3>
     </div>
 
-    <div class="box-body" id="image" style=" border: 1px solid whitesmoke ; text-align: center; position: relative" >
-            <img width="50%" height="50%" src="{{asset('images/no_image.jpg')}}" id="preview_image"/>
-
+    <div class="box-body" id="image" style="text-align: center; position: relative" >
+            <img width="50%" height="50%"  id="preview_image"/>
         <i id="loading" class="fa fa-spinner fa-spin fa-3x fa-fw" style="position: absolute;left: 40%;top: 40%;display: none"></i>
     </div>
     <p style="text-align: center">
@@ -14,7 +13,7 @@
         </a>&nbsp;&nbsp;
 
                 <a href="javascript:removeFile()" style="color: red;text-decoration: none;">
-                    <i class="glyphicon glyphicon-trash"></i>Удалить
+                    <i class="glyphicon glyphicon-trash"></i> Удалить
                 </a>
     </p>
     <input type="file" id="file" style="display: none"/>

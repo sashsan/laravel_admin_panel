@@ -74,13 +74,12 @@
             $product->status = $request->status ? '1' : '0';
             $product->hit = $request->hit ? '1' : '0';
             $product->category_id = $request->parent_id ?? '0';
-            $product->img = $this->productRepository->getImg();
+            $this->productRepository->getImg($product);
             $save = $product->save();
             if ($save) {
                 $this->productRepository->editFilter($id, $data);
                 $this->productRepository->editRelatedProduct($id, $data);
                 $this->productRepository->saveGallery($id);
-
                 return redirect()
                     ->route('blog.admin.products.create', [$product->id])
                     ->with(['success' => 'Успешно сохранено']);
@@ -91,6 +90,72 @@
             }
 
         }
+
+
+        /**
+         * EDIT One Product
+         *
+         * @param  int $id
+         * @return \Illuminate\Http\Response
+         */
+        public function edit($id)
+        {
+            \Session::put('ckfinder_auth', true);
+            $product = $this->productRepository->getInfoProduct($id);
+            $id = $product->id;
+            BlogApp::get_instance()->setProperty('parent_id', $product->category_id);
+            $filter = $this->productRepository->getFiltersProduct($id);
+            $related_products = $this->productRepository->getRelatedProducts($id);
+
+           $images = $this->productRepository->getGallery($id);
+
+
+            MetaTag::setTags(['title' => "Редактирование товара № {$id}"]);
+            return view('blog.admin.product.edit', compact('product', 'images','filter', 'related_products', 'id'), [
+                'categories' => Category::with('children')->where('parent_id', '0')
+                    ->get(),
+                'delimiter' => '-',
+                'product' => $product,
+            ]);
+        }
+
+
+        /**
+         * Update Product
+         * @param AdminProductsCreateRequest $request
+         * @param $id
+         * @return $this
+         */
+        public function update(AdminProductsCreateRequest $request, $id)
+        {
+            $product = $this->productRepository->getEditId($id);
+            if (empty($product)) {
+                return back()
+                    ->withErrors(['msg' => "Запись = [{$id}] не найдена"])
+                    ->withInput();
+            }
+            $data = $request->all();
+            $result = $product->update($data);
+            $product->status = $request->status ? '1' : '0';
+            $product->hit = $request->hit ? '1' : '0';
+            $product->category_id = $request->parent_id ?? $product->category_id;
+            $this->productRepository->getImg($product);
+            $save = $product->save();
+
+            if ($result && $save) {
+                $this->productRepository->editFilter($id, $data);
+                $this->productRepository->editRelatedProduct($id, $data);
+                $this->productRepository->saveGallery($id);
+                return redirect()
+                    ->route('blog.admin.products.edit', [$product->id])
+                    ->with(['success' => 'Успешно сохранено']);
+            } else {
+                return back()
+                    ->withErrors(['msg' => 'Ошибка сохранения'])
+                    ->withInput();
+            }
+        }
+
 
 
         /** Upload Single Image
@@ -163,6 +228,21 @@
             File::delete('uploads/single/' . $filename);
         }
 
+        /** Delete Gallery */
+        public function deleteGallery()
+        {
+            $id = isset($_POST['id']) ? $_POST['id'] : null;
+            $src = isset($_POST['src']) ? $_POST['src'] : null;
+            if (!$id || !$src){
+                return;
+            }
+            if (\DB::delete("DELETE FROM galleries WHERE product_id = ? AND img = ?",[$id, $src])){
+                @unlink("uploads/gallery/$src");
+                exit('1');
+            }
+            return;
+        }
+
 
         /** Related Products */
         public function related(Request $request)
@@ -187,66 +267,56 @@
         }
 
 
-        /**
-         * EDIT One Product
-         *
-         * @param  int $id
-         * @return \Illuminate\Http\Response
-         */
-        public function edit($id)
+        /** Return product status status = 1 */
+        public function returnStatus($id)
         {
-            \Session::put('ckfinder_auth', true);
-            $product = $this->productRepository->getInfoProduct($id);
+            if ($id){
+                $st = $this->productRepository->returnStatusOne($id);
+                if ($st) {
+                    return redirect()
+                        ->route('blog.admin.products.index')
+                        ->with(['success' => 'Успешно сохранено']);
+                } else {
+                    return back()
+                        ->withErrors(['msg' => 'Ошибка сохранения'])
+                        ->withInput();
+                }
+            }
+        }
 
-            $idjs = $product->id;
-            BlogApp::get_instance()->setProperty('parent_id', $product->category_id);
-            $filter = $this->productRepository->getFiltersProduct($id);
-            $related_products = $this->productRepository->getRelatedProducts($id);
-            $images = $this->productRepository->getGallery($id);
-            MetaTag::setTags(['title' => "Редактирование товара № {$id}"]);
-            return view('blog.admin.product.edit', compact('product', 'images', 'filter', 'related_products', 'idjs'), [
-                'categories' => Category::with('children')->where('parent_id', '0')
-                    ->get(),
-                'delimiter' => '-',
-                'product' => $product,
-            ]);
+        /** Return product status status = 0 */
+        public function deleteStatus($id)
+        {
+            if ($id){
+                $st = $this->productRepository->deleteStatusOne($id);
+                if ($st) {
+                    return redirect()
+                        ->route('blog.admin.products.index')
+                        ->with(['success' => 'Успешно сохранено']);
+                } else {
+                    return back()
+                        ->withErrors(['msg' => 'Ошибка сохранения'])
+                        ->withInput();
+                }
+            }
         }
 
 
-        /**
-         * Update Product
-         * @param AdminProductsCreateRequest $request
-         * @param $id
-         * @return $this
-         */
-        public function update(AdminProductsCreateRequest $request, $id)
+        /** Delete One Product from DB */
+        public function deleteProduct($id)
         {
-            $product = $this->productRepository->getEditId($id);
-            if (empty($product)) {
-                return back()
-                    ->withErrors(['msg' => "Запись = [{$id}] не найдена"])
-                    ->withInput();
-            }
-            $data = $request->all();
-            $result = $product->update($data);
-            $product->status = $request->status ? '1' : '0';
-            $product->hit = $request->hit ? '1' : '0';
-            $product->category_id = $request->parent_id ?? $product->category_id;
-//            if(empty($product->img)){
-//                $product->img = $this->productRepository->getImg($id);
-//            }
-            $save = $product->save();
-            $this->productRepository->editFilter($id, $data);
-            $this->productRepository->editRelatedProduct($id, $data);
-            $this->productRepository->saveGallery($id);
-            if ($result && $save) {
-                return redirect()
-                    ->route('blog.admin.products.edit', [$product->id])
-                    ->with(['success' => 'Успешно сохранено']);
-            } else {
-                return back()
-                    ->withErrors(['msg' => 'Ошибка сохранения'])
-                    ->withInput();
+            if ($id){
+                $gal = $this->productRepository->deleteImgGalleryFromPath($id);
+                $db = $this->productRepository->deleteFromDB($id);;
+                if ($db) {
+                    return redirect()
+                        ->route('blog.admin.products.index')
+                        ->with(['success' => 'Успешно удалено']);
+                } else {
+                    return back()
+                        ->withErrors(['msg' => 'Ошибка удаления'])
+                        ->withInput();
+                }
             }
         }
 
@@ -258,7 +328,7 @@
          */
         public function destroy($id)
         {
-            //
+            dd("idiid");
         }
 
 

@@ -12,7 +12,7 @@
 
 
 
-    //Admin side
+    /** Admin side */
     Route::group(['middleware' => ['status','auth']], function () {
         $groupeData = [
             'namespace' => 'Blog\Admin',
@@ -52,8 +52,15 @@
             Route::post('/products/gallery','ProductController@gallery')
             ->name('blog.admin.products.gallery');
 
+            Route::post('/products/delete-gallery','ProductController@deleteGallery')
+            ->name('blog.admin.products.deletegallery');
 
-
+            Route::get('/products/return-status/{id}','ProductController@returnStatus')
+            ->name('blog.admin.products.returnstatus');
+            Route::get('/products/delete-status/{id}','ProductController@deleteStatus')
+                ->name('blog.admin.products.deletestatus');
+            Route::get('/products/delete-product/{id}', 'ProductController@deleteProduct')
+            ->name('blog.admin.products.deleteproduct');
 
 
             Route::resource('products','ProductController')

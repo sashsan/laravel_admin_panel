@@ -9,6 +9,7 @@
     namespace App\Repositories\Admin;
 
     use App\Models\Admin\Product as Model;
+    use App\Models\Admin\Product;
     use App\Repositories\CoreRepository;
     use App\SBlog\Core\BlogApp;
     use Illuminate\Support\Facades\Session;
@@ -53,9 +54,9 @@
         public function getRelatedProducts($id)
         {
             $related_products = $this->startConditions()
-                ->join('related_products','products.id','=','related_products.related_id')
-                ->select('products.title','related_products.related_id')
-                ->where('related_products.product_id',$id)
+                ->join('related_products', 'products.id', '=', 'related_products.related_id')
+                ->select('products.title', 'related_products.related_id')
+                ->where('related_products.product_id', $id)
                 ->get();
             return $related_products;
         }
@@ -64,7 +65,7 @@
         public function getGallery($id)
         {
             $gallery = \DB::table('galleries')
-                ->where('product_id',$id)
+                ->where('product_id', $id)
                 ->pluck('img')
                 ->all();
             return $gallery;
@@ -92,6 +93,7 @@
             return $count;
         }
 
+
         /** Last products */
         public function getLastProducts($perpage)
         {
@@ -102,6 +104,7 @@
             return $get;
         }
 
+
         /** Edit filters */
         public function editFilter($id, $data)
         {
@@ -109,7 +112,6 @@
                 ->where('product_id', $id)
                 ->pluck('attr_id')
                 ->toArray();
-
 
             /** если убрал фильтры */
             if (empty($data['attrs']) && !empty($filter)) {
@@ -125,11 +127,8 @@
                 foreach ($data['attrs'] as $v) {
                     $sql_part .= "($v, $id),";
                 }
-
                 $sql_part = rtrim($sql_part, ',');
-
                 \DB::insert("insert into attribute_products (attr_id, product_id) VALUES $sql_part");
-
                 return;
             }
 
@@ -145,11 +144,9 @@
                         $sql_part .= "($v, $id),";
                     }
                     $sql_part = rtrim($sql_part, ',');
-
                     \DB::insert("insert into attribute_products (attr_id, product_id) VALUES $sql_part");
                 }
             }
-
         }
 
 
@@ -185,6 +182,7 @@
                 return;
             }
 
+
             /** Если поменял связанные товары */
             if (!empty($data['related'])) {
 
@@ -203,8 +201,6 @@
             }
 
         }
-
-
 
 
         /**  Upload Gallery Images */
@@ -235,15 +231,24 @@
         }
 
 
-        /** Get Image for Create New Product */
-        public function getImg()
+        /** Get Image for Create New Product
+         * @param Product $product
+         */
+        public function getImg(Product $product)
         {
+            clearstatcache();
             if (!empty(\Session::get('single'))) {
                 $name = \Session::get('single');
+                $product->img = $name;
                 \Session::forget('single');
-                return $name;
+                return;
             }
+            if (empty(\Session::get('single')) && !is_file(WWW . '/uploads/single/' . $product->img)) {
+                $product->img = null;
+            }
+            return;
         }
+
 
         /** Save Gallery Images
          * @param $id
@@ -260,7 +265,6 @@
                 \Session::forget('gallery');
             }
         }
-
 
 
         /**  Resize Images for My needs */
@@ -308,7 +312,72 @@
             imagedestroy($newImg);
         }
 
+        /**  Turn Status = 1 */
+        public function returnStatusOne($id)
+        {
+            if (isset($id)) {
+                $st = \DB::update("UPDATE products SET status = '1' WHERE id = ?", [$id]);
+                if ($st){
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
 
+        /**  Turn Status = 0 */
+        public function deleteStatusOne($id)
+        {
+            if (isset($id)) {
+                $st = \DB::update("UPDATE products SET status = '0' WHERE id = ?", [$id]);
+                if ($st){
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+
+        /**  Delete Gallery after del one product */
+        public function deleteImgGalleryFromPath($id)
+        {
+            $galleryImg = \DB::table('galleries')
+                ->select('img')
+                ->where('product_id',$id)
+                ->pluck('img')
+                ->all();
+
+            $singleImg = \DB::table('products')
+                ->select('img')
+                ->where('id', $id)
+                ->pluck('img')
+                ->all();
+
+            if (!empty($galleryImg)){
+                foreach ($galleryImg as $img){
+                    @unlink("uploads/gallery/$img");
+                }
+            }
+            if (!empty($singleImg)){
+                @unlink("uploads/single/".$singleImg[0]);
+            }
+
+        }
+
+
+        public function deleteFromDB($id)
+        {
+            if (isset($id)){
+                $related_product = \DB::delete('DELETE FROM related_products WHERE product_id = ?',[$id]);
+                $attribute_product = \DB::delete('DELETE FROM attribute_products WHERE product_id = ?',[$id]);
+                $gallery = \DB::delete('DELETE FROM galleries WHERE product_id = ?',[$id]);
+                $product = \DB::delete('DELETE FROM products WHERE id = ?', [$id]);
+
+                if ($product){
+                    return true;
+                }
+            }
+        }
 
 
     }

@@ -24,7 +24,7 @@
 
         protected static function getParams()
         {
-            $params = require __DIR__ . '/../../../config/params.php';
+            $params = require CONF. '/params.php';
 
             if (!empty($params)) {
                 foreach ($params as $k => $v) {
