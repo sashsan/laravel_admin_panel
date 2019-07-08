@@ -27,9 +27,5 @@
             $this->call(OrdersSeeder::class);
             $this->call(AdminOrderProductsSeeder::class);
 
-
-            $this->call(BlogCategoriesTableSeeder::class);
-            Factory(\App\Models\BlogPost::class, 100)->create();
-
         }
     }

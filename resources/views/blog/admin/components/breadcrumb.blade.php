@@ -21,5 +21,8 @@
     @if (isset($attrs_filter))
         <li><a href="{{url('/admin/filter/attributes-filter')}}"><i></i>{{$attrs_filter}}</a></li>
     @endif
+    @if (isset($currency))
+        <li><a href="{{url('/admin/currency/index')}}"><i></i>{{$currency}}</a></li>
+    @endif
     <li><i class="active"></i>{{$active}}</li>
 </ol>
