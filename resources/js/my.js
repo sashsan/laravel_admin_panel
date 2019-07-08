@@ -191,4 +191,3 @@ $('.del-items').on('click', function () {
 
 
 
-

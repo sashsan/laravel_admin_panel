@@ -338,6 +338,7 @@
             }
         }
 
+
         /**  Delete Gallery after del one product */
         public function deleteImgGalleryFromPath($id)
         {
@@ -365,6 +366,7 @@
         }
 
 
+        /** Delete from DB */
         public function deleteFromDB($id)
         {
             if (isset($id)){
@@ -391,6 +393,6 @@
             return $products;
         }
 
-    
+
 
     }

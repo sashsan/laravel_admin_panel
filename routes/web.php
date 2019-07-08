@@ -77,6 +77,16 @@
             Route::get('/filter/attr-delete/{id}', 'FilterController@attrDelete');
             Route::match(['get','post'],'/filter/attr-edit/{id}','FilterController@attrEdit');
 
+            Route::get('/currency/index','CurrencyController@index');
+            Route::match(['get','post'],'/currency/add','CurrencyController@add');
+            Route::match(['get','post'],'/currency/edit/{id}','CurrencyController@edit');
+            Route::get('/currency/delete/{id}','CurrencyController@delete');
+
+            Route::get('/search/result', 'SearchController@index');
+            Route::get('/autocomplete', 'SearchController@search');
+
+
+
 
             Route::resource('products','ProductController')
                 ->names('blog.admin.products');
