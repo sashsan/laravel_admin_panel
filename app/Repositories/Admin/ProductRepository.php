@@ -391,6 +391,11 @@
             return $products;
         }
 
-
+        /** Check ability */
+        public function checkProducts()
+        {
+            $products = $this->startConditions()
+                ->exists;
+        }
 
     }
