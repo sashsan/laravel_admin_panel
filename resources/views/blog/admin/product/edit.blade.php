@@ -29,6 +29,7 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="title">Категория товара</label>
                                 <select name="parent_id" id="parent_id" class="form-control" required>
                                     <option disabled>-- выберите категорию --</option>
 

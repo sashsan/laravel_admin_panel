@@ -29,7 +29,7 @@
                         @endif
                     </div>
                     <div class="product-info">
-                        <a href="{{route('blog.admin.posts.edit', $product->id)}}" class="product-title">{{$product->title}}
+                        <a href="{{route('blog.admin.products.edit', $product->id)}}" class="product-title">{{$product->title}}
                             <span class="label label-warning pull-right">{{$product->price}} $</span></a>
                         <span class="product-description">{{$product->description}}</span>
                     </div>

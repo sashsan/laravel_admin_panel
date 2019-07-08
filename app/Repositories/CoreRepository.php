@@ -34,6 +34,7 @@
          */
         abstract protected function getModelClass();
 
+
         /**
          * @return Model|\Illuminate\Foundation\Application|mixed
          */

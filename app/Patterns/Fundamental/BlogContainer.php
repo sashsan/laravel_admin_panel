@@ -10,20 +10,34 @@
 
     use App\Patterns\Fundamental\PropertyContainer\PropertyContainer;
 
-    class Blog extends PropertyContainer
+    class BlogContainer extends PropertyContainer
     {
-        private $maxsize;
+
+        private $imgWidth;
+        private $imgHeight;
+        private $galleryWidth;
+        private $GalleryHeight;
 
 
-        public function getMaxsize()
-        {
-            return $this->maxsize;
-        }
 
-        public function setMaxsize($maxsize)
-        {
-            $this->maxsize = $maxsize;
-        }
+        public function getImgWidth(){return $this->imgWidth;}
+
+        public function setImgWidth($imgWidth){$this->imgWidth = $imgWidth;}
+
+        public function getImgHeight(){return $this->imgHeight;}
+
+        public function setImgHeight($imgHeight){$this->imgHeight = $imgHeight;}
+
+        public function getGalleryWidth(){return $this->galleryWidth;}
+
+        public function setGalleryWidth($galleryWidth): void {$this->galleryWidth = $galleryWidth;}
+
+        public function getGalleryHeight(){return $this->GalleryHeight;}
+
+        public function setGalleryHeight($GalleryHeight){$this->GalleryHeight = $GalleryHeight;}
+
+
+
 
 
     }

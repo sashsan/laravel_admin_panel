@@ -7,17 +7,15 @@
     use App\Models\Admin\Category;
     use App\Models\Admin\Product;
     use App\Repositories\Admin\ProductRepository;
-    use Config;
     use Illuminate\Http\Request;
     use MetaTag;
     use Illuminate\Support\Facades\File;
-    use Illuminate\Support\Facades\Validator;
     use App\SBlog\Core\BlogApp;
-    use Session;
 
 
     class ProductController extends AdminBaseController
     {
+
         private $productRepository;
 
 
@@ -44,12 +42,11 @@
 
         /**
          * Show the form for creating a new resource.
-         *
          * @return \Illuminate\Http\Response
          */
         public function create()
         {
-            \Session::put('ckfinder_auth', true);
+            //\Session::flush();
             $item = new Category();
             MetaTag::setTags(['title' => 'Создание нового товара']);
             return view('blog.admin.product.create', [
@@ -100,18 +97,15 @@
          */
         public function edit($id)
         {
-            \Session::put('ckfinder_auth', true);
             $product = $this->productRepository->getInfoProduct($id);
             $id = $product->id;
             BlogApp::get_instance()->setProperty('parent_id', $product->category_id);
             $filter = $this->productRepository->getFiltersProduct($id);
             $related_products = $this->productRepository->getRelatedProducts($id);
-
-           $images = $this->productRepository->getGallery($id);
-
+            $images = $this->productRepository->getGallery($id);
 
             MetaTag::setTags(['title' => "Редактирование товара № {$id}"]);
-            return view('blog.admin.product.edit', compact('product', 'images','filter', 'related_products', 'id'), [
+            return view('blog.admin.product.edit', compact('product', 'images', 'filter', 'related_products', 'id'), [
                 'categories' => Category::with('children')->where('parent_id', '0')
                     ->get(),
                 'delimiter' => '-',
@@ -157,8 +151,7 @@
         }
 
 
-
-        /** Upload Single Image
+        /** Upload Single Image from my.js
          * @param Request $request
          * @return array|\Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
          */
@@ -193,7 +186,7 @@
         }
 
         /**
-         * Add Photo for Gallery
+         * Add Photo for Gallery Ajax from my.js
          * @param Request $request
          * @return array
          */
@@ -228,15 +221,16 @@
             File::delete('uploads/single/' . $filename);
         }
 
+
         /** Delete Gallery */
         public function deleteGallery()
         {
             $id = isset($_POST['id']) ? $_POST['id'] : null;
             $src = isset($_POST['src']) ? $_POST['src'] : null;
-            if (!$id || !$src){
+            if (!$id || !$src) {
                 return;
             }
-            if (\DB::delete("DELETE FROM galleries WHERE product_id = ? AND img = ?",[$id, $src])){
+            if (\DB::delete("DELETE FROM galleries WHERE product_id = ? AND img = ?", [$id, $src])) {
                 @unlink("uploads/gallery/$src");
                 exit('1');
             }
@@ -244,16 +238,14 @@
         }
 
 
-        /** Related Products */
+        /** Related Products
+         * @param Request $request
+         */
         public function related(Request $request)
         {
             $q = isset($request->q) ? htmlspecialchars(trim($request->q)) : '';
             $data['items'] = [];
-            $products = \DB::table('products')
-                ->select('id', 'title')
-                ->where('title', 'LIKE', ["%{$q}%"])
-                ->limit(8)
-                ->get();
+            $products = $this->productRepository->getProducts($q);
             if ($products) {
                 $i = 0;
                 foreach ($products as $id => $title) {
@@ -270,7 +262,7 @@
         /** Return product status status = 1 */
         public function returnStatus($id)
         {
-            if ($id){
+            if ($id) {
                 $st = $this->productRepository->returnStatusOne($id);
                 if ($st) {
                     return redirect()
@@ -287,7 +279,7 @@
         /** Return product status status = 0 */
         public function deleteStatus($id)
         {
-            if ($id){
+            if ($id) {
                 $st = $this->productRepository->deleteStatusOne($id);
                 if ($st) {
                     return redirect()
@@ -305,7 +297,7 @@
         /** Delete One Product from DB */
         public function deleteProduct($id)
         {
-            if ($id){
+            if ($id) {
                 $gal = $this->productRepository->deleteImgGalleryFromPath($id);
                 $db = $this->productRepository->deleteFromDB($id);;
                 if ($db) {
@@ -328,7 +320,7 @@
          */
         public function destroy($id)
         {
-            dd("idiid");
+
         }
 
 

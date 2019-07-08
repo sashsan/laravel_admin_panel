@@ -19,7 +19,6 @@
         $host = $_SERVER['HTTP_HOST'];
     }
 
-
     // http://laravel.blog.san/index.php
     //$app_path = "http://{$_SERVER['HTTP_HOST']}{$_SERVER['PHP_SELF']}";
 

@@ -114,10 +114,10 @@ $('.deletebd').click(function () {
 });
 /* - - - - - - */
 
-/** Подтверждение удаление Категории */
+/** Редактирование коментария */
 
 $('.redact').click(function () {
-  var res = confirm('Вы можете только изменить Комментарий');
+  var res = confirm('Вы можете только изменить Комментарий.');
   return false;
 });
 /** - - - - - - */
@@ -194,6 +194,14 @@ $(".select2").select2({
 $('#add').on('submit', function () {
   if (!isNumeric($('#parent_id').val())) {
     alert('Выберите категорию');
+    return false;
+  }
+});
+/** You must choose category */
+
+$('#addattrs').on('submit', function () {
+  if (!isNumeric($('#category_id').val())) {
+    alert('Выберите группу');
     return false;
   }
 });

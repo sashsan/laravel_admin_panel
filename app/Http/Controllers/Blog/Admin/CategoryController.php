@@ -46,8 +46,6 @@ class CategoryController extends AdminBaseController
         MetaTag::setTags(['title' => 'Список категорий']);
         return view('blog.admin.category.index',['menu' => $menu]);
 
-
-
     }
 
 
@@ -60,11 +58,9 @@ class CategoryController extends AdminBaseController
     public function create()
     {
         $item = new Category();
-
         $categoryList = $this->categoryRepository->getComboBoxCategories();
 
         MetaTag::setTags(['title' => 'Добавление категории']);
-
         return view('blog.admin.category.create', [
             'categories' => Category::with('children')->where('parent_id', '0')->get(),
             'delimiter' => '-',
@@ -83,9 +79,7 @@ class CategoryController extends AdminBaseController
     public function store(BlogCategoryUpdateRequest $request)
     {
         $data = $request->input();
-
         $item = (new Category())->create($data);
-
 
         if ($item) {
             return redirect()
@@ -98,16 +92,7 @@ class CategoryController extends AdminBaseController
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -119,13 +104,11 @@ class CategoryController extends AdminBaseController
     public function edit($id, CategoryRepository $categoryRepository)
     {
         $item = $this->categoryRepository->getEditId($id);
-
         if (empty($item)){
             abort(404);
         }
 
         $categoryList = $this->categoryRepository->getComboBoxCategories();
-
 
         MetaTag::setTags(['title' => 'Редактирование категории']);
         return view('blog.admin.category.edit',[
@@ -134,6 +117,7 @@ class CategoryController extends AdminBaseController
             'item' => $item,
         ]);
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -146,7 +130,6 @@ class CategoryController extends AdminBaseController
     public function update(BlogCategoryUpdateRequest $request, $id)
     {
         $item = $this->categoryRepository->getEditId($id);
-
         if (empty($item)){
             return back()
                 ->withErrors(['msg' => "Запись = [{$id}] не найдена"])
@@ -154,10 +137,7 @@ class CategoryController extends AdminBaseController
         }
 
         $data = $request->all();
-
-
         $result = $item->update($data);
-
         if ($result){
             return redirect()
                 ->route('blog.admin.categories.edit', $item->id)
@@ -167,8 +147,8 @@ class CategoryController extends AdminBaseController
                 ->withErrors(['msg' => 'Ошибка сохранения!'])
                 ->withInput();
         }
-
     }
+
 
     /** @throws \Exception */
     public function mydel()
@@ -192,7 +172,6 @@ class CategoryController extends AdminBaseController
         }
 
         $delete = $this->categoryRepository->deleteCategory($id);
-
         if ($delete){
             return redirect()
                 ->route('blog.admin.categories.index')
@@ -212,5 +191,17 @@ class CategoryController extends AdminBaseController
     public function destroy($id)
     {
         return view('blog.admin.category.index');
+    }
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
     }
 }

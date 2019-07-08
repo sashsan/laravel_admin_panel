@@ -125,6 +125,7 @@
                 compact('item', 'orders', 'role', 'count_orders', 'count'));
         }
 
+
         /**
          * Update the specified resource in storage.
          *

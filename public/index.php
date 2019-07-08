@@ -7,6 +7,8 @@
      * @author   Taylor Otwell <taylor@laravel.com>
      */
 
+    use App\Http\Controllers\FundamentalPatternsController;
+
     define('LARAVEL_START', microtime(true));
 
 

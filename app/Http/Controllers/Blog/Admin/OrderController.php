@@ -30,7 +30,6 @@
             $paginator = $this->orderRepository->getAllOrders($perpage);
 
             MetaTag::setTags(['title' => 'Список заказов']);
-
             return view('blog.admin.order.index',
                 compact('countOrders', 'paginator'));
         }
@@ -50,7 +49,6 @@
             $order_products = $this->orderRepository->getAllOrderProductsId($item->id);
 
             MetaTag::setTags(['title' => "Заказ № {$item->id}"]);
-
             return view('blog.admin.order.edit',
                 compact('item', 'order', 'order_products'));
         }
@@ -95,9 +93,9 @@
         public function destroy($id)
         {
             $st = $this->orderRepository->changeStatusOnDelete($id);
-            if ($st){
+            if ($st) {
                 $result = Order::destroy($id);
-                if($result){
+                if ($result) {
                     return redirect()
                         ->route('blog.admin.orders.index')
                         ->with(['success' => "Запись id [$id] удалена"]);
@@ -119,12 +117,12 @@
 
             $force_result = Order::find($id);
 
-            if (!$force_result){
+            if (!$force_result) {
                 return back()->withErrors(['msg' => 'Ошибка удаления']);
             }
             $force_result = Order::find($id)->forceDelete();
 
-            if($force_result){
+            if ($force_result) {
                 return redirect()
                     ->route('blog.admin.orders.index')
                     ->with(['success' => "Запись id [$id] удалена из БД"]);
@@ -132,8 +130,6 @@
                 return back()->withErrors(['msg' => 'Ошибка удаления']);
             }
         }
-
-
 
 
         public function create()
@@ -158,7 +154,6 @@
         {
             //
         }
-
 
 
     }
