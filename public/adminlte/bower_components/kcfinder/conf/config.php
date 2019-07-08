@@ -1,6 +1,9 @@
 <?php
 
-/** This file is part of KCFinder project
+    use App\Patterns\Fundamental\BlogContainer;
+
+
+    /** This file is part of KCFinder project
   *
   *      @desc Base configuration file
   *   @package KCFinder
@@ -16,15 +19,12 @@
    even if you are using session configuration.
    See http://kcfinder.sunhater.com/install for setting descriptions */
 
-    session_start();
+    require __DIR__ . '/../../../../../vendor/autoload.php';
 
 
     $_CONFIG = array(
 
-
-// GENERAL SETTINGS
-
-    'disabled' => !(isset($_SESSION['ckfinder_auth'])),
+    'disabled' => false,
     'uploadURL' => "../../../images",
     'uploadDir' => "",
     'theme' => "default",

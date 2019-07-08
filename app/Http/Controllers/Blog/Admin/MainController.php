@@ -35,16 +35,11 @@
             $countProducts = MainRepository::getCountProducts();
             $countCategories = MainRepository::getCountCategories();
 
-
             $perpage = 4;
             $last_orders = $this->orderRepository->getAllOrders($perpage);
             $last_products = $this->productRepository->getLastProducts($perpage);
 
-
-            MetaTag::setTags([
-                'title' => 'Админ панель',
-            ]);
-
+            MetaTag::setTags(['title' => 'Админ панель']);
             return view('blog.admin.main.index',
                 compact('countOrders', 'countUsers', 'countProducts', 'countCategories','last_orders','last_products'));
         }

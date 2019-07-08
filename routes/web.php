@@ -62,6 +62,21 @@
             Route::get('/products/delete-product/{id}', 'ProductController@deleteProduct')
             ->name('blog.admin.products.deleteproduct');
 
+            Route::get('/cache/index', 'CacheController@index')
+                ->name('blog.admin.cache');
+            Route::get('/cache/delete/{key}', 'CacheController@delete')
+                ->name('blog.admin.delete');
+
+            Route::get('/filter/group-filter', 'FilterController@attributeGroup');
+            Route::get('/filter/group-add', 'FilterController@attributeGroup');
+            Route::get('/filter/group-delete/{id}', 'FilterController@groupDelete');
+            Route::match(['get','post'],'/filter/group-add-group', 'FilterController@groupAdd');
+            Route::match(['get','post'],'/filter/group-edit/{id}','FilterController@groupEdit');
+            Route::get('/filter/attributes-filter', 'FilterController@attributeFilter');
+            Route::match(['get','post'],'/filter/attrs-add', 'FilterController@attributeAdd');
+            Route::get('/filter/attr-delete/{id}', 'FilterController@attrDelete');
+            Route::match(['get','post'],'/filter/attr-edit/{id}','FilterController@attrEdit');
+
 
             Route::resource('products','ProductController')
                 ->names('blog.admin.products');

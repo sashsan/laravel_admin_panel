@@ -17,9 +17,9 @@ $('.deletebd').click(function () {
 });
 /* - - - - - - */
 
-/** Подтверждение удаление Категории */
+/** Редактирование коментария */
 $('.redact').click(function () {
-    var res = confirm('Вы можете только изменить Комментарий');
+    var res = confirm('Вы можете только изменить Комментарий.');
     return false;
 });
 /** - - - - - - */
@@ -100,11 +100,21 @@ $('#add').on('submit', function () {
     }
 });
 
+/** You must choose category */
+$('#addattrs').on('submit', function () {
+    if (!isNumeric($('#category_id').val())) {
+        alert('Выберите группу');
+        return false;
+    }
+});
+
+
 /** Является ли поле числом true / false  вместе с предыдущим */
 function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
 /** ===== */
+
 
 
 
