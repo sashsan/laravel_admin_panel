@@ -30,6 +30,7 @@
 
 
 
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -171,8 +172,8 @@
 </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="/currency">Список валют</a></li>
-                        <li><a href="/currency/add">Добавить валюту</a></li>
+                        <li><a href="{{url('/admin/currency/index')}}">Список валют</a></li>
+                        <li><a href="{{url('/admin/currency/add')}}">Добавить валюту</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -187,16 +188,19 @@
                     </ul>
                 </li>
             </ul>
+            <br><br>
             <!-- search form -->
 
-            <form action="/admin/search" method="get" autocomplete="off"  style="position: absolute;">
+            <form action="{{url('/admin/search/result')}}" method="get" autocomplete="off"  style="position: absolute;">
                 <div class="input-group">
-                    <input type="text" class="typeahead form-control" id="typeahead" name="s" placeholder="Поиск...." style="color: whitesmoke; background-color:#20262a; border: none;">
+                    <input id="search" name="search" type="text" class="form-control" placeholder="Живой поиск...." style="color: whitesmoke; background-color:#20262a; border: none;">
                     <span class="input-group-btn">
                         <button type="submit" value="" class="btn btn-flat" style="background-color: #ebeff4;"><i class="fa fa-search"></i></button>
                     </span>
                 </div>
             </form>
+
+
 
             <!-- /.search form -->
         </section>
@@ -226,6 +230,23 @@
 <!-- ./wrapper -->
 
 
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
+<script type="text/javascript">
+    var route = "{{ url('/admin/autocomplete') }}";
+    $('#search').typeahead({
+        source:  function (term, process) {
+            return $.get(route, { term: term }, function (data) {
+                return process(data);
+            });
+        }
+    });
+</script>
+
+<script>
+    var pathd = '{{PATH}}';
+</script>
 <!-- jQuery 3 -->
 <script src="{{asset('adminlte/bower_components/jquery/dist/jquery.min.js')}}"></script>
 
@@ -234,6 +255,8 @@
 <script src="{{asset('adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
 <!-- Validator -->
 <script src="{{asset('js/validator.js')}}"></script>
+<!-- Search -->
+
 <!-- AdminLTE App -->
 <script src="{{asset('adminlte/dist/js/adminlte.min.js')}}"></script>
 
@@ -242,8 +265,6 @@
 <script src="{{asset('adminlte/bower_components/ckeditor/adapters/jquery.js')}}"></script>
 <!-- Для select связанные товары в админке добавить товар -->
 <script src="{{asset('adminlte/bower_components/select2/dist/js/select2.full.js')}}"></script>
-<!-- Search -->
-<script src="{{asset('js/typeahead.bundle.js')}}"></script>
 
 <!-- === = ===  -->
 
