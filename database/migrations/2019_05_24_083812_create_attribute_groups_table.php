@@ -15,9 +15,7 @@ class CreateAttributeGroupsTable extends Migration
     {
         Schema::create('attribute_groups', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-
             $table->bigIncrements('id');
-
             $table->string('title', 255);
 
         });

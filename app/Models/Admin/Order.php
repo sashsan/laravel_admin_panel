@@ -20,4 +20,6 @@ class Order extends Model
         'currency',
         'note',
     ];
+
+
 }

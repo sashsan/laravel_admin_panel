@@ -152,7 +152,7 @@
                         <li><a href="{{route('blog.admin.products.create')}}">Добавить товар</a></li>
                     </ul>
                 </li>
-                <li><a href="/cache"><i class="fa fa-database"></i> <span>Кэширование</span></a></li>
+                <li><a href="{{route('blog.admin.cache')}}"><i class="fa fa-database"></i> <span>Кэширование</span></a></li>
                 <li class="treeview">
                     <a href="#"><i class="fa fa-users"></i> <span>Пользователи</span>
                         <span class="pull-right-container">
@@ -182,8 +182,8 @@
 </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="/filter/attribute-group">Группы фильтров</a></li>
-                        <li><a href="/filter/attribute">Фильтры</a></li>
+                        <li><a href="{{url('admin/filter/group-filter')}}">Группы фильтров</a></li>
+                        <li><a href="{{url('admin/filter/attributes-filter')}}">Фильтры</a></li>
                     </ul>
                 </li>
             </ul>
