@@ -78,10 +78,15 @@
 
                             <div class="form-group has-feedback">
                                 <label for="related">Связанные товары</label>
+                                <p><small>Начните вводить наименование товара...</small></p>
                                 <select name="related[]" class="select2 form-control" id="related" multiple></select>
                             </div>
-
+                            <br>
+                            <div class="form-group">
+                                <label for="related">Фильтры продукта</label>
                 {{ Widget::run('filter',['tpl' => 'widgets.filter','filter' => null, ])}}
+
+                            </div>
 
 
                             <div class="form-group">
