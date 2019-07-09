@@ -36,7 +36,7 @@
             $countCategories = MainRepository::getCountCategories();
 
             $perpage = 4;
-            $last_orders = $this->orderRepository->getAllOrders($perpage);
+            $last_orders = $this->orderRepository->getAllOrders(6);
             $last_products = $this->productRepository->getLastProducts($perpage);
 
             MetaTag::setTags(['title' => 'Админ панель']);

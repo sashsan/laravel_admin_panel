@@ -28,6 +28,9 @@ class CategoriesSeeder extends Seeder
             ['id' => '13', 'title' => 'Adriatica','alias' => 'adriatica', 'parent_id' => '11', 'keywords' => 'Adriatica', 'description' => 'Adriatica'],
             ['id' => '14', 'title' => 'Anne Klein','alias' => 'nne-klein', 'parent_id' => '12', 'keywords' => 'Anne Klein', 'description' => 'Anne Klein'],
 
+            ['id' => '15', 'title' => 'Для девочек','alias' => 'girls', 'parent_id' => '3', 'keywords' => 'girls', 'description' => 'girls'],
+            ['id' => '16', 'title' => 'Для мальчиков','alias' => 'boys', 'parent_id' => '3', 'keywords' => 'boys', 'description' => 'boys'],
+
         ];
 
         DB::table('categories')->insert($data);

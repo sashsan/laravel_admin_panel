@@ -25,7 +25,7 @@
                     @csrf
                     <div class="box-body">
                         <div class="form-group has-feedback">
-                            <label for="login">Логин</label>
+                            <label for="login">Логин  <small style="font-size: small; font-weight: normal"> меняется автоматически</small></label>
                             <input type="text" class="form-control"  placeholder="{{ucfirst($item->name)}}" disabled >
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                         </div>

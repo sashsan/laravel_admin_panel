@@ -11,16 +11,18 @@
          */
         public function run()
         {
-            $data = [
-                ['product_id' => 1, 'related_id' => 2],
-                ['product_id' => 1, 'related_id' => 5],
-                ['product_id' => 2, 'related_id' => 5],
-                ['product_id' => 2, 'related_id' => 10],
-                ['product_id' => 5, 'related_id' => 1],
-                ['product_id' => 5, 'related_id' => 7],
-                ['product_id' => 5, 'related_id' => 8],
 
-            ];
+            $data = [];
+
+            for ($y = 1; $y <= 17; $y++) {
+                for ($i = 1; $i <= 3; $i++) {
+                    $data[] = [
+                        'product_id' => $y,
+                        'related_id' => $i,
+                    ];
+                }
+            }
+
 
             DB::table('related_products')->insert($data);
         }
