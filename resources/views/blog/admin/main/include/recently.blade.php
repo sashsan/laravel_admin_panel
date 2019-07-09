@@ -35,7 +35,7 @@
                     </div>
                 </li>
                 <!-- /.item -->
-                
+
                 @endforeach
 
             </ul>

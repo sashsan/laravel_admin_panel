@@ -20,12 +20,12 @@
             <div class="col-md-12">
                 <div class="box">
                     <!-- id="addattrs"  для my.js //Чтобы нужно было обязательно выбрать  -->
-                    <form action="{{url('/admin/filter/attrs-edit',$attr->id)}}" method="post" data-toggle="validator" id="addattrs">
+                    <form action="{{url('/admin/filter/attrs-add')}}" method="post" data-toggle="validator" id="addattrs">
                         @csrf
                         <div class="box-body">
                             <div class="form-group has-feedback">
                                 <label for="value">Наименование</label>
-                                <input type="text" name="value" class="form-control" id="value" placeholder="Наименование" value="{{$atrr->value}}" required>
+                                <input type="text" name="value" class="form-control" id="value" placeholder="Наименование"  required>
                                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                             </div>
                             <div class="form-group">

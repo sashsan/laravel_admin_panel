@@ -65,6 +65,13 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            a {
+                padding: 5px;
+                margin-right: 40px;
+                border: 1px solid #0b3e6f;
+            }
+
         </style>
     </head>
     <body>
@@ -74,30 +81,38 @@
                     @auth
 
                         @if(Auth::user()->isDisabled())
-                            <a href="{{ url('/') }}" style="color: #0b3e6f">Главная</a>
+                            <strong>  <a href="{{ url('/') }}" style="color: #0b3e6f; text-decoration: none">Главная</a></strong>
                         @elseif(Auth::user()->isUser())
-                            <a href="{{ url('/user/index') }}" style="color: #0b3e6f">Кабинет</a>
-                            <a href="{{ url('/') }}" style="color: #0b3e6f">Главная</a>
+                            <strong>  <a href="{{ url('/user/index') }}" style="color: #0b3e6f; text-decoration: none">Кабинет</a></strong>
+                            <strong>  <a href="{{ url('/') }}" style="color: #0b3e6f; text-decoration: none">Главная</a></strong>
                         @elseif(Auth::user()->isVisitor())
-                            <a href="{{ url('/') }}" style="color: #0b3e6f">Главная</a>
+                            <strong>   <a href="{{ url('/') }}" style="color: #0b3e6f; text-decoration: none">Главная</a></strong>
                         @elseif(Auth::user()->isAdministrator())
-                            <a href="{{ url('/admin/index') }}" style="color: #0b3e6f">Панель Администратора</a>
-                            <a href="{{ url('/') }}" style="color: #0b3e6f">Главная</a>
+                            <strong><a href="{{ url('/admin/index') }}" style="color: #0b3e6f; text-decoration: none; cursor: pointer">Панель Администратора</a></strong>
+                            <strong> <a href="{{ url('/') }}" style="color: #0b3e6f; text-decoration: none">Главная</a></strong>
                         @endif
 
-                        <a class="dropdown-item" href="{{ route('logout') }}" style="color: #0b3e6f"
-                           onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
-                        </a>
+                            <strong>
+                                <a class="dropdown-item" href="{{ route('logout') }}" style="color: #0b3e6f; text-decoration: none"
+                                    onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                            Выйти
+                                 </a>
+                            </strong>
+
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
-                    @else
-                        <a href="{{ route('login') }}" style="color: black">Войти</a>
+
+                        @else
+                            <strong>
+                                <a href="{{ route('login') }}" style="color: #0b3e6f; text-decoration: none">Войти</a>
+                            </strong>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" style="color: black">Регистрация</a>
+                            <strong>
+                                <a href="{{ route('register') }}" style="color: #0b3e6f; text-decoration: none">Регистрация</a>
+                            </strong>
                         @endif
                     @endauth
 
@@ -107,7 +122,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                        {{--LARAVEL--}}
+
                 </div>
 
                 <div class="links">

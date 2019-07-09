@@ -17,6 +17,11 @@
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-body">
+                        <div>
+                            <i style="font-weight: bold; margin-left: 170px; font-size: small;"><small>Для редактирования - нажмите на категорию.</small></i>
+                            <i style="font-weight: bold; text-align: right; margin-left: 170px; font-size: small;"><small> Невозможно удалять категории имеющие наследника.</small></i>
+                        </div>
+                       <br>
                         @if($menu)
                             <div class="list-group list-group-root well">
 
