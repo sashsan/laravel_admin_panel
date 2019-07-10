@@ -1,4 +1,5 @@
 <script>
+
     $(document).ready(function () {
 
         if ($('#galleryjs').length > 0){
