@@ -47,7 +47,7 @@
                 form_data.append('_method', 'DELETE');
                 form_data.append('_token', '{{csrf_token()}}');
                 $.ajax({
-                    url: "/admin/products/ajax-remove-image/" + $('#file_name').val(),
+                    url: '{{url('/admin/products/ajax-remove-image')}}'+ '/' + $('#file_name').val(),
                     data: form_data,
                     type: 'POST',
                     contentType: false,
@@ -72,7 +72,7 @@
                 form_data.append('_method', 'DELETE');
                 form_data.append('_token', '{{csrf_token()}}');
                 $.ajax({
-                    url: "/admin/products/ajax-remove-image/"+ $('a.myimg').data('name'),
+                    url: '{{url('/admin/products/ajax-remove-image')}}'+ '/' + $('a.myimg').data('name'),
                     data: form_data,
                     type: 'POST',
                     contentType: false,
@@ -96,7 +96,7 @@
                 form_data.append('_method', 'DELETE');
                 form_data.append('_token', '{{csrf_token()}}');
                 $.ajax({
-                    url: "/admin/products/ajax-remove-image/" + $('#file_name').val(),
+                    url: '{{url('/admin/products/ajax-remove-image')}}'+ '/' + $('#file_name').val(),
                     data: form_data,
                     type: 'POST',
                     contentType: false,

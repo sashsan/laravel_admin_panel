@@ -23,9 +23,7 @@
                 </tr>
                 </thead>
                 <tbody>
-
                 @foreach($last_orders as $order)
-
                     <tr>
                         <td><a href="{{route('blog.admin.orders.edit',$order->id)}}">{{$order->id}}</a></td>
                         <td><a href="{{route('blog.admin.orders.edit',$order->id)}}">{{ucfirst($order->name)}}</a></td>

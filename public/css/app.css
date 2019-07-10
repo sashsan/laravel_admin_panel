@@ -10662,3 +10662,11 @@ a.text-dark:focus {
   }
 }
 
+@font-face {
+  font-family: "https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic";
+  src: url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic.eot");
+  /* IE9 Compat Modes */
+  src: url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic.eot?#iefix") format("embedded-opentype"), url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic.woff2") format("woff2"), url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic.woff") format("woff"), url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic.ttf") format("truetype"), url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic.svg#svgFontName") format("svg");
+  /* Legacy iOS */
+}
+

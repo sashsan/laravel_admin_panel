@@ -6,11 +6,7 @@ namespace App\Http\Controllers\Blog\Admin;
 use App\Http\Requests\BlogCategoryUpdateRequest;
 use App\Models\Admin\Category;
 use App\Repositories\Admin\CategoryRepository;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use MetaTag;
-use Menu as LavMenu;
-use SebastianBergmann\CodeCoverage\Driver\Xdebug;
 
 /**
  *  Управление категориями блога
@@ -78,8 +74,17 @@ class CategoryController extends AdminBaseController
      */
     public function store(BlogCategoryUpdateRequest $request)
     {
+        $name = $this->categoryRepository->checkUniqueName($request->title,$request->parent_id);
+
+        if($name){
+            return back()
+                ->withErrors(['msg'=>'Не может быть в одной и той же Категории двух одинаковых. Выбирите другую Категорию.'])
+                ->withInput();
+        }
+
         $data = $request->input();
-        $item = (new Category())->create($data);
+        $item = new Category();
+        $item->fill($data)->save();
 
         if ($item) {
             return redirect()

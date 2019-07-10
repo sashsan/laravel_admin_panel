@@ -1,7 +1,5 @@
 @extends('layouts.app_admin')
-
 @section('content')
-
 
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -40,7 +38,7 @@
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
                     </div>
-                    <a href="/product" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="{{url('/admin/products')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->

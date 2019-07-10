@@ -79,7 +79,6 @@
     <!-- jQuery 3 -->
     <script src="{{asset('adminlte/bower_components/jquery/dist/jquery.min.js')}}"></script>
 
-    <script src="https://use.fontawesome.com/2c7a93b259.js"></script>
     <!-- Bootstrap 3.3.7 -->
     <script src="{{asset('adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
     <!-- Для select связанные товары в админке добавить товар -->

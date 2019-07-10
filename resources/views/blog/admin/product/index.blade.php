@@ -55,7 +55,6 @@
                                         <a class="delete" href="{{route('blog.admin.products.deleteproduct', $product->id)}}" title="Удалить из БД"><i class="fa fa-fw fa-close text-danger"></i></a>
                                     @endif
 
-
                                 </td>
                             </tr>
 
@@ -72,7 +71,6 @@
                             <div class="col-md-12">
                                 <div class="card">
                                     <div class="card-body">
-
                                         {{$getAllProducts->links()}}
                                     </div>
                                 </div>

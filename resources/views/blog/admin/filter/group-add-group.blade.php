@@ -1,7 +1,5 @@
 @extends('layouts.app_admin')
-
 @section('content')
-
 
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -38,9 +36,6 @@
         </div>
 
     </section>
-
-
-
 
 
 @endsection

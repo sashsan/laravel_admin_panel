@@ -1,6 +1,5 @@
 {
-    "/js/my.js": "/js/my.js",
+    "/js/validator.js": "/js/validator.js",
     "/css/app.css": "/css/app.css",
-    "/css/my.css": "/css/my.css",
-    "/js/validator.js": "/js/validator.js"
+    "/css/my.css": "/css/my.css"
 }
