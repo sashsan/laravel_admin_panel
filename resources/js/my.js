@@ -44,6 +44,8 @@ $('.sidebar-menu a').each(function () {
 
 /** KCFinder  */
 var create = '/admin/products/create';
+
+
 if (window.location.pathname === create) {
     CKEDITOR.replace('editor1');
 
