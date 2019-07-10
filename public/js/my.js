@@ -109,7 +109,14 @@ function isNumeric(n) {
 
 
 
-
+/**
+ * All js files:
+ *
+ * resources/views/blog/admin/product/include/script_gallery.blade.php
+ * resources/views/blog/admin/product/include/script_img.blade.php
+ * resources/views/layouts/app_admin.blade.php
+ *
+ * */
 
 
 
