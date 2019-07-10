@@ -4,9 +4,9 @@
     </div>
     <div class="box-body" id="image" style=" border: 1px solid whitesmoke ; text-align: center; position: relative" >
         @if ($product->img == null)
-            <img width="50%" height="50%" src="/images/no_image.jpg" id="preview_image"/>
+            <img width="50%" height="50%" src='{{asset("/images/no_image.jpg")}}' id="preview_image"/>
         @else
-            <img width="50%" height="50%" src="/uploads/single/{{$product->img}}" id="preview_image"/>
+            <img width="50%" height="50%" src='{{asset("/uploads/single/$product->img")}}' id="preview_image"/>
         @endif
 
         <i id="loading" class="fa fa-spinner fa-spin fa-3x fa-fw" style="position: absolute;left: 40%;top: 40%;display: none"></i>
@@ -31,3 +31,5 @@
     <p style="text-align: center"><small>Рекомендуемые размеры: 125ш.х200в.</small></p>
 
 </div>
+
+

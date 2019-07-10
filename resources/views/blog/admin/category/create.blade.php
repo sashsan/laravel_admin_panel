@@ -31,7 +31,7 @@
                             </div>
                             <div class="form-group">
                                 <select name="parent_id" id="parent_id" class="form-control" required>
-                                    <option value="0">-- самостоятельная категория -- </option>
+                                    <option value='0'>-- самостоятельная категория -- </option>
 
                                     @include('blog.admin.category.include.edit_categories_all_list',['categories' => $categories])
 
@@ -39,12 +39,12 @@
                             </div>
                             <div class="form-group">
                                 <label for="keywords">Ключевые слова</label>
-                                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="Ключевые слова" value="{{old('keywords', $item->keywords)}}">
+                                <input type="text" name="keywords" class="form-control" id="keywords" placeholder="Ключевые слова" value="{{old('keywords', $item->keywords)}}" required>
 
                             </div>
                             <div class="form-group">
                                 <label for="description">Описание</label>
-                                <input type="text" name="description" class="form-control" id="description" placeholder="Описание" value="{{old('description', $item->description)}}">
+                                <input type="text" name="description" class="form-control" id="description" placeholder="Описание" value="{{old('description', $item->description)}}" required>
                             </div>
                         </div>
                         <div class="box-footer">

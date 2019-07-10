@@ -3,14 +3,14 @@
         <h3 class="box-title">Картинки галереи</h3>
     </div>
     <div class="box-body">
-        <div id="multi" class="btn btn-success" data-url="/admin/products/gallery" data-name="multi">Загрузить</div>
+        <div id="multi" class="btn btn-success" data-url="{{url('/admin/products/gallery')}}" data-name="multi">Загрузить</div>
 
         <div class="multi">
 
         @if (!empty($images))
                 <p><small>Для удаления нажмите на картинку.</small></p>
             @foreach($images as $image)
-                    <img src="/uploads/gallery/{{$image}}" alt="" style="max-height: 150px; cursor: pointer;" data-id="{{$product->id}}" data-src="{{$image}}" class="del-items">
+                    <img src='{{asset("/uploads/gallery/$image")}}' alt="" style="max-height: 150px; cursor: pointer;" data-id="{{$product->id}}" data-src="{{$image}}" class="del-items">
 
             @endforeach
         @endif

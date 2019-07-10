@@ -5,9 +5,9 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         @component('blog.admin.components.breadcrumb')
-            @slot('title') Список категорий @endslot
+            @slot('title') Список меню категорий @endslot
             @slot('parent') Главная @endslot
-            @slot('active') Список категорий @endslot
+            @slot('active') Список меню категорий @endslot
         @endcomponent
     </section>
 
@@ -17,9 +17,9 @@
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-body">
-                        <div>
-                            <i style="font-weight: bold; margin-left: 170px; font-size: small;"><small>Для редактирования - нажмите на категорию.</small></i>
-                            <i style="font-weight: bold; text-align: right; margin-left: 170px; font-size: small;"><small> Невозможно удалять категории имеющие наследника.</small></i>
+                        <div width="100%">
+                            <small style="margin-left: 70px">Для редактирования - нажмите на категорию.</small>
+                            <small style="margin-left: 70px"> Невозможно удалять категории имеющие наследника или имеющие товары.</small>
                         </div>
                        <br>
                         @if($menu)

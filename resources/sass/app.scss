@@ -1,8 +1,20 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
+
 // Variables
 @import 'variables';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+
+@font-face {
+    font-family: 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic';
+    src: url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic.eot'); /* IE9 Compat Modes */
+    src: url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic.woff2') format('woff2'), /* Super Modern Browsers */
+    url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic.woff') format('woff'), /* Pretty Modern Browsers */
+    url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic.svg#svgFontName') format('svg'); /* Legacy iOS */
+}

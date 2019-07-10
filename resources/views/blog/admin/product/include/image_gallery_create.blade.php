@@ -3,7 +3,7 @@
         <h3 class="box-title">Картинки галереи</h3>
     </div>
     <div class="box-body">
-        <div id="multi" class="btn btn-success" data-url="/admin/products/gallery" data-name="multi">Загрузить</div>
+        <div id="multi" class="btn btn-success" data-url="{{url('/admin/products/gallery')}}" data-name="multi">Загрузить</div>
         <div class="multi">
         </div>
         <p>

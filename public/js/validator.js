@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -430,14 +430,38 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 /***/ }),
 
-/***/ 1:
-/*!*****************************************!*\
-  !*** multi ./resources/js/validator.js ***!
-  \*****************************************/
+/***/ "./resources/sass/app.scss":
+/*!*********************************!*\
+  !*** ./resources/sass/app.scss ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./resources/sass/my.scss":
+/*!********************************!*\
+  !*** ./resources/sass/my.scss ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 0:
+/*!********************************************************************************************!*\
+  !*** multi ./resources/js/validator.js ./resources/sass/app.scss ./resources/sass/my.scss ***!
+  \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\OSPanel\domains\laravel.blog.san\resources\js\validator.js */"./resources/js/validator.js");
+__webpack_require__(/*! D:\OSPanel\domains\laravel.blog.san\resources\js\validator.js */"./resources/js/validator.js");
+__webpack_require__(/*! D:\OSPanel\domains\laravel.blog.san\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! D:\OSPanel\domains\laravel.blog.san\resources\sass\my.scss */"./resources/sass/my.scss");
 
 
 /***/ })

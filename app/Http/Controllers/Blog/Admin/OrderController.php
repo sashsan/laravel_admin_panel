@@ -114,15 +114,14 @@
          */
         public function forcedestroy($id)
         {
-
-            $force_result = Order::find($id);
-
-            if (!$force_result) {
-                return back()->withErrors(['msg' => 'Ошибка удаления']);
+            if (empty($id)){
+                return back()->withErrors(['msg' => 'Запись не найдена']);
             }
-            $force_result = Order::find($id)->forceDelete();
 
-            if ($force_result) {
+            $res = \DB::table('orders')
+                ->delete($id);
+
+            if ($res) {
                 return redirect()
                     ->route('blog.admin.orders.index')
                     ->with(['success' => "Запись id [$id] удалена из БД"]);
