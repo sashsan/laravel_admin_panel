@@ -272,7 +272,7 @@
 <script src="{{asset('js/my.js')}}"></script>
 
 @include('blog.admin.product.include.script_img')
-
+@include('blog.admin.product.include.script_gallery')
 
 
 </body>
