@@ -1,7 +1,6 @@
 @extends('layouts.app_admin')
 @section('content')
 
-
     <!-- Content Header (Page header) -->
     <section class="content-header">
         @component('blog.admin.components.breadcrumb')
@@ -12,7 +11,6 @@
         @endcomponent
     </section>
 
-
     <!-- Main content -->
     <section class="content">
         <div class="row">
@@ -21,7 +19,6 @@
                     <!--   data-toggle="validator"  ДЛЯ ВАЛИДАЦИИ-->
                     <form action="{{url('/admin/filter/group-edit', $group->id)}}" method="post" data-toggle="validator">
                         @csrf
-
                         <div class="box-body">
                             <div class="form-group has-feedback">
                                 <label for="title">Наименование группы</label>
@@ -38,9 +35,6 @@
         </div>
 
     </section>
-
-
-
 
 
 @endsection

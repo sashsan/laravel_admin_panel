@@ -9,6 +9,7 @@
     namespace App\Repositories\Admin;
 
     use App\Models\Admin\Category as Model;
+    use App\Models\Admin\Category;
     use App\Repositories\CoreRepository;
     use Menu as LavMenu;
 
@@ -29,7 +30,7 @@
             return Model::class;
         }
 
-
+        /** Children category check */
         public function checkChildren($id)
         {
             $children = $this->startConditions()
@@ -38,6 +39,7 @@
             return $children;
         }
 
+        /** Parents in product */
         public function checkParentsInProducts($id)
         {
             $parents = \DB::table('products')
@@ -48,6 +50,7 @@
         }
 
 
+        /** Delete category */
         public function deleteCategory($id)
         {
             $delete = $this->startConditions()
@@ -95,7 +98,15 @@
             return $result;
         }
 
-
+        /** Check unique name and its main category or not */
+        public function checkUniqueName($name,$parent_id)
+        {
+            $name = $this->startConditions()
+                ->where('title','=', $name)
+                ->where('parent_id','=',$parent_id)
+                ->exists();
+            return $name;
+        }
 
 
     }

@@ -1,7 +1,6 @@
 @extends('layouts.app_admin')
 @section('content')
 
-
     <!-- Content Header (Page header) -->
     <section class="content-header">
         @component('blog.admin.components.breadcrumb')
@@ -10,10 +9,6 @@
             @slot('active') Фильтры @endslot
         @endcomponent
     </section>
-
-
-
-
 
     <!-- Main content -->
     <section class="content">
@@ -58,8 +53,6 @@
 
     </section>
     <!-- /.content -->
-
-
 
 
 @endsection

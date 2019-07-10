@@ -27,9 +27,9 @@
                             <div class="product-main simpleCart_shelfItem">
                                 <a href="#" class="mask">
                                     @if (empty($product->img))
-                                        <img class="img-responsive zoom-img" src="/images/no_image.png" alt="" />
+                                        <img class="img-responsive zoom-img" src="{{asset('/images/no_image.png')}}" alt="" />
                                     @else
-                                        <img class="img-responsive zoom-img" src="/uploads/single/{{$product->img}}" alt="" />
+                                        <img class="img-responsive zoom-img" src="{{asset("/uploads/single/$product->img")}}" alt="" />
                                     @endif
 
                                 </a>
@@ -55,7 +55,7 @@
                     </div>
                     @endif
                 </div>
-  
+
                 <div class="clearfix"></div>
             </div>
         </div>

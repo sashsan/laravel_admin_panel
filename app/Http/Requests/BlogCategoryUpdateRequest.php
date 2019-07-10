@@ -13,7 +13,6 @@ class BlogCategoryUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        //return auth()->check();
         return true;
     }
 
@@ -28,7 +27,7 @@ class BlogCategoryUpdateRequest extends FormRequest
             'title' => 'required|min:4|max:200',
             'slug' => 'max:200',
             'description' => 'min:3|string|max:500',
-            'parent_id' => 'required|integer|exists:categories,id',
+            'parent_id' => 'integer',
         ];
 
     }
@@ -37,10 +36,9 @@ class BlogCategoryUpdateRequest extends FormRequest
     public function messages()
     {
         return [
+            'title.min' => 'Минимальное имя 4 символа',
             'description.min' => 'Минимальная длинна описания 5 символов',
             'description.string' => 'Описание должно быть текстом',
-            'comment.max' => 'Максимальная длинна комментария 200 символов',
-            'parent_id.exists' => 'Текущая категория не может быть этой категорией. Выбирите другую.'
         ];
     }
 }
