@@ -35,7 +35,7 @@
                             buttonMulti.closest('.file-upload').find('.overlay').css({'display': 'none'});
 
                             response = JSON.parse(response);
-                            $('.' + buttonMulti.data('name')).append('<img src="{{asset('/uploads/gallery/')}}'+ '/' + response.file + '" style="max-height: 150px;">');
+                            $('.' + buttonMulti.data('name')).append('<img src="{{asset('/uploads/gallery/')}}/'+ response.file+'" style="max-height: 150px;">');
                         }, 1000);
                     }
                 });
@@ -56,7 +56,7 @@
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-                    url: '{{asset('/admin/products/delete-gallery')}}',
+                    url: '{{url('/admin/products/delete-gallery')}}',
                     data: {id: id, src: src, _token: _token},
                     type: 'POST',
                     beforeSend: function () {

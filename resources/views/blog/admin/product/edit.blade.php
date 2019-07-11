@@ -5,7 +5,7 @@
 
     <section class="content-header">
         @component('blog.admin.components.breadcrumb')
-            @slot('title') Редактирование продукта <b>{{$product->title}}</b> @endslot
+            @slot('title') Редактирование продукта @endslot
             @slot('parent') Главная @endslot
             @slot('product') Список продуктов @endslot
                 @slot('active') Редактирование продукта {{$product->title}} @endslot
