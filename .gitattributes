@@ -1,2 +1,2 @@
 * linguist-vendored
-*.php laravel linguist-vendored=false
+*.laravel linguist-vendored=false
