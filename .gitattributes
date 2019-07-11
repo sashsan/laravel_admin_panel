@@ -1,2 +1,6 @@
-* linguist-vendored
-*.laravel linguist-vendored=false
+* text=auto
+*.css linguist-vendored
+*.scss linguist-vendored
+*.php linguist-vendored=false
+CHANGELOG.md export-ignore
+
