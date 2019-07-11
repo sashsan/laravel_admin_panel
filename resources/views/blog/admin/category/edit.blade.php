@@ -5,7 +5,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         @component('blog.admin.components.breadcrumb')
-            @slot('title') Создание категории @endslot
+            @slot('title') Редактирование категории {{$item->title}}@endslot
             @slot('parent') Главная @endslot
             @slot('category') Список категорий @endslot
             @slot('active') Редактирование категории {{$item->title}} @endslot

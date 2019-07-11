@@ -27,7 +27,7 @@
         {
             $perpage = 5;
             $countOrders = MainRepository::getCountOrders();
-            $paginator = $this->orderRepository->getAllOrders($perpage);
+            $paginator = $this->orderRepository->getAllOrders(15);
 
             MetaTag::setTags(['title' => 'Список заказов']);
             return view('blog.admin.order.index',
